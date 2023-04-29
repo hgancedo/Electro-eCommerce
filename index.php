@@ -1,3 +1,16 @@
+<?php
+include_once "./src/Producto.php";
+include_once "./src/Familia.php";
+
+$prod = new Producto();
+$fam = new Familia();
+
+$productos = $prod->getProducts("PC");
+$novedades = $prod->getRandomProducts();
+
+$familyNames = $fam->getFamilyNames();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Electro - HTML Ecommerce Template</title>
+    <title>NETWARE TIENDA ONLINE DE INFORMÁTICA</title>
 
     <!-- Google font -->
     <link
@@ -48,20 +61,21 @@
               <a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a>
+              <a href="#"><i class="fa fa-envelope-o"></i>hgancedo@email.com</a>
             </li>
             <li>
               <a href="#"
-                ><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a
+                ><i class="fa fa-map-marker"></i>17 Pol. Industrial Trápaga,
+                Vizcaya</a
               >
             </li>
           </ul>
           <ul class="header-links pull-right">
             <li>
-              <a href="#"><i class="fa fa-dollar"></i> USD</a>
+              <a href="#"><i class="fa fa-eur"></i>EUR</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-user-o"></i> My Account</a>
+              <a href="#"><i class="fa fa-user-o"></i>Mi Cuenta</a>
             </li>
           </ul>
         </div>
@@ -202,13 +216,12 @@
         <div id="responsive-nav">
           <!-- NAV -->
           <ul class="main-nav nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Hot Deals</a></li>
-            <li><a href="#">Categories</a></li>
-            <li><a href="#">Laptops</a></li>
-            <li><a href="#">Smartphones</a></li>
-            <li><a href="#">Cameras</a></li>
-            <li><a href="#">Accessories</a></li>
+            <!-- <li class="active"><a href="#">Pc Sobremesa</a></li> -->
+            <?php foreach($familyNames as $familia) {?>
+            <li><a href="#"><?php echo $familia['nombre']; ?></php> </a></li>
+            <?php
+            }
+            ?>
           </ul>
           <!-- /NAV -->
         </div>
