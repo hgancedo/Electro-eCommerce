@@ -11,9 +11,9 @@ class Familia extends Conexion {
     }
 
     //Seleccionamos productos filtrando por familia
-    public function getFamilyNames() {
+    public function getFamilies() {
 
-        $sql="SELECT nombre FROM familias ORDER BY nombre DESC";
+        $sql="SELECT * FROM familias ORDER BY nombre DESC";
         $stm=$this->conexion->prepare($sql);
         try {
             $stm->execute();

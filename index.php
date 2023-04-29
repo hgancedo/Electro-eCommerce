@@ -8,7 +8,8 @@ $fam = new Familia();
 $productos = $prod->getProducts("PC");
 $novedades = $prod->getRandomProducts();
 
-$familyNames = $fam->getFamilyNames();
+$families = $fam->getFamilies();
+
 ?>
 
 <!DOCTYPE html>
@@ -217,8 +218,8 @@ $familyNames = $fam->getFamilyNames();
           <!-- NAV -->
           <ul class="main-nav nav navbar-nav">
             <!-- <li class="active"><a href="#">Pc Sobremesa</a></li> -->
-            <?php foreach($familyNames as $familia) {?>
-            <li><a href="#"><?php echo $familia['nombre']; ?></php> </a></li>
+            <?php foreach($families as $family) {?>
+            <li><a href="#"><?php echo $family['nombre']; ?></a></li>
             <?php
             }
             ?>
@@ -237,14 +238,19 @@ $familyNames = $fam->getFamilyNames();
       <div class="container">
         <!-- row -->
         <div class="row">
+
+        <?php foreach($families as $family) {
+          //ruta para las imágenes de categorías
+          $src = "./img/CATEGORIES/". $family['cod']. ".webp";
+          ?>
           <!-- shop -->
           <div class="col-md-3 col-xs-6">
             <div class="shop">
               <div class="shop-img">
-                <img src="./img/shop01.png" alt="" />
+                <img src="<?php echo $src ;?>" alt="" />
               </div>
               <div class="shop-body">
-                <h3>Laptop<br />Collection</h3>
+                <h3><?php echo $family['nombre']; ?><br /></h3>
                 <a href="#" class="cta-btn"
                   >Shop now <i class="fa fa-arrow-circle-right"></i
                 ></a>
@@ -252,54 +258,10 @@ $familyNames = $fam->getFamilyNames();
             </div>
           </div>
           <!-- /shop -->
+        <?php
+        }
+        ?>
 
-          <!-- shop -->
-          <div class="col-md-3 col-xs-6">
-            <div class="shop">
-              <div class="shop-img">
-                <img src="./img/shop03.png" alt="" />
-              </div>
-              <div class="shop-body">
-                <h3>Accessories<br />Collection</h3>
-                <a href="#" class="cta-btn"
-                  >Shop now <i class="fa fa-arrow-circle-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <!-- /shop -->
-
-          <!-- shop -->
-          <div class="col-md-3 col-xs-6">
-            <div class="shop">
-              <div class="shop-img">
-                <img src="./img/shop02.png" alt="" />
-              </div>
-              <div class="shop-body">
-                <h3>Cameras<br />Collection</h3>
-                <a href="#" class="cta-btn"
-                  >Shop now <i class="fa fa-arrow-circle-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <!-- /shop -->
-
-          <!-- shop ADEDD!!!!!!-->
-          <div class="col-md-3 col-xs-6">
-            <div class="shop">
-              <div class="shop-img">
-                <img src="./img/shop02.png" alt="" />
-              </div>
-              <div class="shop-body">
-                <h3>Cameras<br />Collection</h3>
-                <a href="#" class="cta-btn"
-                  >Shop now <i class="fa fa-arrow-circle-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <!-- /shop ADEDD!!!!!!-->
         </div>
         <!-- /row -->
       </div>
@@ -316,15 +278,18 @@ $familyNames = $fam->getFamilyNames();
           <!-- section title -->
           <div class="col-md-12">
             <div class="section-title">
-              <h3 class="title">New Products</h3>
+              <h3 class="title">Nuevos Productos</h3>
               <div class="section-nav">
                 <ul class="section-tab-nav tab-nav">
-                  <li class="active">
-                    <a data-toggle="tab" href="#tab1">Laptops</a>
+                <!--<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li> -->
+                  <?php foreach($families as $familia) {?>
+                  <li>
+                    <a data-toggle="tab" href="#tab1"><?php echo $familia['nombre']; ?></a>
                   </li>
-                  <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
-                  <li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-                  <li><a data-toggle="tab" href="#tab1">Accessories</a></li>
+                  <?php
+                  }
+                  ?>
+
                 </ul>
               </div>
             </div>
