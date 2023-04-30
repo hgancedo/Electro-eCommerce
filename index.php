@@ -7,6 +7,10 @@ $fam = new Familia();
 
 //novedades del primer carrusel (y del grupo del último carrusel, la primera columna de 2 div)
 $novedades = $prod->getRandomProducts(6);
+//más vendidos
+$topVentas = $prod->getRandomProducts(6);
+//más valorados
+$mostValued = $prod->getRandomProducts(6);
 
 $families = $fam->getFamilies();
 
@@ -437,11 +441,11 @@ $families = $fam->getFamilies();
                 <!-- Recorremos hasta 3 porque son 2 div de 3 productos cada div -->
                 <?php for($i=0; $i<3; $i++) {
                 //Ruta de las fotos  
-                $srcPics = "./img/PRODUCTS/ALL_SMALL/" .$novedades[$i]['id']. ".webp"; ?>
+                $srcNovedades = "./img/PRODUCTS/ALL_SMALL/" .$novedades[$i]['id']. ".webp"; ?>
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="<?php echo $srcPics ;?>" alt="" />
+                    <img src="<?php echo $srcNovedades ;?>" alt="" />
                   </div>
                   <div class="product-body">
                     <p class="product-category"><?php echo $novedades[$i]['nombre']; ?></p>
@@ -462,11 +466,11 @@ $families = $fam->getFamilies();
               <div>
                 <?php for($i=3; $i<6; $i++) {
                 //Ruta de las fotos  
-                $srcPics2 = "./img/PRODUCTS/ALL_SMALL/" .$novedades[$i]['id']. ".webp"; ?>
+                $srcNovedades2 = "./img/PRODUCTS/ALL_SMALL/" .$novedades[$i]['id']. ".webp"; ?>
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="<?php echo $srcPics2 ;?>" alt="" />
+                    <img src="<?php echo $srcNovedades2 ;?>" alt="" />
                   </div>
                   <div class="product-body">
                     <p class="product-category"><?php echo $novedades[$i]['nombre']; ?></p>
@@ -498,109 +502,57 @@ $families = $fam->getFamilies();
 
             <div class="products-widget-slick" data-nav="#slick-nav-4">
               <div>
+
+                <?php for($i=0; $i<3; $i++) {
+                //Ruta de las fotos  
+                $srcTopVentas = "./img/PRODUCTS/ALL_SMALL/" .$topVentas[$i]['id']. ".webp"; ?>
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="./img/product04.png" alt="" />
+                    <img src="<?php echo $srcTopVentas ;?>" alt="" />
                   </div>
                   <div class="product-body">
-                    <p class="product-category">Category</p>
+                    <p class="product-category"><?php echo $topVentas[$i]['nombre']; ?></p>
                     <h3 class="product-name">
-                      <a href="#">product name goes here</a>
+                      <a href="#"><?php echo $topVentas[$i]['nombre_corto']; ?></a>
                     </h3>
                     <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
+                      <?php echo $topVentas[$i]['pvp'] ."€" ;?>
                     </h4>
                   </div>
                 </div>
                 <!-- /product widget -->
+                <?php
+                }
+                ?>
 
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="./img/product05.png" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category">Category</p>
-                    <h3 class="product-name">
-                      <a href="#">product name goes here</a>
-                    </h3>
-                    <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
-                    </h4>
-                  </div>
-                </div>
-                <!-- /product widget -->
-
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="./img/product06.png" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category">Category</p>
-                    <h3 class="product-name">
-                      <a href="#">product name goes here</a>
-                    </h3>
-                    <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
-                    </h4>
-                  </div>
-                </div>
-                <!-- product widget -->
               </div>
 
               <div>
+
+                <?php for($i=3; $i<6; $i++) {
+                //Ruta de las fotos  
+                $srcTopVentas2 = "./img/PRODUCTS/ALL_SMALL/" .$topVentas[$i]['id']. ".webp"; ?>
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="./img/product07.png" alt="" />
+                    <img src="<?php echo $srcTopVentas2 ;?>" alt="" />
                   </div>
                   <div class="product-body">
-                    <p class="product-category">Category</p>
+                    <p class="product-category"><?php echo $topVentas[$i]['nombre']; ?></p>
                     <h3 class="product-name">
-                      <a href="#">product name goes here</a>
+                      <a href="#"><?php echo $topVentas[$i]['nombre_corto']; ?></a>
                     </h3>
                     <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
+                      <?php echo $topVentas[$i]['pvp'] ."€" ;?>
                     </h4>
                   </div>
                 </div>
                 <!-- /product widget -->
+                <?php
+                }
+                ?>
 
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="./img/product08.png" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category">Category</p>
-                    <h3 class="product-name">
-                      <a href="#">product name goes here</a>
-                    </h3>
-                    <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
-                    </h4>
-                  </div>
-                </div>
-                <!-- /product widget -->
-
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="./img/product09.png" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category">Category</p>
-                    <h3 class="product-name">
-                      <a href="#">product name goes here</a>
-                    </h3>
-                    <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
-                    </h4>
-                  </div>
-                </div>
-                <!-- product widget -->
               </div>
             </div>
           </div>
@@ -615,111 +567,60 @@ $families = $fam->getFamilies();
               </div>
             </div>
 
+
             <div class="products-widget-slick" data-nav="#slick-nav-5">
               <div>
+
+                <?php for($i=0; $i<3; $i++) {
+                //Ruta de las fotos  
+                $srcMostValued = "./img/PRODUCTS/ALL_SMALL/" .$mostValued[$i]['id']. ".webp"; ?>
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="./img/product01.png" alt="" />
+                    <img src="<?php echo $srcMostValued ;?>" alt="" />
                   </div>
                   <div class="product-body">
-                    <p class="product-category">Category</p>
+                    <p class="product-category"><?php echo $mostValued[$i]['nombre']; ?></p>
                     <h3 class="product-name">
-                      <a href="#">product name goes here</a>
+                      <a href="#"><?php echo $mostValued[$i]['nombre_corto']; ?></a>
                     </h3>
                     <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
+                      <?php echo $mostValued[$i]['pvp'] ."€" ;?>
                     </h4>
                   </div>
                 </div>
                 <!-- /product widget -->
+                <?php
+                }
+                ?>
 
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="./img/product02.png" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category">Category</p>
-                    <h3 class="product-name">
-                      <a href="#">product name goes here</a>
-                    </h3>
-                    <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
-                    </h4>
-                  </div>
-                </div>
-                <!-- /product widget -->
-
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="./img/product03.png" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category">Category</p>
-                    <h3 class="product-name">
-                      <a href="#">product name goes here</a>
-                    </h3>
-                    <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
-                    </h4>
-                  </div>
-                </div>
-                <!-- product widget -->
               </div>
 
               <div>
+
+                <?php for($i=3; $i<6; $i++) {
+                //Ruta de las fotos  
+                $srcMostValued2 = "./img/PRODUCTS/ALL_SMALL/" .$mostValued[$i]['id']. ".webp"; ?>
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="./img/product04.png" alt="" />
+                    <img src="<?php echo $srcMostValued2 ;?>" alt="" />
                   </div>
                   <div class="product-body">
-                    <p class="product-category">Category</p>
+                    <p class="product-category"><?php echo $mostValued[$i]['nombre']; ?></p>
                     <h3 class="product-name">
-                      <a href="#">product name goes here</a>
+                      <a href="#"><?php echo $mostValued[$i]['nombre_corto']; ?></a>
                     </h3>
                     <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
+                    <?php echo $mostValued[$i]['pvp'] ."€" ;?>
                     </h4>
                   </div>
                 </div>
                 <!-- /product widget -->
+                <?php
+                }
+                ?>
 
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="./img/product05.png" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category">Category</p>
-                    <h3 class="product-name">
-                      <a href="#">product name goes here</a>
-                    </h3>
-                    <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
-                    </h4>
-                  </div>
-                </div>
-                <!-- /product widget -->
-
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="./img/product06.png" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category">Category</p>
-                    <h3 class="product-name">
-                      <a href="#">product name goes here</a>
-                    </h3>
-                    <h4 class="product-price">
-                      $980.00 <del class="product-old-price">$990.00</del>
-                    </h4>
-                  </div>
-                </div>
-                <!-- product widget -->
               </div>
             </div>
           </div>
