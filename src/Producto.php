@@ -24,8 +24,9 @@ class Producto extends Conexion {
     }
 
     //Selección aleatoria. En producción filtraríamos por fecha para mostrar novedades recientes, calcularíamos productos mas vendidos para superventas y productos que hayan bajado de precio para las ofertas.
-    public function getRandomProducts() {
-        $sql = "SELECT * FROM productos order by RAND() LIMIT 6";
+    public function getRandomProducts($num) {
+        $sql = "SELECT id, nombre_corto, pvp, f.nombre FROM productos p inner join familias f 
+        ON p.familia = f.cod order by RAND() LIMIT $num";
         $stm=$this->conexion->prepare($sql);
         try {
             $stm->execute();
