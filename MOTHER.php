@@ -281,8 +281,7 @@ $items = $prod->getProducts($famKey);
                     <p class="product-category">Placas Base</p>
                     <h3 class="product-name">
                       <!-- ruta para enlace al producto, le pasamos la familia y el id -->
-                      <?php $ItemView = './ITEM.php?famKey=' .$famKey. '&id=' .$item['id'] ;
-                      echo $ItemView; ?>
+                      <?php $ItemView = './ITEM.php?famKey=' .$famKey. '&id=' .$item['id'] ;?>
                       <a href="<?php echo $ItemView ;?>"><?php echo $item['nombre_corto'] ;?></a>
                     </h3>
                     <h4 class="product-price">
@@ -382,8 +381,8 @@ $items = $prod->getProducts($famKey);
       <div class="section">
         <!-- container -->
         <div class="container">
-  <!-- row -->
-  <div class="row">
+          <!-- row -->
+          <div class="row">
             <div class="col-md-3 col-xs-6">
               <div class="footer">
                 <h3 class="footer-title">Sobre Nosotros</h3>
@@ -485,7 +484,7 @@ $items = $prod->getProducts($famKey);
               </ul>
               <span class="copyright">
                 <a target="_blank" href="https://www.templateshub.net"
-                  >Templates Hub</a
+                  >Powered By Hector Gancedo Grade</a
                 >
               </span>
             </div>

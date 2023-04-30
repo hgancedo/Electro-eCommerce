@@ -11,12 +11,22 @@ class Familia extends Conexion {
     }
 
     //Seleccionamos productos filtrando por familia
-    public function getFamilies() {
+    public function getFamilies($fam=null) {
 
-        $sql="SELECT * FROM familias ORDER BY nombre DESC";
+        if(!$fam) {
+            $sql="SELECT * FROM familias ORDER BY nombre DESC";
+        } else {
+            $sql ="SELECT * FROM familias WHERE cod = :c ORDER BY nombre DESC";
+        }
+        
         $stm=$this->conexion->prepare($sql);
         try {
-            $stm->execute();
+            if(!$fam) {
+                $stm->execute();
+            } else {
+                $stm->execute([":c"=>$fam]);
+            }
+            ;
         } catch (Exception $ex) {
             echo "Error al comprobar nombre de familia: <br>" .$ex->getMessage();
         }

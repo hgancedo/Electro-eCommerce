@@ -9,6 +9,8 @@ $prod = new Producto();
 
 //El producto que mostraremos según la familia e id que recibimos por url
 $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
+//Obtenemos el nombre de familia a partir de famKey
+$familyItem = $fam->getFamilies($_GET['famKey']);
 ?>
 
 <!DOCTYPE html>
@@ -266,8 +268,8 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
           <div class="col-md-5 col-md-push-2">
             <div id="product-main-img">
               <div class="product-preview">
-                <!-- ruta a las imágenes de diferentes vistas del producto -->
-                <?php $srcItempreview = './img/PRODUCTS/ALL_SMALL/' .$_GET['id']. '.webp' ;?>
+                <!-- ruta a las imágenes de diferentes vistas del producto AMPLIADO Y ZOOM -->
+                <?php $srcItempreview = './img/PRODUCTS/ALL_BIG/' .$_GET['id']. '.webp' ;?>
                 <img src="<?php echo $srcItempreview ;?>" alt="" />
               </div>
 
@@ -290,19 +292,21 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
           <div class="col-md-2 col-md-pull-5">
             <div id="product-imgs">
               <div class="product-preview">
-                <img src="<?php echo $srcItempreview ;?>" alt="" />
+              <!-- ruta a las imágenes de diferentes vistas del producto, preview pequeños -->
+              <?php $srcItemSmall = './img/PRODUCTS/ALL_SMALL/' .$_GET['id']. '.webp' ;?>
+              <img src="<?php echo $srcItemSmall ;?>" alt="" />
               </div>
 
               <div class="product-preview">
-                <img src="<?php echo $srcItempreview ;?>" alt="" />
+                <img src="<?php echo $srcItemSmall ;?>" alt="" />
               </div>
 
               <div class="product-preview">
-                <img src="<?php echo $srcItempreview ;?>" alt="" />
+                <img src="<?php echo $srcItemSmall ;?>" alt="" />
               </div>
 
               <div class="product-preview">
-                <img src="<?php echo $srcItempreview ;?>" alt="" />
+                <img src="<?php echo $srcItemSmall ;?>" alt="" />
               </div>
             </div>
           </div>
@@ -331,10 +335,7 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
                 <span class="product-available">In Stock</span>
               </div>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                <?php echo $item[0]['descripcion'] ;?>
               </p>
 
               <div class="product-options">
@@ -376,9 +377,8 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
               </ul>
 
               <ul class="product-links">
-                <li>Category:</li>
-                <li><a href="#">Headphones</a></li>
-                <li><a href="#">Accessories</a></li>
+                <li>Categoría:</li>
+                <li><a href="#"><?php echo $familyItem[0]['nombre'] ;?></a></li>
               </ul>
 
               <ul class="product-links">
@@ -406,10 +406,10 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
               <!-- product tab nav -->
               <ul class="tab-nav">
                 <li class="active">
-                  <a data-toggle="tab" href="#tab1">Description</a>
+                  <a data-toggle="tab" href="#tab1">Descripción</a>
                 </li>
-                <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+                <li><a data-toggle="tab" href="#tab2">Detalles</a></li>
+                <li><a data-toggle="tab" href="#tab3">Opiniones (3)</a></li>
               </ul>
               <!-- /product tab nav -->
 
@@ -420,15 +420,7 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
                   <div class="row">
                     <div class="col-md-12">
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
+                        <?php echo $item[0]['descripcion'] ;?>
                       </p>
                     </div>
                   </div>
@@ -693,199 +685,6 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
     </div>
     <!-- /SECTION -->
 
-    <!-- Section -->
-    <div class="section">
-      <!-- container -->
-      <div class="container">
-        <!-- row -->
-        <div class="row">
-          <div class="col-md-12">
-            <div class="section-title text-center">
-              <h3 class="title">Related Products</h3>
-            </div>
-          </div>
-
-          <!-- product -->
-          <div class="col-md-3 col-xs-6">
-            <div class="product">
-              <div class="product-img">
-                <img src="./img/product01.png" alt="" />
-                <div class="product-label">
-                  <span class="sale">-30%</span>
-                </div>
-              </div>
-              <div class="product-body">
-                <p class="product-category">Category</p>
-                <h3 class="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 class="product-price">
-                  $980.00 <del class="product-old-price">$990.00</del>
-                </h4>
-                <div class="product-rating"></div>
-                <div class="product-btns">
-                  <button class="add-to-wishlist">
-                    <i class="fa fa-heart-o"></i
-                    ><span class="tooltipp">add to wishlist</span>
-                  </button>
-                  <button class="add-to-compare">
-                    <i class="fa fa-exchange"></i
-                    ><span class="tooltipp">add to compare</span>
-                  </button>
-                  <button class="quick-view">
-                    <i class="fa fa-eye"></i
-                    ><span class="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div class="add-to-cart">
-                <button class="add-to-cart-btn">
-                  <i class="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- /product -->
-
-          <!-- product -->
-          <div class="col-md-3 col-xs-6">
-            <div class="product">
-              <div class="product-img">
-                <img src="./img/product02.png" alt="" />
-                <div class="product-label">
-                  <span class="new">NEW</span>
-                </div>
-              </div>
-              <div class="product-body">
-                <p class="product-category">Category</p>
-                <h3 class="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 class="product-price">
-                  $980.00 <del class="product-old-price">$990.00</del>
-                </h4>
-                <div class="product-rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="product-btns">
-                  <button class="add-to-wishlist">
-                    <i class="fa fa-heart-o"></i
-                    ><span class="tooltipp">add to wishlist</span>
-                  </button>
-                  <button class="add-to-compare">
-                    <i class="fa fa-exchange"></i
-                    ><span class="tooltipp">add to compare</span>
-                  </button>
-                  <button class="quick-view">
-                    <i class="fa fa-eye"></i
-                    ><span class="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div class="add-to-cart">
-                <button class="add-to-cart-btn">
-                  <i class="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- /product -->
-
-          <div class="clearfix visible-sm visible-xs"></div>
-
-          <!-- product -->
-          <div class="col-md-3 col-xs-6">
-            <div class="product">
-              <div class="product-img">
-                <img src="./img/product03.png" alt="" />
-              </div>
-              <div class="product-body">
-                <p class="product-category">Category</p>
-                <h3 class="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 class="product-price">
-                  $980.00 <del class="product-old-price">$990.00</del>
-                </h4>
-                <div class="product-rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star-o"></i>
-                </div>
-                <div class="product-btns">
-                  <button class="add-to-wishlist">
-                    <i class="fa fa-heart-o"></i
-                    ><span class="tooltipp">add to wishlist</span>
-                  </button>
-                  <button class="add-to-compare">
-                    <i class="fa fa-exchange"></i
-                    ><span class="tooltipp">add to compare</span>
-                  </button>
-                  <button class="quick-view">
-                    <i class="fa fa-eye"></i
-                    ><span class="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div class="add-to-cart">
-                <button class="add-to-cart-btn">
-                  <i class="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- /product -->
-
-          <!-- product -->
-          <div class="col-md-3 col-xs-6">
-            <div class="product">
-              <div class="product-img">
-                <img src="./img/product04.png" alt="" />
-              </div>
-              <div class="product-body">
-                <p class="product-category">Category</p>
-                <h3 class="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 class="product-price">
-                  $980.00 <del class="product-old-price">$990.00</del>
-                </h4>
-                <div class="product-rating"></div>
-                <div class="product-btns">
-                  <button class="add-to-wishlist">
-                    <i class="fa fa-heart-o"></i
-                    ><span class="tooltipp">add to wishlist</span>
-                  </button>
-                  <button class="add-to-compare">
-                    <i class="fa fa-exchange"></i
-                    ><span class="tooltipp">add to compare</span>
-                  </button>
-                  <button class="quick-view">
-                    <i class="fa fa-eye"></i
-                    ><span class="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div class="add-to-cart">
-                <button class="add-to-cart-btn">
-                  <i class="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- /product -->
-        </div>
-        <!-- /row -->
-      </div>
-      <!-- /container -->
-    </div>
-    <!-- /Section -->
 
     <!-- NEWSLETTER -->
     <div id="newsletter" class="section">
@@ -895,15 +694,15 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
         <div class="row">
           <div class="col-md-12">
             <div class="newsletter">
-              <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+              <p>Suscríbete a nuestra <strong>NEWSLETTER</strong></p>
               <form>
                 <input
                   class="input"
                   type="email"
-                  placeholder="Enter Your Email"
+                  placeholder="Introduce tu Email"
                 />
                 <button class="newsletter-btn">
-                  <i class="fa fa-envelope"></i> Subscribe
+                  <i class="fa fa-envelope"></i> Subscribirse
                 </button>
               </form>
               <ul class="newsletter-follow">
@@ -929,6 +728,7 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
     </div>
     <!-- /NEWSLETTER -->
 
+
     <!-- FOOTER -->
     <footer id="footer">
       <!-- top footer -->
@@ -939,7 +739,7 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
           <div class="row">
             <div class="col-md-3 col-xs-6">
               <div class="footer">
-                <h3 class="footer-title">About Us</h3>
+                <h3 class="footer-title">Sobre Nosotros</h3>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                   do eiusmod tempor incididunt ut.
@@ -947,7 +747,7 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
                 <ul class="footer-links">
                   <li>
                     <a href="#"
-                      ><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a
+                      ><i class="fa fa-map-marker"></i>17 Pol. Industrial Trápaga, Vizcaya</a
                     >
                   </li>
                   <li>
@@ -955,7 +755,7 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
                   </li>
                   <li>
                     <a href="#"
-                      ><i class="fa fa-envelope-o"></i>email@email.com</a
+                      ><i class="fa fa-envelope-o"></i>hgancedo@email.com</a
                     >
                   </li>
                 </ul>
@@ -964,13 +764,14 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
 
             <div class="col-md-3 col-xs-6">
               <div class="footer">
-                <h3 class="footer-title">Categories</h3>
+                <h3 class="footer-title">Categorías</h3>
                 <ul class="footer-links">
-                  <li><a href="#">Hot deals</a></li>
-                  <li><a href="#">Laptops</a></li>
-                  <li><a href="#">Smartphones</a></li>
-                  <li><a href="#">Cameras</a></li>
-                  <li><a href="#">Accessories</a></li>
+                  <li><a href="#">Ofertas</a></li>
+                  <?php foreach($families as $family) {?>
+                  <li><a href="#"><?php echo $family['nombre']; ?></a></li>
+                  <?php
+                  }
+                  ?>
                 </ul>
               </div>
             </div>
@@ -979,26 +780,26 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
 
             <div class="col-md-3 col-xs-6">
               <div class="footer">
-                <h3 class="footer-title">Information</h3>
+                <h3 class="footer-title">Información</h3>
                 <ul class="footer-links">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                  <li><a href="#">Privacy Policy</a></li>
-                  <li><a href="#">Orders and Returns</a></li>
-                  <li><a href="#">Terms & Conditions</a></li>
+                  <li><a href="#">Sobre Nosotros</a></li>
+                  <li><a href="#">Contacto</a></li>
+                  <li><a href="#">Política de Privacidad</a></li>
+                  <li><a href="#">Pedidos y Devoluciones</a></li>
+                  <li><a href="#">Términos y Condiciones</a></li>
                 </ul>
               </div>
             </div>
 
             <div class="col-md-3 col-xs-6">
               <div class="footer">
-                <h3 class="footer-title">Service</h3>
+                <h3 class="footer-title">Servicio</h3>
                 <ul class="footer-links">
-                  <li><a href="#">My Account</a></li>
-                  <li><a href="#">View Cart</a></li>
-                  <li><a href="#">Wishlist</a></li>
-                  <li><a href="#">Track My Order</a></li>
-                  <li><a href="#">Help</a></li>
+                  <li><a href="#">Mi Cuenta</a></li>
+                  <li><a href="#">Ver Carrito</a></li>
+                  <li><a href="#">Lista de Deseos</a></li>
+                  <li><a href="#">Seguimiento del Pedido</a></li>
+                  <li><a href="#">Ayuda</a></li>
                 </ul>
               </div>
             </div>
@@ -1037,7 +838,7 @@ $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
               </ul>
               <span class="copyright">
                 <a target="_blank" href="https://www.templateshub.net"
-                  >Templates Hub</a
+                  >Powered By Hector Gancedo Grade</a
                 >
               </span>
             </div>
