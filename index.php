@@ -71,8 +71,7 @@ $families = $fam->getFamilies();
             <li>
               <a href="#"
                 ><i class="fa fa-map-marker"></i>17 Pol. Industrial Trápaga,
-                Vizcaya</a
-              >
+                Vizcaya</a>
             </li>
           </ul>
           <ul class="header-links pull-right">
@@ -222,6 +221,7 @@ $families = $fam->getFamilies();
           <!-- NAV -->
           <ul class="main-nav nav navbar-nav">
             <!-- <li class="active"><a href="#">Pc Sobremesa</a></li> -->
+            <li><a href="#">Categorías</a></li>
             <?php foreach($families as $family) {?>
             <li><a href="#"><?php echo $family['nombre']; ?></a></li>
             <?php
@@ -286,6 +286,7 @@ $families = $fam->getFamilies();
               <div class="section-nav">
                 <ul class="section-tab-nav tab-nav">
                 <!--<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li> -->
+                  <li><a href="#">Categorías</a></li>
                   <?php foreach($families as $familia) {?>
                   <li>
                     <a data-toggle="tab" href="#tab1"><?php echo $familia['nombre']; ?></a>
@@ -561,7 +562,7 @@ $families = $fam->getFamilies();
 
           <div class="col-md-4 col-xs-6">
             <div class="section-title">
-              <h4 class="title">Mejor Valorados</h4>
+              <h4 class="title">Más Valorados</h4>
               <div class="section-nav">
                 <div id="slick-nav-5" class="products-slick-nav"></div>
               </div>
