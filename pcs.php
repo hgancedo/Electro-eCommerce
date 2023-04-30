@@ -7,8 +7,7 @@ $families = $fam->getFamilies();
 
 //Seleccionamos todas las placas
 $prod = new Producto();
-$items = $prod->getProducts('MOTHER');
-
+$items = $prod->getProducts('PC');
 ?>
 
 <!DOCTYPE html>
@@ -219,7 +218,8 @@ $items = $prod->getProducts('MOTHER');
             <li><a href="#">Categorías</a></li>
             <!-- <li class="active"><a href="#">Inicio</a></li> -->
             <!-- Mostramos las categorías excepto en la que estamos -->
-            <?php for($i=1; $i<count($families); $i++) {?>
+            <?php for($i=0; $i<count($families); $i++) {
+              if($i==1) continue ?> 
             <li><a href="#"><?php echo $families[$i]['nombre']; ?></a></li>
             <?php
             }
@@ -243,7 +243,7 @@ $items = $prod->getProducts('MOTHER');
             <ul class="breadcrumb-tree">
               <li><a href="#">Inicio</a></li>
               <li><a href="#">Categorías</a></li>
-              <li><a href="#">Placas Base</a></li>
+              <li><a href="#">PCs Sobremesa</a></li>
             </ul>
           </div>
         </div>
@@ -275,7 +275,7 @@ $items = $prod->getProducts('MOTHER');
                     <img src="<?php echo $srcItem ;?>" alt="" />
                   </div>
                   <div class="product-body">
-                    <p class="product-category">Placas Base</p>
+                    <p class="product-category"><?php echo $item['nombre'] ;?></p>
                     <h3 class="product-name">
                       <a href="#"><?php echo $item['nombre_corto'] ;?></a>
                     </h3>
