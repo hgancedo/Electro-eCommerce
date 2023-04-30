@@ -7,8 +7,7 @@ $families = $fam->getFamilies();
 
 //Seleccionamos todas las placas
 $prod = new Producto();
-$items = $prod->getProducts('MOTHER');
-
+$items = $prod->getProducts('MON');
 ?>
 
 <!DOCTYPE html>
@@ -213,14 +212,15 @@ $items = $prod->getProducts('MOTHER');
       <div class="container">
         <!-- responsive-nav -->
         <div id="responsive-nav">
-          <!-- NAV -->
-          <ul class="main-nav nav navbar-nav">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Categorías</a></li>
-            <!-- <li class="active"><a href="#">Inicio</a></li> -->
-            <!-- Mostramos las categorías excepto en la que estamos -->
-            <?php for($i=1; $i<count($families); $i++) {?>
-            <li><a href="#"><?php echo $families[$i]['nombre']; ?></a></li>
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+            <!-- <li class="active"><a href="#">Pc Sobremesa</a></li> -->
+            <li><a href="./index.php">Inicio</a></li>
+            <?php foreach($families as $family) {
+            //ruta para los enlaces
+            $link = './' .$family['cod']. '.php';
+            ?>
+            <li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
             <?php
             }
             ?>
@@ -241,9 +241,8 @@ $items = $prod->getProducts('MOTHER');
         <div class="row">
           <div class="col-md-12">
             <ul class="breadcrumb-tree">
-              <li><a href="#">Inicio</a></li>
-              <li><a href="#">Categorías</a></li>
-              <li><a href="#">Placas Base</a></li>
+              <li><a href="./index.php">Inicio</a></li>
+              <li><a href="#">Monitores</a></li>
             </ul>
           </div>
         </div>
@@ -275,7 +274,7 @@ $items = $prod->getProducts('MOTHER');
                     <img src="<?php echo $srcItem ;?>" alt="" />
                   </div>
                   <div class="product-body">
-                    <p class="product-category">Placas Base</p>
+                    <p class="product-category">Ordenadores Portátiles</p>
                     <h3 class="product-name">
                       <a href="#"><?php echo $item['nombre_corto'] ;?></a>
                     </h3>

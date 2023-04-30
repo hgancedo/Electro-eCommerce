@@ -221,9 +221,11 @@ $families = $fam->getFamilies();
           <!-- NAV -->
           <ul class="main-nav nav navbar-nav">
             <!-- <li class="active"><a href="#">Pc Sobremesa</a></li> -->
-            <li><a href="#">Categorías</a></li>
-            <?php foreach($families as $family) {?>
-            <li><a href="#"><?php echo $family['nombre']; ?></a></li>
+            <?php foreach($families as $family) {
+            //ruta para los enlaces
+            $link = './' .$family['cod']. '.php';
+            ?>
+            <li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
             <?php
             }
             ?>
@@ -255,8 +257,12 @@ $families = $fam->getFamilies();
               </div>
               <div class="shop-body">
                 <h3><?php echo $family['nombre']; ?><br /></h3>
-                <a href="#" class="cta-btn"
-                  >Shop now <i class="fa fa-arrow-circle-right"></i
+                <!-- ruta para los enlaces -->
+                <?php 
+                $link = './' .$family['cod']. '.php';
+                ?>
+                <a href="<?php echo $link ;?>" class="cta-btn"
+                  >Comprar <i class="fa fa-arrow-circle-right"></i
                 ></a>
               </div>
             </div>
@@ -286,10 +292,12 @@ $families = $fam->getFamilies();
               <div class="section-nav">
                 <ul class="section-tab-nav tab-nav">
                 <!--<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li> -->
-                  <li><a href="#">Categorías</a></li>
-                  <?php foreach($families as $familia) {?>
+                  <?php foreach($families as $family) {
+                  //ruta para los enlaces
+                  $link = './' .$family['cod']. '.php';
+                  ?>
                   <li>
-                    <a data-toggle="tab" href="#tab1"><?php echo $familia['nombre']; ?></a>
+                    <a href="<?php echo $link ;?>"><?php echo $family['nombre'] ;?></a>
                   </li>
                   <?php
                   }
