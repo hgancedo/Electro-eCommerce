@@ -9,15 +9,26 @@ class Producto extends Conexion {
 
     }
 
-    //Seleccionamos productos filtrando por familia
-    public function getProducts($familia) {
+    //Seleccionamos productos filtrando por familia e id como argumento opcional
+    public function getProducts($familia, $id=null) {
 
-        $sql="SELECT * FROM productos WHERE familia = :f";
+        //Si $id==null, sólo consultamos por familia
+        if(!$id) {
+            $sql="SELECT * FROM productos WHERE familia = :f";
+        } else {
+            $sql="SELECT * FROM productos WHERE familia = :f AND id = :id";
+        }
+
         $stm=$this->conexion->prepare($sql);
         try {
-            $stm->execute([":f"=>$familia]);
+            if(!$id) {
+                $stm->execute([":f"=>$familia]);
+            } else {
+                $stm->execute([":f"=>$familia, ":id"=>$id]);
+            }
+            
         } catch (Exception $ex) {
-            echo "Error al comprobar el dorsal: <br>" .$ex->getMessage();
+            echo "Error al seleccionar el producto: <br>" .$ex->getMessage();
         }
 
         return $stm->fetchAll();
@@ -31,7 +42,7 @@ class Producto extends Conexion {
         try {
             $stm->execute();
         } catch (Exception $ex) {
-            echo "Error al comprobar el dorsal: <br>" .$ex->getMessage();
+            echo "Error al seleccionar productos aleatorios <br>" .$ex->getMessage();
         }
 
         return $stm->fetchAll();

@@ -7,7 +7,10 @@ $families = $fam->getFamilies();
 
 //Seleccionamos todas las placas
 $prod = new Producto();
-$items = $prod->getProducts('MOTHER');
+
+//variable que pasaremos por url, necesaria para mostrar el producto junto con su id. También la utilizaremos para algunos string en los enlaces.
+$famKey = 'MOTHER';
+$items = $prod->getProducts($famKey);
 
 ?>
 
@@ -277,7 +280,10 @@ $items = $prod->getProducts('MOTHER');
                   <div class="product-body">
                     <p class="product-category">Placas Base</p>
                     <h3 class="product-name">
-                      <a href="#"><?php echo $item['nombre_corto'] ;?></a>
+                      <!-- ruta para enlace al producto, le pasamos la familia y el id -->
+                      <?php $ItemView = './ITEM.php?famKey=' .$famKey. '&id=' .$item['id'] ;
+                      echo $ItemView; ?>
+                      <a href="<?php echo $ItemView ;?>"><?php echo $item['nombre_corto'] ;?></a>
                     </h3>
                     <h4 class="product-price">
                       <?php echo $item['pvp'] ."€" ;?>
