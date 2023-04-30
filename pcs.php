@@ -275,7 +275,7 @@ $items = $prod->getProducts('PC');
                     <img src="<?php echo $srcItem ;?>" alt="" />
                   </div>
                   <div class="product-body">
-                    <p class="product-category"><?php echo $item['nombre'] ;?></p>
+                    <p class="product-category">PCs Sobremesa</p>
                     <h3 class="product-name">
                       <a href="#"><?php echo $item['nombre_corto'] ;?></a>
                     </h3>

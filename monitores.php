@@ -1,19 +1,13 @@
 <?php
-include_once "./src/Producto.php";
 include_once "./src/Familia.php";
+include_once "./src/Producto.php";
 
-$prod = new Producto();
 $fam = new Familia();
-
-//novedades del primer carrusel (y del grupo del último carrusel, la primera columna de 2 div)
-$novedades = $prod->getRandomProducts(6);
-//más vendidos
-$topVentas = $prod->getRandomProducts(6);
-//más valorados
-$mostValued = $prod->getRandomProducts(6);
-
 $families = $fam->getFamilies();
 
+//Seleccionamos todas las placas
+$prod = new Producto();
+$items = $prod->getProducts('MON');
 ?>
 
 <!DOCTYPE html>
@@ -220,10 +214,13 @@ $families = $fam->getFamilies();
         <div id="responsive-nav">
           <!-- NAV -->
           <ul class="main-nav nav navbar-nav">
-            <!-- <li class="active"><a href="#">Pc Sobremesa</a></li> -->
+            <li><a href="#">Inicio</a></li>
             <li><a href="#">Categorías</a></li>
-            <?php foreach($families as $family) {?>
-            <li><a href="#"><?php echo $family['nombre']; ?></a></li>
+            <!-- <li class="active"><a href="#">Inicio</a></li> -->
+            <!-- Mostramos las categorías excepto en la que estamos -->
+            <?php for($i=0; $i<count($families); $i++) {
+              if($i==3) continue ?> 
+            <li><a href="#"><?php echo $families[$i]['nombre']; ?></a></li>
             <?php
             }
             ?>
@@ -236,42 +233,25 @@ $families = $fam->getFamilies();
     </nav>
     <!-- /NAVIGATION -->
 
-    <!-- SECTION -->
-    <div class="section">
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb" class="section">
       <!-- container -->
       <div class="container">
         <!-- row -->
         <div class="row">
-
-          <?php foreach($families as $family) {
-          //ruta para las imágenes de categorías
-          $srcCateg = "./img/CATEGORIES/". $family['cod']. ".webp";
-          ?>
-          <!-- shop -->
-          <div class="col-md-3 col-xs-6">
-            <div class="shop">
-              <div class="shop-img">
-                <img src="<?php echo $srcCateg ;?>" alt="" />
-              </div>
-              <div class="shop-body">
-                <h3><?php echo $family['nombre']; ?><br /></h3>
-                <a href="#" class="cta-btn"
-                  >Shop now <i class="fa fa-arrow-circle-right"></i
-                ></a>
-              </div>
-            </div>
+          <div class="col-md-12">
+            <ul class="breadcrumb-tree">
+              <li><a href="#">Inicio</a></li>
+              <li><a href="#">Categorías</a></li>
+              <li><a href="#">Monitores</a></li>
+            </ul>
           </div>
-          <!-- /shop -->
-          <?php
-          }
-          ?>
-
         </div>
         <!-- /row -->
       </div>
       <!-- /container -->
     </div>
-    <!-- /SECTION -->
+    <!-- /BREADCRUMB -->
 
     <!-- SECTION -->
     <div class="section">
@@ -279,352 +259,68 @@ $families = $fam->getFamilies();
       <div class="container">
         <!-- row -->
         <div class="row">
-          <!-- section title -->
-          <div class="col-md-12">
-            <div class="section-title">
-              <h3 class="title">Nuevos Productos</h3>
-              <div class="section-nav">
-                <ul class="section-tab-nav tab-nav">
-                <!--<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li> -->
-                  <li><a href="#">Categorías</a></li>
-                  <?php foreach($families as $familia) {?>
-                  <li>
-                    <a data-toggle="tab" href="#tab1"><?php echo $familia['nombre']; ?></a>
-                  </li>
-                  <?php
-                  }
-                  ?>
+          
+          <!-- STORE -->
+          <div id="store" class="col-md-12">
 
-                </ul>
-              </div>
-            </div>
-          </div>
-          <!-- /section title -->
-
-          <!-- Products tab & slick -->
-          <div class="col-md-12">
+            <!-- store products -->
             <div class="row">
-              <div class="products-tabs">
-                <!-- tab -->
-                <div id="tab1" class="tab-pane active">
-                  <div class="products-slick" data-nav="#slick-nav-1">
 
-                    <!-- product -->
-                    <?php foreach($novedades as $novedad){
-                    //Ruta de las fotos  
-                    $srcAllProd = "./img/PRODUCTS/ALL_SMALL/" .$novedad['id']. ".webp"; ?>
-                    <div class="product">
-                      <div class="product-img">
-                        <img src="<?php echo $srcAllProd; ?>" alt="" />
-                        <div class="product-label">
-                          <span class="new">NEW</span>
-                        </div>
-                      </div>
-                      <div class="product-body">
-                        <p class="product-category"><?php echo $novedad['nombre']; ?></p>
-                        <h3 class="product-name">
-                          <a href="#"><?php echo $novedad['nombre_corto']; ?></a>
-                        </h3>
-                        <h4 class="product-price">
-                          <?php echo $novedad['pvp'] ."€" ;?>
-                        </h4>
-                        <div class="product-rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-btns">
-                          <button class="add-to-wishlist">
-                            <i class="fa fa-heart-o"></i
-                            ><span class="tooltipp">add to wishlist</span>
-                          </button>
-                          <button class="add-to-compare">
-                            <i class="fa fa-exchange"></i
-                            ><span class="tooltipp">add to compare</span>
-                          </button>
-                          <button class="quick-view">
-                            <i class="fa fa-eye"></i
-                            ><span class="tooltipp">quick view</span>
-                          </button>
-                        </div>
-                      </div>
-                      <div class="add-to-cart">
-                        <button class="add-to-cart-btn">
-                          <i class="fa fa-shopping-cart"></i> add to cart
-                        </button>
-                      </div>
+              <?php foreach($items as $item){
+              $srcItem = "./img/PRODUCTS/ALL_SMALL/" .$item['id']. ".webp"; ?>
+              <!-- product -->
+              <div class="col-md-3 col-xs-6">
+                <div class="product">
+                  <div class="product-img">
+                    <img src="<?php echo $srcItem ;?>" alt="" />
+                  </div>
+                  <div class="product-body">
+                    <p class="product-category">Ordenadores Portátiles</p>
+                    <h3 class="product-name">
+                      <a href="#"><?php echo $item['nombre_corto'] ;?></a>
+                    </h3>
+                    <h4 class="product-price">
+                      <?php echo $item['pvp'] ."€" ;?>
+                    </h4>
+                    <div class="product-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
                     </div>
-                    <!-- /product -->
-                    <?php
-                    }
-                    ?>
-
+                    <div class="product-btns">
+                      <button class="add-to-wishlist">
+                        <i class="fa fa-heart-o"></i
+                        ><span class="tooltipp">add to wishlist</span>
+                      </button>
+                      <button class="add-to-compare">
+                        <i class="fa fa-exchange"></i
+                        ><span class="tooltipp">add to compare</span>
+                      </button>
+                      <button class="quick-view">
+                        <i class="fa fa-eye"></i
+                        ><span class="tooltipp">quick view</span>
+                      </button>
+                    </div>
                   </div>
-                  <div id="slick-nav-1" class="products-slick-nav"></div>
+                  <div class="add-to-cart">
+                    <button class="add-to-cart-btn">
+                      <i class="fa fa-shopping-cart"></i> add to cart
+                    </button>
+                  </div>
                 </div>
-                <!-- /tab -->
               </div>
+              <!-- /product -->
+              <?php
+              }
+              ?>
+
             </div>
+            <!-- /store products -->
+
           </div>
-          <!-- Products tab & slick -->
-        </div>
-        <!-- /row -->
-      </div>
-      <!-- /container -->
-    </div>
-    <!-- /SECTION -->
-
-    <!-- HOT DEAL SECTION -->
-    <div id="hot-deal" class="section">
-      <!-- container -->
-      <div class="container">
-        <!-- row -->
-        <div class="row">
-          <div class="col-md-12">
-            <div class="hot-deal">
-              <ul class="hot-deal-countdown">
-                <li>
-                  <div>
-                    <h3>02</h3>
-                    <span>Días</span>
-                  </div>
-                </li>
-                <li>
-                  <div>
-                    <h3>10</h3>
-                    <span>Horas</span>
-                  </div>
-                </li>
-                <li>
-                  <div>
-                    <h3>34</h3>
-                    <span>Mins</span>
-                  </div>
-                </li>
-                <li>
-                  <div>
-                    <h3>60</h3>
-                    <span>Segs</span>
-                  </div>
-                </li>
-              </ul>
-              <h2 class="text-uppercase">Ofertas Semanales</h2>
-              <p>Descuentos de hasta el 50%</p>
-              <a class="primary-btn cta-btn" href="#">Comprar</a>
-            </div>
-          </div>
-        </div>
-        <!-- /row -->
-      </div>
-      <!-- /container -->
-    </div>
-    <!-- /HOT DEAL SECTION -->
-
-    <!-- SECTION -->
-    <div class="section">
-      <!-- container -->
-      <div class="container">
-        <!-- row -->
-        <div class="row">
-          <div class="col-md-4 col-xs-6">
-            <div class="section-title">
-              <h4 class="title">Novedades</h4>
-              <div class="section-nav">
-                <div id="slick-nav-3" class="products-slick-nav"></div>
-              </div>
-            </div>
-
-            <div class="products-widget-slick" data-nav="#slick-nav-3">
-
-              <div>
-                <!-- Recorremos hasta 3 porque son 2 div de 3 productos cada div -->
-                <?php for($i=0; $i<3; $i++) {
-                //Ruta de las fotos  
-                $srcNovedades = "./img/PRODUCTS/ALL_SMALL/" .$novedades[$i]['id']. ".webp"; ?>
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="<?php echo $srcNovedades ;?>" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category"><?php echo $novedades[$i]['nombre']; ?></p>
-                    <h3 class="product-name">
-                      <a href="#"><?php echo $novedades[$i]['nombre_corto'] ;?></a>
-                    </h3>
-                    <h4 class="product-price">
-                      <?php echo $novedades[$i]['pvp'] ."€"; ?>
-                    </h4>
-                  </div>
-                </div>
-                <!-- /product widget -->
-                <?php
-                }
-                ?>
-              </div>
-
-              <div>
-                <?php for($i=3; $i<6; $i++) {
-                //Ruta de las fotos  
-                $srcNovedades2 = "./img/PRODUCTS/ALL_SMALL/" .$novedades[$i]['id']. ".webp"; ?>
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="<?php echo $srcNovedades2 ;?>" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category"><?php echo $novedades[$i]['nombre']; ?></p>
-                    <h3 class="product-name">
-                      <a href="#"><?php echo $novedades[$i]['nombre_corto']; ?></a>
-                    </h3>
-                    <h4 class="product-price">
-                      <?php echo $novedades[$i]['pvp'] ."€" ;?>
-                    </h4>
-                  </div>
-                </div>
-                <!-- /product widget -->
-                <?php
-                }
-                ?>
-
-              </div>
-
-            </div>
-          </div>
-
-          <div class="col-md-4 col-xs-6">
-            <div class="section-title">
-              <h4 class="title">Top Ventas</h4>
-              <div class="section-nav">
-                <div id="slick-nav-4" class="products-slick-nav"></div>
-              </div>
-            </div>
-
-            <div class="products-widget-slick" data-nav="#slick-nav-4">
-              <div>
-
-                <?php for($i=0; $i<3; $i++) {
-                //Ruta de las fotos  
-                $srcTopVentas = "./img/PRODUCTS/ALL_SMALL/" .$topVentas[$i]['id']. ".webp"; ?>
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="<?php echo $srcTopVentas ;?>" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category"><?php echo $topVentas[$i]['nombre']; ?></p>
-                    <h3 class="product-name">
-                      <a href="#"><?php echo $topVentas[$i]['nombre_corto']; ?></a>
-                    </h3>
-                    <h4 class="product-price">
-                      <?php echo $topVentas[$i]['pvp'] ."€" ;?>
-                    </h4>
-                  </div>
-                </div>
-                <!-- /product widget -->
-                <?php
-                }
-                ?>
-
-              </div>
-
-              <div>
-
-                <?php for($i=3; $i<6; $i++) {
-                //Ruta de las fotos  
-                $srcTopVentas2 = "./img/PRODUCTS/ALL_SMALL/" .$topVentas[$i]['id']. ".webp"; ?>
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="<?php echo $srcTopVentas2 ;?>" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category"><?php echo $topVentas[$i]['nombre']; ?></p>
-                    <h3 class="product-name">
-                      <a href="#"><?php echo $topVentas[$i]['nombre_corto']; ?></a>
-                    </h3>
-                    <h4 class="product-price">
-                      <?php echo $topVentas[$i]['pvp'] ."€" ;?>
-                    </h4>
-                  </div>
-                </div>
-                <!-- /product widget -->
-                <?php
-                }
-                ?>
-
-              </div>
-            </div>
-          </div>
-
-          <div class="clearfix visible-sm visible-xs"></div>
-
-          <div class="col-md-4 col-xs-6">
-            <div class="section-title">
-              <h4 class="title">Más Valorados</h4>
-              <div class="section-nav">
-                <div id="slick-nav-5" class="products-slick-nav"></div>
-              </div>
-            </div>
-
-
-            <div class="products-widget-slick" data-nav="#slick-nav-5">
-              <div>
-
-                <?php for($i=0; $i<3; $i++) {
-                //Ruta de las fotos  
-                $srcMostValued = "./img/PRODUCTS/ALL_SMALL/" .$mostValued[$i]['id']. ".webp"; ?>
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="<?php echo $srcMostValued ;?>" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category"><?php echo $mostValued[$i]['nombre']; ?></p>
-                    <h3 class="product-name">
-                      <a href="#"><?php echo $mostValued[$i]['nombre_corto']; ?></a>
-                    </h3>
-                    <h4 class="product-price">
-                      <?php echo $mostValued[$i]['pvp'] ."€" ;?>
-                    </h4>
-                  </div>
-                </div>
-                <!-- /product widget -->
-                <?php
-                }
-                ?>
-
-              </div>
-
-              <div>
-
-                <?php for($i=3; $i<6; $i++) {
-                //Ruta de las fotos  
-                $srcMostValued2 = "./img/PRODUCTS/ALL_SMALL/" .$mostValued[$i]['id']. ".webp"; ?>
-                <!-- product widget -->
-                <div class="product-widget">
-                  <div class="product-img">
-                    <img src="<?php echo $srcMostValued2 ;?>" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category"><?php echo $mostValued[$i]['nombre']; ?></p>
-                    <h3 class="product-name">
-                      <a href="#"><?php echo $mostValued[$i]['nombre_corto']; ?></a>
-                    </h3>
-                    <h4 class="product-price">
-                    <?php echo $mostValued[$i]['pvp'] ."€" ;?>
-                    </h4>
-                  </div>
-                </div>
-                <!-- /product widget -->
-                <?php
-                }
-                ?>
-
-              </div>
-            </div>
-          </div>
+          <!-- /STORE -->
         </div>
         <!-- /row -->
       </div>
@@ -680,8 +376,8 @@ $families = $fam->getFamilies();
       <div class="section">
         <!-- container -->
         <div class="container">
-          <!-- row -->
-          <div class="row">
+  <!-- row -->
+  <div class="row">
             <div class="col-md-3 col-xs-6">
               <div class="footer">
                 <h3 class="footer-title">Sobre Nosotros</h3>
@@ -783,7 +479,7 @@ $families = $fam->getFamilies();
               </ul>
               <span class="copyright">
                 <a target="_blank" href="https://www.templateshub.net"
-                  >Powered By Hector Gancedo Grade</a
+                  >Templates Hub</a
                 >
               </span>
             </div>
