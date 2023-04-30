@@ -12,6 +12,8 @@ $prod = new Producto();
 $famKey = 'MOTHER';
 $items = $prod->getProducts($famKey);
 
+//El nombre de la familia según el cod
+$category = $fam->getFamilies($famKey);
 ?>
 
 <!DOCTYPE html>
@@ -246,7 +248,7 @@ $items = $prod->getProducts($famKey);
           <div class="col-md-12">
             <ul class="breadcrumb-tree">
               <li><a href="./index.php">Inicio</a></li>
-              <li><a href="#">Placas Base</a></li>
+              <li><a href="#"><?php echo $category[0]['nombre'] ;?></a></li>
             </ul>
           </div>
         </div>
@@ -278,7 +280,7 @@ $items = $prod->getProducts($famKey);
                     <img src="<?php echo $srcItem ;?>" alt="" />
                   </div>
                   <div class="product-body">
-                    <p class="product-category">Placas Base</p>
+                    <p class="product-category"><?php echo $category[0]['nombre'] ;?></p>
                     <h3 class="product-name">
                       <!-- ruta para enlace al producto, le pasamos la familia y el id -->
                       <?php $ItemView = './ITEM.php?famKey=' .$famKey. '&id=' .$item['id'] ;?>

@@ -5,9 +5,14 @@ include_once "./src/Producto.php";
 $fam = new Familia();
 $families = $fam->getFamilies();
 
-//Seleccionamos todas las placas
+//Seleccionamos productos
 $prod = new Producto();
-$items = $prod->getProducts('PC');
+//variable que pasaremos por url, necesaria para mostrar el producto junto con su id. También la utilizaremos para algunos string en los enlaces.
+$famKey = 'PC';
+$items = $prod->getProducts($famKey);
+
+//El nombre de la familia según el cod
+$category = $fam->getFamilies($famKey);
 ?>
 
 <!DOCTYPE html>
@@ -242,7 +247,7 @@ $items = $prod->getProducts('PC');
           <div class="col-md-12">
             <ul class="breadcrumb-tree">
               <li><a href="./index.php">Inicio</a></li>
-              <li><a href="">PCs Sobremesa</a></li>
+              <li><a href=""><?php echo $category[0]['nombre'] ;?></a></li>
             </ul>
           </div>
         </div>
@@ -274,9 +279,13 @@ $items = $prod->getProducts('PC');
                     <img src="<?php echo $srcItem ;?>" alt="" />
                   </div>
                   <div class="product-body">
-                    <p class="product-category">PCs Sobremesa</p>
+                    <p class="product-category"><?php echo $category[0]['nombre'] ;?></p>
+
+                  
                     <h3 class="product-name">
-                      <a href="#"><?php echo $item['nombre_corto'] ;?></a>
+                       <!-- ruta para enlace al producto, le pasamos la familia y el id -->
+                       <?php $ItemView = './ITEM.php?famKey=' .$famKey. '&id=' .$item['id'] ;?>
+                      <a href="<?php echo $ItemView ;?>"><?php echo $item['nombre_corto'] ;?></a>
                     </h3>
                     <h4 class="product-price">
                       <?php echo $item['pvp'] ."€" ;?>
@@ -297,7 +306,7 @@ $items = $prod->getProducts('PC');
                         <i class="fa fa-exchange"></i
                         ><span class="tooltipp">add to compare</span>
                       </button>
-                      <button class="quick-view">
+                      <button id="quickView" class="quick-view" value="<?php echo $item['id'] ;?>">
                         <i class="fa fa-eye"></i
                         ><span class="tooltipp">quick view</span>
                       </button>
@@ -375,8 +384,8 @@ $items = $prod->getProducts('PC');
       <div class="section">
         <!-- container -->
         <div class="container">
-  <!-- row -->
-  <div class="row">
+          <!-- row -->
+          <div class="row">
             <div class="col-md-3 col-xs-6">
               <div class="footer">
                 <h3 class="footer-title">Sobre Nosotros</h3>
@@ -498,5 +507,6 @@ $items = $prod->getProducts('PC');
     <script src="js/nouislider.min.js"></script>
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
+    <script type="text/javascript" src="./js/categoryFunctions.js"></script>
   </body>
 </html>

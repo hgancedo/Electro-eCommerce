@@ -10,7 +10,7 @@ class Familia extends Conexion {
 
     }
 
-    //Seleccionamos productos filtrando por familia
+    //Devuelve todas las familias o las del cod que le pasemos
     public function getFamilies($fam=null) {
 
         if(!$fam) {
@@ -33,4 +33,5 @@ class Familia extends Conexion {
 
         return $stm->fetchAll();
     }
+
 }
