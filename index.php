@@ -293,7 +293,7 @@ $families = $fam->getFamilies();
                 <ul class="section-tab-nav tab-nav">
                 <!--<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li> -->
                   <?php foreach($families as $family) {
-                  //ruta para los enlaces
+                  //ruta para los enlaces de tab-nav
                   $link = './' .$family['cod']. '.php';
                   ?>
                   <li>
@@ -331,7 +331,9 @@ $families = $fam->getFamilies();
                       <div class="product-body">
                         <p class="product-category"><?php echo $novedad['nombre']; ?></p>
                         <h3 class="product-name">
-                          <a href="#"><?php echo $novedad['nombre_corto']; ?></a>
+                          <!-- ruta para el enlace al producto -->
+                          <?php $url = './ITEM.php?famKey=' .$novedad['cod']. '&id=' .$novedad['id'] ;?>
+                          <a href="<?php echo $url ;?>"><?php echo $novedad['nombre_corto']; ?></a>
                         </h3>
                         <h4 class="product-price">
                           <?php echo $novedad['pvp'] ."€" ;?>
@@ -352,7 +354,7 @@ $families = $fam->getFamilies();
                             <i class="fa fa-exchange"></i
                             ><span class="tooltipp">add to compare</span>
                           </button>
-                          <button class="quick-view">
+                          <button id="quickView" class="quick-view" value="<?php echo $novedad['id'].'+'.$novedad['cod'] ;?>">
                             <i class="fa fa-eye"></i
                             ><span class="tooltipp">quick view</span>
                           </button>
@@ -811,5 +813,6 @@ $families = $fam->getFamilies();
     <script src="js/nouislider.min.js"></script>
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
+    <script type="text/javascript" src="./js/toItemFromIndex.js"></script>
   </body>
 </html>

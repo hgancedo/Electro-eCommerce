@@ -34,9 +34,9 @@ class Producto extends Conexion {
         return $stm->fetchAll();
     }
 
-    //Selección aleatoria. En producción filtraríamos por fecha para mostrar novedades recientes, calcularíamos productos mas vendidos para superventas y productos que hayan bajado de precio para las ofertas. Devuelve columnas de tabla productos y la columna nombre de tabla familias
+    //Selección aleatoria. En producción filtraríamos por fecha para mostrar novedades recientes, calcularíamos productos mas vendidos para superventas y productos que hayan bajado de precio para las ofertas. Devuelve columnas de tabla productos y las columnas, 2, de tabla familias
     public function getRandomProducts($num) {
-        $sql = "SELECT id, nombre_corto, pvp, f.nombre FROM productos p inner join familias f 
+        $sql = "SELECT id, nombre_corto, pvp, f.nombre, f.cod FROM productos p inner join familias f 
         ON p.familia = f.cod order by RAND() LIMIT $num";
         $stm=$this->conexion->prepare($sql);
         try {
