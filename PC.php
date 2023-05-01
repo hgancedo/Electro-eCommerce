@@ -281,7 +281,6 @@ $category = $fam->getFamilies($famKey);
                   <div class="product-body">
                     <p class="product-category"><?php echo $category[0]['nombre'] ;?></p>
 
-                  
                     <h3 class="product-name">
                        <!-- ruta para enlace al producto, le pasamos la familia y el id -->
                        <?php $ItemView = './ITEM.php?famKey=' .$famKey. '&id=' .$item['id'] ;?>
@@ -306,6 +305,7 @@ $category = $fam->getFamilies($famKey);
                         <i class="fa fa-exchange"></i
                         ><span class="tooltipp">add to compare</span>
                       </button>
+                      <!-- en este botón pasamos idProd -->
                       <button id="quickView" class="quick-view" value="<?php echo $item['id'] ;?>">
                         <i class="fa fa-eye"></i
                         ><span class="tooltipp">quick view</span>
@@ -507,6 +507,7 @@ $category = $fam->getFamilies($famKey);
     <script src="js/nouislider.min.js"></script>
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
+    <!-- script que permite acceder a ITEM capturando valor de url y de boton id="quickView" -->
     <script type="text/javascript" src="./js/categoryFunctions.js"></script>
   </body>
 </html>
