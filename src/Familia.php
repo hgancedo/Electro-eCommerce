@@ -34,4 +34,18 @@ class Familia extends Conexion {
         return $stm->fetchAll();
     }
 
+    //Función que devuelve el cod a partir del nombre
+    public function getCodFamily($nomFam) {
+        $sql = "SELECT cod FROM familias WHERE nombre = :n";
+        $stm=$this->conexion->prepare($sql);
+
+        try {
+            $stm->execute([":n"=>$nomFam]);
+        } catch (Exception $ex) {
+            echo "Error al comprobar el cod de familia: " .$ex->getMessage(). "<br>";
+        }
+
+        return $stm->fetchAll();
+    }
+
 }

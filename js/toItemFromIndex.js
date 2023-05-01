@@ -1,3 +1,4 @@
+//script que direcciona a ITEM.php campturando vars necesarias del valor del boton #quickView
 "use strict";
 
 //array de botones que contienen los 2 strings, idProd y codFamilia

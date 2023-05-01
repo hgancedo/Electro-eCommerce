@@ -461,7 +461,14 @@ $families = $fam->getFamilies();
                   <div class="product-body">
                     <p class="product-category"><?php echo $novedades[$i]['nombre']; ?></p>
                     <h3 class="product-name">
-                      <a href="#"><?php echo $novedades[$i]['nombre_corto'] ;?></a>
+
+                      <!-- url según la famKey e idProd. Necesitamos el famKey (o cod de familia) a partir del nombre de ésta -->
+                      <?php
+                      $famKeyNov_1 = $fam->getCodFamily($novedades[$i]['nombre']);
+                      //url que contendrá el famkey ( o cod fam) e idProd
+                      $urlNov_1 = './ITEM.php?famKey='. $famKeyNov_1[0]['cod']. '&id='. $novedades[$i]['id'];
+                      ?>
+                      <a href="<?php echo $urlNov_1 ;?>"><?php echo $novedades[$i]['nombre_corto'] ;?></a>
                     </h3>
                     <h4 class="product-price">
                       <?php echo $novedades[$i]['pvp'] ."€"; ?>
@@ -486,7 +493,14 @@ $families = $fam->getFamilies();
                   <div class="product-body">
                     <p class="product-category"><?php echo $novedades[$i]['nombre']; ?></p>
                     <h3 class="product-name">
-                      <a href="#"><?php echo $novedades[$i]['nombre_corto']; ?></a>
+
+                      <!-- url según la famKey e idProd. Necesitamos el famKey (o cod de familia) a partir del nombre de ésta -->
+                      <?php
+                      $famKeyNov_2 = $fam->getCodFamily($novedades[$i]['nombre']);
+                      //url que contendrá el famkey ( o cod fam) e idProd
+                      $urlNov_2 = './ITEM.php?famKey='. $famKeyNov_2[0]['cod']. '&id='. $novedades[$i]['id'];
+                      ?>
+                      <a href="<?php echo $urlNov_2 ;?>"><?php echo $novedades[$i]['nombre_corto']; ?></a>
                     </h3>
                     <h4 class="product-price">
                       <?php echo $novedades[$i]['pvp'] ."€" ;?>
@@ -525,7 +539,14 @@ $families = $fam->getFamilies();
                   <div class="product-body">
                     <p class="product-category"><?php echo $topVentas[$i]['nombre']; ?></p>
                     <h3 class="product-name">
-                      <a href="#"><?php echo $topVentas[$i]['nombre_corto']; ?></a>
+                    
+                      <!-- url según la famKey e idProd. Necesitamos el famKey (o cod de familia) a partir del nombre de ésta -->
+                      <?php
+                      $famKeyTop_1 = $fam->getCodFamily($topVentas[$i]['nombre']);
+                      //url que contendrá el famkey ( o cod fam) e idProd
+                      $urlTop_1 = './ITEM.php?famKey='. $famKeyTop_1[0]['cod']. '&id='. $topVentas[$i]['id'];
+                      ?>
+                      <a href="<?php echo $urlTop_1 ;?>"><?php echo $topVentas[$i]['nombre_corto']; ?></a>
                     </h3>
                     <h4 class="product-price">
                       <?php echo $topVentas[$i]['pvp'] ."€" ;?>
@@ -552,7 +573,14 @@ $families = $fam->getFamilies();
                   <div class="product-body">
                     <p class="product-category"><?php echo $topVentas[$i]['nombre']; ?></p>
                     <h3 class="product-name">
-                      <a href="#"><?php echo $topVentas[$i]['nombre_corto']; ?></a>
+
+                      <!-- url según la famKey e idProd. Necesitamos el famKey (o cod de familia) a partir del nombre de ésta -->
+                      <?php
+                      $famKeyTop_2 = $fam->getCodFamily($topVentas[$i]['nombre']);
+                      //url que contendrá el famkey ( o cod fam) e idProd
+                      $urlTop_2 = './ITEM.php?famKey='. $famKeyTop_2[0]['cod']. '&id='. $topVentas[$i]['id'];
+                      ?>
+                      <a href="<?php echo $urlTop_2 ;?>"><?php echo $topVentas[$i]['nombre_corto']; ?></a>
                     </h3>
                     <h4 class="product-price">
                       <?php echo $topVentas[$i]['pvp'] ."€" ;?>
@@ -592,8 +620,16 @@ $families = $fam->getFamilies();
                   </div>
                   <div class="product-body">
                     <p class="product-category"><?php echo $mostValued[$i]['nombre']; ?></p>
+
                     <h3 class="product-name">
-                      <a href="#"><?php echo $mostValued[$i]['nombre_corto']; ?></a>
+
+                      <!-- url según la famKey e idProd. Necesitamos el famKey (o cod de familia) a partir del nombre de ésta -->
+                      <?php
+                      $famKeyMost_1 = $fam->getCodFamily($mostValued[$i]['nombre']);
+                      //url que contendrá el famkey ( o cod fam) e idProd
+                      $urlMost_1 = './ITEM.php?famKey='. $famKeyMost_1[0]['cod']. '&id='. $mostValued[$i]['id'];
+                      ?>
+                      <a href="<?php echo $urlMost_1 ;?>"><?php echo $mostValued[$i]['nombre_corto']; ?></a>
                     </h3>
                     <h4 class="product-price">
                       <?php echo $mostValued[$i]['pvp'] ."€" ;?>
@@ -620,7 +656,15 @@ $families = $fam->getFamilies();
                   <div class="product-body">
                     <p class="product-category"><?php echo $mostValued[$i]['nombre']; ?></p>
                     <h3 class="product-name">
-                      <a href="#"><?php echo $mostValued[$i]['nombre_corto']; ?></a>
+
+                      
+                      <!-- url según la famKey e idProd. Necesitamos el famKey (o cod de familia) a partir del nombre de ésta -->
+                      <?php
+                      $famKeyMost_2 = $fam->getCodFamily($mostValued[$i]['nombre']);
+                      //url que contendrá el famkey ( o cod fam) e idProd
+                      $urlMost_2 = './ITEM.php?famKey='. $famKeyMost_2[0]['cod']. '&id='. $mostValued[$i]['id'];
+                      ?>
+                      <a href="<?php echo $urlMost_2 ;?>"><?php echo $mostValued[$i]['nombre_corto']; ?></a>
                     </h3>
                     <h4 class="product-price">
                     <?php echo $mostValued[$i]['pvp'] ."€" ;?>

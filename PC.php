@@ -5,7 +5,6 @@ include_once "./src/Producto.php";
 $fam = new Familia();
 $families = $fam->getFamilies();
 
-//Seleccionamos productos
 $prod = new Producto();
 //variable que pasaremos por url, necesaria para mostrar el producto junto con su id. También la utilizaremos para algunos string en los enlaces.
 $famKey = 'PC';

@@ -366,7 +366,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
               </ul>
 
               <ul class="product-links">
-                <li>Share:</li>
+                <li>Compartir:</li>
                 <li>
                   <a href="#"><i class="fa fa-facebook"></i></a>
                 </li>

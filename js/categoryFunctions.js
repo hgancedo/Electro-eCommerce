@@ -1,3 +1,5 @@
+//script que direcciona a ITEM.php capturando una var de la url y otra del boton #quickView
+
 "use strict";
 //Extraemos la url, una parte coincide con el cod de producto
 const fileName = location.href.split("/").slice(-1);
