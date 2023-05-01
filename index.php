@@ -7,6 +7,7 @@ $fam = new Familia();
 
 //novedades del primer carrusel (y del grupo del último carrusel, la primera columna de 2 div)
 $novedades = $prod->getRandomProducts(6);
+
 //más vendidos
 $topVentas = $prod->getRandomProducts(6);
 //más valorados
@@ -354,7 +355,7 @@ $families = $fam->getFamilies();
                             <i class="fa fa-exchange"></i
                             ><span class="tooltipp">add to compare</span>
                           </button>
-                          <button id="quickView" class="quick-view" value="<?php echo $novedad['id'].'+'.$novedad['cod'] ;?>">
+                          <button class="eyeView" class="quick-view" value="<?php echo $novedad['id'].'+'.$novedad['cod'] ;?>">
                             <i class="fa fa-eye"></i
                             ><span class="tooltipp">quick view</span>
                           </button>

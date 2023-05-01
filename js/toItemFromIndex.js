@@ -2,7 +2,8 @@
 "use strict";
 
 //array de botones que contienen los 2 strings, idProd y codFamilia
-const arrayButton = document.querySelectorAll("#quickView");
+//No entiendo por qué se generan 16 botones, si el array está creado con
+const arrayButton = document.querySelectorAll(".eyeView");
 console.log(arrayButton);
 
 arrayButton.forEach((button) => {
