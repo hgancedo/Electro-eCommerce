@@ -244,11 +244,10 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
         <div class="row">
           <div class="col-md-12">
             <ul class="breadcrumb-tree">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">All Categories</a></li>
-              <li><a href="#">Accessories</a></li>
-              <li><a href="#">Headphones</a></li>
-              <li class="active">Product name goes here</li>
+              <li><a href="index.php">Inicio</a></li>
+              <!-- enlace a página según famKey -->
+              <li><a href="<?php echo './'. $_GET['famKey']. '.php' ;?>"><?php echo $familyItem[0]['nombre']; ?></a></li>
+              <li class="active"><?php echo $item[0]['nombre_corto'] ;?></li>
             </ul>
           </div>
         </div>
@@ -338,21 +337,6 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
                 <?php echo $item[0]['descripcion'] ;?>
               </p>
 
-              <div class="product-options">
-                <label>
-                  Size
-                  <select class="input-select">
-                    <option value="0">X</option>
-                  </select>
-                </label>
-                <label>
-                  Color
-                  <select class="input-select">
-                    <option value="0">Red</option>
-                  </select>
-                </label>
-              </div>
-
               <div class="add-to-cart">
                 <div class="qty-label">
                   Qty
@@ -369,10 +353,10 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
 
               <ul class="product-btns">
                 <li>
-                  <a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a>
+                  <a href="#"><i class="fa fa-heart-o"></i> añadir a deseos</a>
                 </li>
                 <li>
-                  <a href="#"><i class="fa fa-exchange"></i> add to compare</a>
+                  <a href="#"><i class="fa fa-exchange"></i> añadir a comparar</a>
                 </li>
               </ul>
 
