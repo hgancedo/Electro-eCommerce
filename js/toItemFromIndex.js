@@ -2,7 +2,8 @@
 "use strict";
 
 //array de botones que contienen los 2 strings, idProd y codFamilia
-//No entiendo por qué se generan 16 botones, si el array está creado con
+//No funcionaba bien poniendo el mismo id para todos los botones(obvio) pero con 4 botones, en id=quickView (ITEM.php), sí funciona. Por lo tanto  hemos usado class para seleccionar los botones que se generan en el main carrusel de index.html
+//No entiendo por qué se generan 16 botones, si el array está creado con random(6) y estos botones se generan dinamicamente dentro de un foreach, deberían ser 6 botones
 const arrayButton = document.querySelectorAll(".eyeView");
 console.log(arrayButton);
 

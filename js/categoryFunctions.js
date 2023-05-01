@@ -1,4 +1,5 @@
 //script que direcciona a ITEM.php capturando una var de la url y otra del boton #quickView
+//Por algún motivo, para 4 productos funciona el mismo id para el botón y capturar con querySelectorAll()
 
 "use strict";
 //Extraemos la url, una parte coincide con el cod de producto
