@@ -362,8 +362,8 @@ $families = $fam->getFamilies();
                         </div>
                       </div>
                       <div class="add-to-cart">
-                        <button class="add-to-cart-btn">
-                          <i class="fa fa-shopping-cart"></i> add to cart
+                        <button class="add-to-cart-btn addToCart" value="<?php echo $novedad['id']. '/' .$novedad['nombre_corto'] .'/'. $novedad['pvp'] ;?>">
+                          <i class="fa fa-shopping-cart"></i> añadir al carrito
                         </button>
                       </div>
                     </div>
@@ -858,6 +858,9 @@ $families = $fam->getFamilies();
     <script src="js/nouislider.min.js"></script>
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
+    <!-- script que envía valores por medio del botón a ITEM.php para localizar producto -->
     <script type="text/javascript" src="./js/toItemFromIndex.js"></script>
+    <!-- script que gestiona el carrito -->
+    <script type="text/javascript" src="./js/shopCart.js"></script>
   </body>
 </html>
