@@ -367,7 +367,7 @@ $families = $fam->getFamilies();
                       </div>
                       <div class="add-to-cart">
                         <button class="add-to-cart-btn addToCart" value="<?php echo $novedad['id']. '/' .$novedad['nombre_corto'] .'/'. $novedad['pvp'] ;?>">
-                          <i class="fa fa-shopping-cart"></i> añadir al carrito
+                        <i class="fa fa-shopping-cart"></i> añadir al carrito
                         </button>
                       </div>
                     </div>

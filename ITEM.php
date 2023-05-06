@@ -353,13 +353,13 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
                 <div class="qty-label">
                   Qty
                   <div class="input-number">
-                    <input type="number" />
+                    <input type="number" value = "1"/>
                     <span class="qty-up">+</span>
                     <span class="qty-down">-</span>
                   </div>
                 </div>
-                <button class="add-to-cart-btn">
-                  <i class="fa fa-shopping-cart"></i> add to cart
+                    <button class="add-to-cart-btn addToCart" value="<?php echo $item[0]['id']. '/' .$item[0]['nombre_corto'] .'/'. $item[0]['pvp'] ;?>">
+                    <i class="fa fa-shopping-cart"></i> añadir al carrito
                 </button>
               </div>
 
@@ -855,5 +855,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
     <script src="js/nouislider.min.js"></script>
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
+    <!-- script que gestiona el carrito -->
+    <script type="text/javascript" src="./js/shopCart.js"></script>
   </body>
 </html>
