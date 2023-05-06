@@ -358,7 +358,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
                     <span class="qty-down">-</span>
                   </div>
                 </div>
-                    <button class="add-to-cart-btn addToCart" value="<?php echo $item[0]['id']. '/' .$item[0]['nombre_corto'] .'/'. $item[0]['pvp'] ;?>">
+                <button class="add-to-cart-btn addToCart" value="<?php echo $item[0]['id']. '/' .$item[0]['nombre_corto'] .'/'. $item[0]['pvp'] ;?>">
                     <i class="fa fa-shopping-cart"></i> añadir al carrito
                 </button>
               </div>

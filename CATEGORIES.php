@@ -315,8 +315,8 @@ $category = $fam->getFamilies($famKey);
                     </div>
                   </div>
                   <div class="add-to-cart">
-                    <button class="add-to-cart-btn">
-                      <i class="fa fa-shopping-cart"></i> add to cart
+                    <button class="add-to-cart-btn addToCart" value="<?php echo $item['id']. '/' .$item['nombre_corto'] .'/'. $item['pvp'] ;?>">
+                      <i class="fa fa-shopping-cart"></i> añadir al carrito
                     </button>
                   </div>
                 </div>
