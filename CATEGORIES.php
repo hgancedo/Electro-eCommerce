@@ -2,13 +2,17 @@
 include_once "./src/Familia.php";
 include_once "./src/Producto.php";
 
-$fam = new Familia();
-$families = $fam->getFamilies();
 
+//AHORA RECIBIMOS $famKey por url para hacer una única página de categorías y crearla dinámicamente según la categoría recibida
+$famKey = $_GET['famKey'];
+
+//Seleccionamos los productos según la familia (o categoría, es sinónimo), al igual que lo es cod o famKey
 $prod = new Producto();
-//variable que pasaremos por url, necesaria para mostrar el producto junto con su id. También la utilizaremos para algunos string en los enlaces.
-$famKey = 'PC';
 $items = $prod->getProducts($famKey);
+
+$fam = new Familia();
+//El conjunto de todas las familias o categorías
+$families = $fam->getFamilies();
 
 //El nombre de la familia según el cod
 $category = $fam->getFamilies($famKey);
@@ -222,7 +226,7 @@ $category = $fam->getFamilies($famKey);
             <li><a href="./index.php">Inicio</a></li>
             <?php foreach($families as $family) {
             //ruta para los enlaces
-            $link = './' .$family['cod']. '.php';
+            $link = './CATEGORIES.php?famKey=' .$family['cod'];
             ?>
             <li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
             <?php
@@ -246,7 +250,7 @@ $category = $fam->getFamilies($famKey);
           <div class="col-md-12">
             <ul class="breadcrumb-tree">
               <li><a href="./index.php">Inicio</a></li>
-              <li><a href=""><?php echo $category[0]['nombre'] ;?></a></li>
+              <li><a href="#"><?php echo $category[0]['nombre'] ;?></a></li>
             </ul>
           </div>
         </div>
@@ -281,8 +285,8 @@ $category = $fam->getFamilies($famKey);
                     <p class="product-category"><?php echo $category[0]['nombre'] ;?></p>
 
                     <h3 class="product-name">
-                       <!-- ruta para enlace al producto, le pasamos la familia y el id -->
-                       <?php $ItemView = './ITEM.php?famKey=' .$famKey. '&id=' .$item['id'] ;?>
+                      <!-- ruta para enlace al producto, le pasamos la familia y el id -->
+                      <?php $ItemView = './ITEM.php?famKey=' .$famKey. '&id=' .$item['id'] ;?>
                       <a href="<?php echo $ItemView ;?>"><?php echo $item['nombre_corto'] ;?></a>
                     </h3>
                     <h4 class="product-price">
@@ -304,7 +308,6 @@ $category = $fam->getFamilies($famKey);
                         <i class="fa fa-exchange"></i
                         ><span class="tooltipp">add to compare</span>
                       </button>
-                      <!-- en este botón pasamos idProd -->
                       <button id="quickView" class="quick-view" value="<?php echo $item['id'] ;?>">
                         <i class="fa fa-eye"></i
                         ><span class="tooltipp">quick view</span>
@@ -414,9 +417,10 @@ $category = $fam->getFamilies($famKey);
               <div class="footer">
                 <h3 class="footer-title">Categorías</h3>
                 <ul class="footer-links">
-                  <li><a href="#">Ofertas</a></li>
-                  <?php foreach($families as $family) {?>
-                  <li><a href="#"><?php echo $family['nombre']; ?></a></li>
+                  <li><a >Ofertas</a></li>
+                  <?php foreach($families as $family) {
+                    $link = './CATEGORIES.php?famKey=' .$family['cod']; ?>
+                  <li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
                   <?php
                   }
                   ?>
@@ -486,7 +490,7 @@ $category = $fam->getFamilies($famKey);
               </ul>
               <span class="copyright">
                 <a target="_blank" href="https://www.templateshub.net"
-                  >Templates Hub</a
+                  >Powered By Hector Gancedo Grade</a
                 >
               </span>
             </div>
@@ -508,5 +512,6 @@ $category = $fam->getFamilies($famKey);
     <script src="js/main.js"></script>
     <!-- script que permite acceder a ITEM capturando valor de url y de boton id="quickView" -->
     <script type="text/javascript" src="./js/categoryFunctions.js"></script>
+  </body>
   </body>
 </html>

@@ -222,9 +222,13 @@ $families = $fam->getFamilies();
           <!-- NAV -->
           <ul class="main-nav nav navbar-nav">
             <!-- <li class="active"><a href="#">Pc Sobremesa</a></li> -->
+
+          <!-- si definimos un enlace para cada categoría en lugar de crearlos dinámicamente, podremos crear cada página de categoría
+          con el famKey que recibirá y no tendremos que crear una página por cada categoría, simplemente  UNA ÚNICA PÁGINA  -->
+
             <?php foreach($families as $family) {
             //ruta para los enlaces
-            $link = './' .$family['cod']. '.php';
+            $link = './CATEGORIES.php?famKey=' .$family['cod'];
             ?>
             <li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
             <?php
@@ -260,7 +264,7 @@ $families = $fam->getFamilies();
                 <h3><?php echo $family['nombre']; ?><br /></h3>
                 <!-- ruta para los enlaces -->
                 <?php 
-                $link = './' .$family['cod']. '.php';
+                $link = './CATEGORIES.php?famKey=' .$family['cod'];
                 ?>
                 <a href="<?php echo $link ;?>" class="cta-btn"
                   >Comprar <i class="fa fa-arrow-circle-right"></i
@@ -295,7 +299,7 @@ $families = $fam->getFamilies();
                 <!--<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li> -->
                   <?php foreach($families as $family) {
                   //ruta para los enlaces de tab-nav
-                  $link = './' .$family['cod']. '.php';
+                  $link = './CATEGORIES.php?famKey=' .$family['cod'];
                   ?>
                   <li>
                     <a href="<?php echo $link ;?>"><?php echo $family['nombre'] ;?></a>
@@ -767,8 +771,9 @@ $families = $fam->getFamilies();
                 <h3 class="footer-title">Categorías</h3>
                 <ul class="footer-links">
                   <li><a href="#">Ofertas</a></li>
-                  <?php foreach($families as $family) {?>
-                  <li><a href="#"><?php echo $family['nombre']; ?></a></li>
+                  <?php foreach($families as $family) {
+                  $link = './CATEGORIES.php?famKey=' .$family['cod']; ?>
+                  <li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
                   <?php
                   }
                   ?>
