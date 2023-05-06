@@ -374,7 +374,8 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
 
               <ul class="product-links">
                 <li>Categoría:</li>
-                <li><a href="#"><?php echo $familyItem[0]['nombre'] ;?></a></li>
+                <?php $link = './CATEGORIES.php?famKey=' . $_GET['famKey'] ;?>
+                <li><a href="<?php echo $link ;?>"><?php echo $familyItem[0]['nombre'] ;?></a></li>
               </ul>
 
               <ul class="product-links">
