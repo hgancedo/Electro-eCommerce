@@ -359,7 +359,7 @@ $families = $fam->getFamilies();
                             <i class="fa fa-exchange"></i
                             ><span class="tooltipp">add to compare</span>
                           </button>
-                          <button class="eyeView" class="quick-view" value="<?php echo $novedad['id'].'+'.$novedad['cod'] ;?>">
+                          <button class="eyeView" value="<?php echo $novedad['id'].'+'.$novedad['cod'] ;?>">
                             <i class="fa fa-eye"></i
                             ><span class="tooltipp">quick view</span>
                           </button>
@@ -863,8 +863,8 @@ $families = $fam->getFamilies();
     <script src="js/nouislider.min.js"></script>
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
-    <!-- script que envía valores por medio del botón a ITEM.php para localizar producto -->
-    <script type="text/javascript" src="./js/toItemFromIndex.js"></script>
+    <!-- script que envía valores por medio del botón eyeView a ITEM.php para localizar producto -->
+    <script type="text/javascript" src="./js/toItemFromEye.js"></script>
     <!-- script que gestiona el carrito -->
     <script type="text/javascript" src="./js/shopCart.js"></script>
   </body>

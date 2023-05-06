@@ -308,7 +308,7 @@ $category = $fam->getFamilies($famKey);
                         <i class="fa fa-exchange"></i
                         ><span class="tooltipp">add to compare</span>
                       </button>
-                      <button id="quickView" class="quick-view" value="<?php echo $item['id'] ;?>">
+                      <button class="eyeView" value="<?php echo $item['id']. '+' .$famKey ;?>">
                         <i class="fa fa-eye"></i
                         ><span class="tooltipp">quick view</span>
                       </button>
@@ -510,8 +510,11 @@ $category = $fam->getFamilies($famKey);
     <script src="js/nouislider.min.js"></script>
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
-    <!-- script que permite acceder a ITEM capturando valor de url y de boton id="quickView" -->
-    <script type="text/javascript" src="./js/categoryFunctions.js"></script>
+    <!-- script que envía valores por medio del botón eyeView a ITEM.php para localizar producto -->
+    <script type="text/javascript" src="./js/toItemFromEye.js"></script>
+    <!-- script que gestiona el carrito -->
+    <script type="text/javascript" src="./js/shopCart.js"></script>
+
   </body>
   </body>
 </html>

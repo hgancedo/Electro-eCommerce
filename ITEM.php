@@ -9,8 +9,19 @@ $prod = new Producto();
 
 //El producto que mostraremos según la familia e id que recibimos por url
 $item = $prod->getProducts($_GET['famKey'], $_GET['id']);
+
+// echo "<pre>";
+// print_r($item);
+// echo "</pre>";
+
+
 //Obtenemos el nombre de familia a partir de famKey
 $familyItem = $fam->getFamilies($_GET['famKey']);
+
+// echo "<pre>";
+// print_r($familyItem);
+// echo "</pre>";
+
 ?>
 
 <!DOCTYPE html>
@@ -221,7 +232,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
             <li><a href="./index.php">Inicio</a></li>
             <?php foreach($families as $family) {
             //ruta para los enlaces
-            $link = './' .$family['cod']. '.php';
+            $link = './CATEGORIES.php?famKey=' . $family['cod'];
             ?>
             <li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
             <?php
@@ -246,7 +257,8 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
             <ul class="breadcrumb-tree">
               <li><a href="index.php">Inicio</a></li>
               <!-- enlace a página según famKey -->
-              <li><a href="<?php echo './'. $_GET['famKey']. '.php' ;?>"><?php echo $familyItem[0]['nombre']; ?></a></li>
+              <?php $link = './CATEGORIES.php?famKey=' . $_GET['famKey'] ;?>
+              <li><a href="<?php echo $link ;?>"><?php echo $familyItem[0]['nombre']; ?></a></li>
               <li class="active"><?php echo $item[0]['nombre_corto'] ;?></li>
             </ul>
           </div>
@@ -751,8 +763,9 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
                 <h3 class="footer-title">Categorías</h3>
                 <ul class="footer-links">
                   <li><a href="#">Ofertas</a></li>
-                  <?php foreach($families as $family) {?>
-                  <li><a href="#"><?php echo $family['nombre']; ?></a></li>
+                  <?php foreach($families as $family) {
+                    $link = './CATEGORIES.php?famKey=' .$family['cod']; ?>
+                  <li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
                   <?php
                   }
                   ?>
