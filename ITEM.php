@@ -353,7 +353,8 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
                 <div class="qty-label">
                   Qty
                   <div class="input-number">
-                    <input type="number" value = "1"/>
+                    <!-- Identificamos el input con qty y su id -->
+                    <input class="<?php echo 'qty_' .$item[0]['id'] ;?> " type="number" min= "1" value= "1"/>
                     <span class="qty-up">+</span>
                     <span class="qty-down">-</span>
                   </div>
@@ -857,6 +858,6 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
     <!-- script que gestiona el carrito -->
-    <script type="text/javascript" src="./js/shopCart.js"></script>
+    <script type="text/javascript" src="./js/shopCartFromItem.js"></script>
   </body>
 </html>

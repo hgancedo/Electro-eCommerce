@@ -26,6 +26,10 @@ if(isset($_POST['prod'])) {
         $_SESSION['arrayProd'][] = $prod; 
     
     }
+
+    //para pruebas
+    // session_destroy();
+    
     
     echo json_encode($_SESSION['arrayProd']);
     

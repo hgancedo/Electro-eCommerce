@@ -1,4 +1,8 @@
 <?php
+session_start();
+
+
+
 include_once "./src/Producto.php";
 include_once "./src/Familia.php";
 
@@ -145,43 +149,55 @@ $families = $fam->getFamilies();
                   </a>
                   <div class="cart-dropdown">
                     <div class="cart-list">
+
+                      <!-- Si hay productos en Session arrayProd, lo recorremos, si no mostramos vacío -->
+                      <?php if(isset($_SESSION['arrayProd'])) {
+                        // controlar con variable boolean si isset arrayProd false no mostramos cart-summary tampoco
+                      $show = true; 
+                      $sumTot = 0;
+                      $sumProd = 0;
+                      foreach($_SESSION['arrayProd'] as $prod) {
+                      $sumTot += floatval($prod[2]) * intval($prod[3]);
+                      $sumProd += intval($prod[3]);
+                      ?>
                       <div class="product-widget">
                         <div class="product-img">
                           <img src="./img/product01.png" alt="" />
                         </div>
                         <div class="product-body">
                           <h3 class="product-name">
-                            <a href="#">product name goes here</a>
+                            <a href="#"><?php echo $prod[1] ;?></a>
                           </h3>
                           <h4 class="product-price">
-                            <span class="qty">1x</span>$980.00
+                            <span class="qty"><?php echo $prod[3] .'x' ;?></span><?php echo $prod[2] .'€' ; ?>
                           </h4>
                         </div>
                         <button class="delete">
                           <i class="fa fa-close"></i>
                         </button>
                       </div>
+                      <?php
+                      }
+                      //cierre de if count > 0
+                      
+                      } else {
+                        $show = false;
+                      ?>
+                      <div>
+                        Carrito Vacío
+                      </div>
+                      <!-- cierre del else -->
+                      <?php
+                      }
+                      ?>
 
-                      <div class="product-widget">
-                        <div class="product-img">
-                          <img src="./img/product02.png" alt="" />
-                        </div>
-                        <div class="product-body">
-                          <h3 class="product-name">
-                            <a href="#">product name goes here</a>
-                          </h3>
-                          <h4 class="product-price">
-                            <span class="qty">3x</span>$980.00
-                          </h4>
-                        </div>
-                        <button class="delete">
-                          <i class="fa fa-close"></i>
-                        </button>
-                      </div>
                     </div>
+                    <!-- /cierre de class="cart-list" -->
+                    
+                    <?php if($show) {?>
                     <div class="cart-summary">
-                      <small>3 Item(s) selected</small>
-                      <h5>SUBTOTAL: $2940.00</h5>
+                      <small><?php echo $sumProd ;?> producto(s) seleccionados</small>
+                      <h5>SUBTOTAL: <?php echo $sumTot .'€' ;?> </h5>
                     </div>
                     <div class="cart-btns">
                       <a href="#">View Cart</a>
@@ -189,8 +205,15 @@ $families = $fam->getFamilies();
                         >Checkout <i class="fa fa-arrow-circle-right"></i
                       ></a>
                     </div>
+                    <?php
+                    }
+                    ?>
+                    <!-- Cierre de if(show) -->
+
                   </div>
                 </div>
+               
+
                 <!-- /Cart -->
 
                 <!-- Menu Toogle -->
@@ -366,7 +389,7 @@ $families = $fam->getFamilies();
                         </div>
                       </div>
                       <div class="add-to-cart">
-                        <button class="add-to-cart-btn addToCart" value="<?php echo $novedad['id']. '/' .$novedad['nombre_corto'] .'/'. $novedad['pvp'] ;?>">
+                        <button class="add-to-cart-btn addToCart" value="<?php echo $novedad['id']. '/' .$novedad['nombre_corto'] .'/'. $novedad['pvp'] .'/'. 1  ;?>">
                         <i class="fa fa-shopping-cart"></i> añadir al carrito
                         </button>
                       </div>
