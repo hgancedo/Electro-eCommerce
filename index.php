@@ -148,9 +148,11 @@ $families = $fam->getFamilies();
                     <span>Carrito</span>
                     <?php
                     //num de productos totales que se muestran en la burbuja del carrito
-                    $prodTot = 0; 
-                    foreach($_SESSION['arrayProd'] as $prod) {
-                      $prodTot += $prod[3];
+                    $prodTot = 0;
+                    if(isset($_SESSION['arrayProd'])) {
+                      foreach($_SESSION['arrayProd'] as $prod) {
+                        $prodTot += $prod[3];
+                      }
                     }
                     ?>
                     <div class="qty"><?php echo $prodTot ;?></div>
@@ -160,17 +162,19 @@ $families = $fam->getFamilies();
 
                       <!-- Si hay productos en Session arrayProd, lo recorremos, si no mostramos vacío -->
                       <?php if(isset($_SESSION['arrayProd'])) {
-                        // controlar con variable boolean si isset arrayProd false no mostramos cart-summary tampoco
+                      // controlar con variable boolean si isset arrayProd false no mostramos cart-summary tampoco
                       $show = true; 
                       $sumTot = 0;
                       $prodTot = 0;
                       foreach($_SESSION['arrayProd'] as $prod) {
+                      //precio * cantidad
                       $sumTot += floatval($prod[2]) * intval($prod[3]);
+                      //uds de productos totales en carrito
                       $prodTot += floatval($prod[3]);
                       ?>
                       <div class="product-widget">
                         <div class="product-img">
-                          <img src="./img/product01.png" alt="" />
+                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="" />
                         </div>
                         <div class="product-body">
                           <h3 class="product-name">
@@ -180,7 +184,7 @@ $families = $fam->getFamilies();
                             <span class="qty"><?php echo $prod[3] .'x' ;?></span><?php echo $prod[2] .'€' ; ?>
                           </h4>
                         </div>
-                        <button class="delete">
+                        <button class="delete" value="<?php echo $prod[0] ;?>">
                           <i class="fa fa-close"></i>
                         </button>
                       </div>
@@ -898,5 +902,6 @@ $families = $fam->getFamilies();
     <script type="text/javascript" src="./js/toItemFromEye.js"></script>
     <!-- script que gestiona el carrito -->
     <script type="text/javascript" src="./js/shopCart.js"></script>
+    <script type="text/javascript" src="./js/removeFromCart.js"></script>
   </body>
 </html>

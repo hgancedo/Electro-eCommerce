@@ -4,6 +4,8 @@ session_start();
 //para pruebas
 // session_destroy();
 
+
+//Si recibimos un producto para add al carrito
 //Recibimos la cadena en un string, con los elemtos separados por ','
 if(isset($_POST['prod'])) {
 
@@ -33,11 +35,11 @@ if(isset($_POST['prod'])) {
                     $innerArray[3] += $prod[3];
                     $control = true;
                 }
-            }
-            //Si el producto no existe, añado todo el array a la cesta
-            if(!$control) $_SESSION['arrayProd'][] = $prod; 
-    
         }
+        //Si el producto no existe, añado todo el array a la cesta
+        if(!$control) $_SESSION['arrayProd'][] = $prod; 
+    
+    }
         
 
     //para pruebas
@@ -45,7 +47,52 @@ if(isset($_POST['prod'])) {
     
     
     echo json_encode($_SESSION['arrayProd']);
-}  
+} 
+
+//Si recibimos id para borrar ese producto (y todas sus uds) del carrito
+if(isset($_POST['remove'])) {
+    //id del producto a borrar
+    $remProd = $_POST['remove'];
+
+    //Buscamos en el array y borramos. Recordad usar "&" para modificar SESSION por referencia
+    foreach($_SESSION['arrayProd'] as &$innerArray) {
+        if(in_array($remProd, $innerArray)) {
+            // echo "<pre>";
+            // print_r($innerArray);
+            // echo "</pre>";
+            // echo "<br><br>";
+            // unset($innerArray[0], $innerArray[1], $innerArray[2], $innerArray[3]);
+            // echo "borrado";
+            // echo "<pre>";
+            // print_r($innerArray);
+            // echo "</pre>";
+            // echo "<br><br>";
+            // print_r($data);
+            // echo "<br><br>";
+            // echo "ahora filtramos para elminar array vacío";
+            // $data = array_filter($data);
+            // echo "<br>";
+            // print_r($data);
+            // $_SESSION['arrayProd'] = $data;
+           
+       
+          
+            $innerArray = [];
+
+            //hay que borrar el array, filtrar los array vacíos que quedan en SESSION arrayProd, sino se queda como vacío o undefined, pero sigue existiendo y da problemas
+            $_SESSION['arrayProd'] = array_filter($_SESSION['arrayProd']);
+
+            //Si se queda vacío el session array, lo eliminamos
+            if(count($_SESSION['arrayProd']) == 0) unset($_SESSION['arrayProd']);
+        }
+
+        //no podemos devolver el array SESSION con echo aquí pq cuando se vacíe dará error undefined
+        //devolvemos algo para que no salte al catch error
+        echo 1;
+        
+    }
+ 
+}
 
 
 

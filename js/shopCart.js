@@ -2,6 +2,7 @@
 const arrayButtAddCart = document.querySelectorAll(".addToCart");
 console.log(arrayButtAddCart);
 
+//Add producto al carrito
 arrayButtAddCart.forEach((button) => {
   button.addEventListener("click", () => {
     console.log("click push");
