@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-
+//para pruebas
+//session_destroy();
 
 include_once "./src/Producto.php";
 include_once "./src/Familia.php";
@@ -145,7 +146,14 @@ $families = $fam->getFamilies();
                   >
                     <i class="fa fa-shopping-cart"></i>
                     <span>Carrito</span>
-                    <div class="qty">3</div>
+                    <?php
+                    //num de productos totales que se muestran en la burbuja del carrito
+                    $prodTot = 0; 
+                    foreach($_SESSION['arrayProd'] as $prod) {
+                      $prodTot += $prod[3];
+                    }
+                    ?>
+                    <div class="qty"><?php echo $prodTot ;?></div>
                   </a>
                   <div class="cart-dropdown">
                     <div class="cart-list">
@@ -155,10 +163,10 @@ $families = $fam->getFamilies();
                         // controlar con variable boolean si isset arrayProd false no mostramos cart-summary tampoco
                       $show = true; 
                       $sumTot = 0;
-                      $sumProd = 0;
+                      $prodTot = 0;
                       foreach($_SESSION['arrayProd'] as $prod) {
                       $sumTot += floatval($prod[2]) * intval($prod[3]);
-                      $sumProd += intval($prod[3]);
+                      $prodTot += floatval($prod[3]);
                       ?>
                       <div class="product-widget">
                         <div class="product-img">
@@ -196,7 +204,7 @@ $families = $fam->getFamilies();
                     
                     <?php if($show) {?>
                     <div class="cart-summary">
-                      <small><?php echo $sumProd ;?> producto(s) seleccionados</small>
+                      <small> <?php echo $prodTot ;?> producto(s) seleccionados</small>
                       <h5>SUBTOTAL: <?php echo $sumTot .'€' ;?> </h5>
                     </div>
                     <div class="cart-btns">

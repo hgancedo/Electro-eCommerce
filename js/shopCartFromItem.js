@@ -13,7 +13,7 @@ arrayButtAddCart.forEach((button) => {
     console.log(prod);
     //el idProd para el id del input
     console.log(prod[0]);
-    //seleccionamos el input correspondiente
+    //seleccionamos el input correspondiente. Cuidado!!!la clase qty, se usa ya en el carrito, pero sin el _id
     const idInput = ".qty_" + prod[0];
     console.log(idInput);
     const inputValue = document.querySelector(idInput).value;
