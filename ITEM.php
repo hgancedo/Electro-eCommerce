@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include_once "./src/Familia.php";
 include_once("./src/Producto.php");
 

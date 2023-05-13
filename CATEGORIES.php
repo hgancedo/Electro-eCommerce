@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "./src/Familia.php";
 include_once "./src/Producto.php";
 
@@ -142,47 +143,73 @@ $category = $fam->getFamilies($famKey);
                   >
                     <i class="fa fa-shopping-cart"></i>
                     <span>Carrito</span>
-                    <div class="qty">3</div>
+
+                    <?php
+                    //num de productos totales que se muestran en la burbuja del carrito
+                    $prodTot = 0;
+                    if(isset($_SESSION['arrayProd'])) {
+                      foreach($_SESSION['arrayProd'] as $prod) {
+                        $prodTot += $prod[3];
+                      }
+                    }
+                    ?>
+
+                    <div class="qty"><?php echo $prodTot ;?></div>
                   </a>
+
                   <div class="cart-dropdown">
                     <div class="cart-list">
-                      <div class="product-widget">
-                        <div class="product-img">
-                          <img src="./img/product01.png" alt="" />
-                        </div>
-                        <div class="product-body">
-                          <h3 class="product-name">
-                            <a href="#">product name goes here</a>
-                          </h3>
-                          <h4 class="product-price">
-                            <span class="qty">1x</span>$980.00
-                          </h4>
-                        </div>
-                        <button class="delete">
-                          <i class="fa fa-close"></i>
-                        </button>
-                      </div>
+
+                      <!-- Si hay productos en Session arrayProd, lo recorremos, si no mostramos vacío -->
+                      <?php if(isset($_SESSION['arrayProd'])) {
+                      // controlar con variable boolean si isset arrayProd false no mostramos cart-summary tampoco
+                      $show = true; 
+                      $sumTot = 0;
+                      $prodTot = 0;
+                      foreach($_SESSION['arrayProd'] as $prod) {
+                      //precio * cantidad
+                      $sumTot += floatval($prod[2]) * intval($prod[3]);
+                      //uds de productos totales en carrito
+                      $prodTot += floatval($prod[3]);
+                      ?>
 
                       <div class="product-widget">
                         <div class="product-img">
-                          <img src="./img/product02.png" alt="" />
+                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="" />
                         </div>
                         <div class="product-body">
                           <h3 class="product-name">
-                            <a href="#">product name goes here</a>
+                            <a href="#"><?php echo $prod[1] ;?></a>
                           </h3>
                           <h4 class="product-price">
-                            <span class="qty">3x</span>$980.00
+                            <span class="qty"><?php echo $prod[3] .'x' ;?></span><?php echo $prod[2] .'€' ; ?>
                           </h4>
                         </div>
-                        <button class="delete">
+                        <button class="delete" value="<?php echo $prod[0] ;?>">
                           <i class="fa fa-close"></i>
                         </button>
                       </div>
+                      <?php
+                      }
+                      //cierre de if count > 0
+                      
+                      } else {
+                        $show = false;
+                      ?>
+                      <div>
+                        Carrito Vacío
+                      </div>
+                      <!-- cierre del else -->
+                      <?php
+                      }
+                      ?>
                     </div>
+                    <!-- /cierre de class="cart-list" -->
+
+                    <?php if($show) {?>
                     <div class="cart-summary">
-                      <small>3 Item(s) selected</small>
-                      <h5>SUBTOTAL: $2940.00</h5>
+                      <small> <?php echo $prodTot ;?> producto(s)   seleccionados</small>
+                      <h5>SUBTOTAL: <?php echo $sumTot .'€' ;?> </h5>
                     </div>
                     <div class="cart-btns">
                       <a href="#">View Cart</a>
@@ -190,8 +217,15 @@ $category = $fam->getFamilies($famKey);
                         >Checkout <i class="fa fa-arrow-circle-right"></i
                       ></a>
                     </div>
+                    <?php
+                    }
+                    ?>
+                    <!-- Cierre de if(show) -->
+
                   </div>
                 </div>
+
+
                 <!-- /Cart -->
 
                 <!-- Menu Toogle -->
@@ -514,7 +548,7 @@ $category = $fam->getFamilies($famKey);
     <script type="text/javascript" src="./js/toItemFromEye.js"></script>
     <!-- script que gestiona el carrito -->
     <script type="text/javascript" src="./js/shopCart.js"></script>
-
+    <script type="text/javascript" src="./js/removeFromCart.js"></script>
   </body>
   </body>
 </html>
