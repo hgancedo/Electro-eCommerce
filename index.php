@@ -224,8 +224,6 @@ $families = $fam->getFamilies();
 
                   </div>
                 </div>
-               
-
                 <!-- /Cart -->
 
                 <!-- Menu Toogle -->
