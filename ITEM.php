@@ -143,7 +143,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
 
                 <!-- Cart -->
                 <div class="dropdown">
-                  <a
+                  <a href="#"
                     class="dropdown-toggle"
                     data-toggle="dropdown"
                     aria-expanded="true"
@@ -182,7 +182,10 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
                         </div>
                         <div class="product-body">
                           <h3 class="product-name">
-                            <a href="#"><?php echo $prod[1] ;?></a>
+                            
+                            <!-- ruta para ir a ITEM.php desde el carrito -->
+                            <?php $link= './ITEM.php?famKey=' .$prod[4]. '&id=' .$prod[0] ;?>
+                            <a href="<?php echo $link ;?>"><?php echo $prod[1] ;?></a>
                           </h3>
                           <h4 class="product-price">
                           <span class="qty"><?php echo $prod[3] .'x' ;?></span><?php echo $prod[2] .'€' ; ?>
@@ -216,9 +219,8 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
                       <h5>SUBTOTAL: <?php echo $sumTot .'€' ;?> </h5>
                     </div>
                     <div class="cart-btns">
-                      <a href="#">View Cart</a>
-                      <a href="#"
-                        >Checkout <i class="fa fa-arrow-circle-right"></i
+                      <a href="./checkout.php"
+                        >Comprar <i class="fa fa-arrow-circle-right"></i
                       ></a>
                     </div>
                     <?php
@@ -371,7 +373,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
               </div>
               <div>
                 <h3 class="product-price">
-                <?php echo $item[0]['pvp']. '€' ;?>
+                <?php echo floatval($item[0]['pvp']). '€' ;?>
                 </h3>
                 <span class="product-available">In Stock</span>
               </div>
@@ -391,7 +393,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
                 </div>
                 <!-- tendremos que pasar la cantidad de uds del seleccionable, en las otras páginas siempre eran 1
                 Pasamos 0 y en JS controlamos if uds === 0 -->
-                <button class="add-to-cart-btn addToCart" value="<?php echo $item[0]['id']. '/' .$item[0]['nombre_corto'] .'/'. $item[0]['pvp']; ?>">
+                <button class="add-to-cart-btn addToCart" value="<?php echo $item[0]['id']. '/' .$item[0]['nombre_corto'] .'/'. $item[0]['pvp'] .'/'. $_GET['famKey']; ?>">
                     <i class="fa fa-shopping-cart"></i> añadir al carrito
                 </button>
               </div>

@@ -2,7 +2,7 @@
 session_start();
 
 //para pruebas
-// session_destroy();
+//session_destroy();
 
 
 //Si recibimos un producto para add al carrito
@@ -18,8 +18,8 @@ if(isset($_POST['prod'])) {
     //había problemas en la obtención del string cuando tenía " en las pulgadas, en este fichero o en el .js
     $prod = explode("," ,$prodStr);
 
-    //convertimos a entero la última posición -uds-
-    $prod[count($prod)-1] = floatval($prod[count($prod)-1]);
+    //convertimos a entero la penúltima posición -uds-
+    $prod[count($prod)-2] = floatval($prod[count($prod)-2]);
 
     //pvp no hace falta pasarlo a float, porque lo devolvemos a js tal cual y hacemos el casting allí
 

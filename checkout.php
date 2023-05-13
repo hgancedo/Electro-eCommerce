@@ -1,23 +1,11 @@
 <?php
 session_start();
 include_once "./src/Familia.php";
-include_once "./src/Producto.php";
-
-
-//AHORA RECIBIMOS $famKey por url para hacer una única página de categorías y crearla dinámicamente según la categoría recibida
-$famKey = $_GET['famKey'];
-
-//Seleccionamos los productos según la familia (o categoría, es sinónimo), al igual que lo es cod o famKey
-$prod = new Producto();
-$items = $prod->getProducts($famKey);
 
 $fam = new Familia();
-//El conjunto de todas las familias o categorías
 $families = $fam->getFamilies();
-
-//El nombre de la familia según el cod
-$category = $fam->getFamilies($famKey);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +57,7 @@ $category = $fam->getFamilies($famKey);
               <a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-envelope-o"></i>hgancedo@email.com</a>
+              <a href="#"><i class="fa fa-envelope-o"></i> hgancedo@email.com</a>
             </li>
             <li>
               <a href="#"
@@ -82,7 +70,7 @@ $category = $fam->getFamilies($famKey);
               <a href="#"><i class="fa fa-eur"></i>EUR</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-user-o"></i>Mi Cuenta</a>
+              <a href="#"><i class="fa fa-user-o"></i>Mi Cuenta<a>
             </li>
           </ul>
         </div>
@@ -110,12 +98,12 @@ $category = $fam->getFamilies($famKey);
               <div class="header-search">
                 <form>
                   <select class="input-select">
-                    <option value="0">Categorías</option>
+                    <option value="0">All Categories</option>
                     <option value="1">Category 01</option>
                     <option value="1">Category 02</option>
                   </select>
-                  <input class="input" placeholder="Buscar aquí" />
-                  <button class="search-btn">Buscar</button>
+                  <input class="input" placeholder="Search here" />
+                  <button class="search-btn">Search</button>
                 </form>
               </div>
             </div>
@@ -128,7 +116,7 @@ $category = $fam->getFamilies($famKey);
                 <div>
                   <a href="#">
                     <i class="fa fa-heart-o"></i>
-                    <span>Lista Deseos</span>
+                    <span>Your Wishlist</span>
                     <div class="qty">2</div>
                   </a>
                 </div>
@@ -136,14 +124,13 @@ $category = $fam->getFamilies($famKey);
 
                 <!-- Cart -->
                 <div class="dropdown">
-                  <a href="#"
+                  <a
                     class="dropdown-toggle"
                     data-toggle="dropdown"
                     aria-expanded="true"
                   >
                     <i class="fa fa-shopping-cart"></i>
                     <span>Carrito</span>
-
                     <?php
                     //num de productos totales que se muestran en la burbuja del carrito
                     $prodTot = 0;
@@ -153,13 +140,11 @@ $category = $fam->getFamilies($famKey);
                       }
                     }
                     ?>
-
                     <div class="qty"><?php echo $prodTot ;?></div>
                   </a>
-
                   <div class="cart-dropdown">
                     <div class="cart-list">
-
+               
                       <!-- Si hay productos en Session arrayProd, lo recorremos, si no mostramos vacío -->
                       <?php if(isset($_SESSION['arrayProd'])) {
                       // controlar con variable boolean si isset arrayProd false no mostramos cart-summary tampoco
@@ -172,7 +157,6 @@ $category = $fam->getFamilies($famKey);
                       //uds de productos totales en carrito
                       $prodTot += floatval($prod[3]);
                       ?>
-
                       <div class="product-widget">
                         <div class="product-img">
                           <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="" />
@@ -185,7 +169,7 @@ $category = $fam->getFamilies($famKey);
                             <a href="<?php echo $link ;?>"><?php echo $prod[1] ;?></a>
                           </h3>
                           <h4 class="product-price">
-                            <span class="qty"><?php echo $prod[3] .'x' ;?></span><?php echo $prod[2] .'€' ; ?>
+                          <span class="qty"><?php echo $prod[3] .'x' ;?></span><?php echo $prod[2] .'€' ; ?>
                           </h4>
                         </div>
                         <button class="delete" value="<?php echo $prod[0] ;?>">
@@ -206,28 +190,28 @@ $category = $fam->getFamilies($famKey);
                       <?php
                       }
                       ?>
+
                     </div>
                     <!-- /cierre de class="cart-list" -->
 
                     <?php if($show) {?>
                     <div class="cart-summary">
-                      <small> <?php echo $prodTot ;?> producto(s)   seleccionados</small>
+                      <small> <?php echo $prodTot ;?> producto(s) seleccionados</small>
                       <h5>SUBTOTAL: <?php echo $sumTot .'€' ;?> </h5>
                     </div>
                     <div class="cart-btns">
-                      <a href="./checkout.php"
+
+                      <a 
                         >Comprar <i class="fa fa-arrow-circle-right"></i
                       ></a>
                     </div>
                     <?php
                     }
                     ?>
-                    <!-- Cierre de if(show) -->
+                    <!-- Cierre de if(show) --> 
 
                   </div>
                 </div>
-
-
                 <!-- /Cart -->
 
                 <!-- Menu Toogle -->
@@ -256,13 +240,13 @@ $category = $fam->getFamilies($famKey);
       <div class="container">
         <!-- responsive-nav -->
         <div id="responsive-nav">
-          <!-- NAV -->
-          <ul class="main-nav nav navbar-nav">
+           <!-- NAV -->
+           <ul class="main-nav nav navbar-nav">
             <!-- <li class="active"><a href="#">Pc Sobremesa</a></li> -->
             <li><a href="./index.php">Inicio</a></li>
             <?php foreach($families as $family) {
             //ruta para los enlaces
-            $link = './CATEGORIES.php?famKey=' .$family['cod'];
+            $link = './CATEGORIES.php?famKey=' . $family['cod'];
             ?>
             <li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
             <?php
@@ -285,8 +269,8 @@ $category = $fam->getFamilies($famKey);
         <div class="row">
           <div class="col-md-12">
             <ul class="breadcrumb-tree">
-              <li><a href="./index.php">Inicio</a></li>
-              <li class="active"><?php echo $category[0]['nombre'] ;?></li>
+              <li><a href="index.php">Inicio</a></li>
+              <li class="active">Carrito</li>
             </ul>
           </div>
         </div>
@@ -302,71 +286,185 @@ $category = $fam->getFamilies($famKey);
       <div class="container">
         <!-- row -->
         <div class="row">
-          
-          <!-- STORE -->
-          <div id="store" class="col-md-12">
+          <div class="col-md-7">
+            <!-- Billing Details -->
+            <div class="billing-details">
+              <div class="section-title">
+                <h3 class="title">Datos de Envío</h3>
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="text"
+                  name="first-name"
+                  placeholder="Nombre"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="text"
+                  name="last-name"
+                  placeholder="Apellidos"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="text"
+                  name="address"
+                  placeholder="Dirección"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="text"
+                  name="city"
+                  placeholder="Población"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="text"
+                  name="country"
+                  placeholder="Provincia"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="text"
+                  name="zip-code"
+                  placeholder="C.P."
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="tel"
+                  name="tel"
+                  placeholder="Teléfono"
+                />
+              </div>
+              
+            </div>
+            <!-- /Billing Details -->
+          </div>
 
-            <!-- store products -->
-            <div class="row">
+          <!-- Order Details -->
+          <div class="col-md-5 order-details">
+            <div class="section-title text-center">
+              <h3 class="title">PEDIDO</h3>
+            </div>
 
-              <?php foreach($items as $item){
-              $srcItem = "./img/PRODUCTS/ALL_SMALL/" .$item['id']. ".webp"; ?>
-              <!-- product -->
-              <div class="col-md-3 col-xs-6">
-                <div class="product">
-                  <div class="product-img">
-                    <img src="<?php echo $srcItem ;?>" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category"><?php echo $category[0]['nombre'] ;?></p>
+            <div class="order-summary">
+              <?php if(isset($_SESSION['arrayProd'])) { ?>
+              <div class="order-col">
+                <div><strong>PRODUCT</strong></div>
+                <div><strong>TOTAL</strong></div>
+              </div>
+              <div class="order-products">
 
-                    <h3 class="product-name">
-                      <!-- ruta para enlace al producto, le pasamos la familia y el id -->
-                      <?php $ItemView = './ITEM.php?famKey=' .$famKey. '&id=' .$item['id'] ;?>
-                      <a href="<?php echo $ItemView ;?>"><?php echo $item['nombre_corto'] ;?></a>
-                    </h3>
-                    <h4 class="product-price">
-                      <?php echo $item['pvp'] ."€" ;?>
-                    </h4>
-                    <div class="product-rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                    <div class="product-btns">
-                      <button class="add-to-wishlist">
-                        <i class="fa fa-heart-o"></i
-                        ><span class="tooltipp">add to wishlist</span>
-                      </button>
-                      <button class="add-to-compare">
-                        <i class="fa fa-exchange"></i
-                        ><span class="tooltipp">add to compare</span>
-                      </button>
-                      <button class="eyeView" value="<?php echo $item['id']. '+' .$famKey ;?>">
-                        <i class="fa fa-eye"></i
-                        ><span class="tooltipp">quick view</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="add-to-cart">
-                    <button class="add-to-cart-btn addToCart" value="<?php echo $item['id']. '/' .$item['nombre_corto'] .'/'. $item['pvp'] .'/'. 1 .'/'. $famKey;?>">
-                      <i class="fa fa-shopping-cart"></i> añadir al carrito
-                    </button>
-                  </div>
+                <?php
+                $sumTot = 0;
+                $sumPart = 0;
+                foreach($_SESSION['arrayProd'] as $prod) { 
+                $sumPart = floatval($prod[2]) * intval($prod[3]);
+                $sumTot += floatval($prod[2]) * intval($prod[3]); ?>
+                <div class="order-col">
+                  <div><?php echo $prod[3] .'x '. floatval($prod[2]) .'€'; ?></div>
+                  <div><?php echo $sumPart .'€'; ?></div>
+                </div>
+                <?php
+                }
+                ?>
+
+              </div>
+              <div class="order-col">
+                <div>Envío</div>
+                <div><strong>GRATIS</strong></div>
+              </div>
+              <div class="order-col">
+                <div><strong>TOTAL</strong></div>
+                <div><strong class="order-total"><?php echo $sumTot .'€' ;?></strong></div>
+              </div>
+            </div>
+            <!-- Cierre de Order Summary -->
+
+            <div class="payment-method">
+              <div class="input-radio">
+                <input type="radio" name="payment" id="payment-1" />
+                <label for="payment-1">
+                  <span></span>
+                  Transferencia Bancaria
+                </label>
+                <div class="caption">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </p>
                 </div>
               </div>
-              <!-- /product -->
-              <?php
-              }
-              ?>
-
+              <div class="input-radio">
+                <input type="radio" name="payment" id="payment-2" />
+                <label for="payment-2">
+                  <span></span>
+                  Tarjéta de débito/crédito
+                </label>
+                <div class="caption">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </p>
+                </div>
+              </div>
+              <div class="input-radio">
+                <input type="radio" name="payment" id="payment-3" />
+                <label for="payment-3">
+                  <span></span>
+                  Paypal
+                </label>
+                <div class="caption">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                  </p>
+                </div>
+              </div>
             </div>
-            <!-- /store products -->
-
+            <div class="input-checkbox">
+              <input type="checkbox" id="terms" />
+              <label for="terms">
+                <span></span>
+                He leído y acepto los <a href="#">términos y condiciones</a>
+              </label>
+            </div>
+            <a href="#" class="primary-btn order-submit">Pagar</a>
           </div>
-          <!-- /STORE -->
+          <!-- /Order Details -->
+          <?php
+            } else { ?>
+            <div>
+              <div><strong>CARRITO VACÍO</strong></div>
+            </div>
+            <?php
+            }
+            ?>
+            <!-- cierre de if isset $_SESSiON -->
+
         </div>
         <!-- /row -->
       </div>
@@ -381,7 +479,7 @@ $category = $fam->getFamilies($famKey);
         <!-- row -->
         <div class="row">
           <div class="col-md-12">
-            <div class="newsletter">
+          <div class="newsletter">
               <p>Suscríbete a nuestra <strong>NEWSLETTER</strong></p>
               <form>
                 <input
@@ -426,7 +524,7 @@ $category = $fam->getFamilies($famKey);
           <div class="row">
             <div class="col-md-3 col-xs-6">
               <div class="footer">
-                <h3 class="footer-title">Sobre Nosotros</h3>
+                <h3 class="footer-title">About Us</h3>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                   do eiusmod tempor incididunt ut.
@@ -434,7 +532,7 @@ $category = $fam->getFamilies($famKey);
                 <ul class="footer-links">
                   <li>
                     <a href="#"
-                      ><i class="fa fa-map-marker"></i>17 Pol. Industrial Trápaga, Vizcaya</a
+                      ><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a
                     >
                   </li>
                   <li>
@@ -442,7 +540,7 @@ $category = $fam->getFamilies($famKey);
                   </li>
                   <li>
                     <a href="#"
-                      ><i class="fa fa-envelope-o"></i>hgancedo@email.com</a
+                      ><i class="fa fa-envelope-o"></i>email@email.com</a
                     >
                   </li>
                 </ul>
@@ -453,7 +551,7 @@ $category = $fam->getFamilies($famKey);
               <div class="footer">
                 <h3 class="footer-title">Categorías</h3>
                 <ul class="footer-links">
-                  <li><a >Ofertas</a></li>
+                  <li><a href="#">Ofertas</a></li>
                   <?php foreach($families as $family) {
                     $link = './CATEGORIES.php?famKey=' .$family['cod']; ?>
                   <li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
@@ -526,7 +624,7 @@ $category = $fam->getFamilies($famKey);
               </ul>
               <span class="copyright">
                 <a target="_blank" href="https://www.templateshub.net"
-                  >Powered By Hector Gancedo Grade</a
+                  >Templates Hub</a
                 >
               </span>
             </div>
@@ -546,11 +644,8 @@ $category = $fam->getFamilies($famKey);
     <script src="js/nouislider.min.js"></script>
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
-    <!-- script que envía valores por medio del botón eyeView a ITEM.php para localizar producto -->
-    <script type="text/javascript" src="./js/toItemFromEye.js"></script>
     <!-- script que gestiona el carrito -->
     <script type="text/javascript" src="./js/shopCart.js"></script>
     <script type="text/javascript" src="./js/removeFromCart.js"></script>
-  </body>
   </body>
 </html>

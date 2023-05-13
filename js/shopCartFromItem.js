@@ -21,8 +21,8 @@ arrayButtAddCart.forEach((button) => {
 
     console.log("valor del input:" + inputValue);
 
-    //Insertamos el valor al final del array
-    prod.push(inputValue);
+    //Insertamos el valor de la cantidad del producto, en la penúltima posición del array, ya que en la última ha de ir la familia
+    prod.splice(prod.length - 1, 0, inputValue);
     console.log(prod);
 
     const data = new FormData();

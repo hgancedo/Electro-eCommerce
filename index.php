@@ -139,7 +139,7 @@ $families = $fam->getFamilies();
 
                 <!-- Cart -->
                 <div class="dropdown">
-                  <a
+                  <a href="#"
                     class="dropdown-toggle"
                     data-toggle="dropdown"
                     aria-expanded="true"
@@ -178,7 +178,9 @@ $families = $fam->getFamilies();
                         </div>
                         <div class="product-body">
                           <h3 class="product-name">
-                            <a href="#"><?php echo $prod[1] ;?></a>
+                            <!-- ruta para ir a ITEM.php desde el carrito -->
+                            <?php $link= './ITEM.php?famKey=' .$prod[4]. '&id=' .$prod[0] ;?>
+                            <a href="<?php echo $link ;?>"><?php echo $prod[1] ;?></a>
                           </h3>
                           <h4 class="product-price">
                             <span class="qty"><?php echo $prod[3] .'x' ;?></span><?php echo $prod[2] .'€' ; ?>
@@ -212,9 +214,8 @@ $families = $fam->getFamilies();
                       <h5>SUBTOTAL: <?php echo $sumTot .'€' ;?> </h5>
                     </div>
                     <div class="cart-btns">
-                      <a href="#">View Cart</a>
-                      <a href="#"
-                        >Checkout <i class="fa fa-arrow-circle-right"></i
+                      <a href="./checkout.php"
+                        >Comprar <i class="fa fa-arrow-circle-right"></i
                       ></a>
                     </div>
                     <?php
@@ -399,7 +400,7 @@ $families = $fam->getFamilies();
                         </div>
                       </div>
                       <div class="add-to-cart">
-                        <button class="add-to-cart-btn addToCart" value="<?php echo $novedad['id']. '/' .$novedad['nombre_corto'] .'/'. $novedad['pvp'] .'/'. 1  ;?>">
+                        <button class="add-to-cart-btn addToCart" value="<?php echo $novedad['id']. '/' .$novedad['nombre_corto'] .'/'. $novedad['pvp'] .'/'. 1 .'/'. $novedad['cod'] ;?>">
                         <i class="fa fa-shopping-cart"></i> añadir al carrito
                         </button>
                       </div>
