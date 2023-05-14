@@ -10,6 +10,7 @@ include_once "./src/Familia.php";
 if(isset($_GET['resetProd'])){
   unset($_SESSION['arrayProd']);
   unset($_SESSION['resetProd']);
+  //recargamos pag para q no se mantenga resetProd en la url
   header("Location: ./index.php");
 } 
 
@@ -68,6 +69,37 @@ $families = $fam->getFamilies();
     <![endif]-->
   </head>
   <body>
+    <!-- div que se mostrará al hacer click en MiCuenta -->
+    <div class="show_acc" id="show-acc">
+      <div class="title">Iniciar sesión</div>
+      <div class="form-login">
+        <form action="">
+          <div class="input-flex">
+            <div class="input-logo">
+              <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+            </div>    
+            <input type="text" name="user" id="" placeholder="Usuario">
+          </div>
+          
+          <div class="input-flex">
+            <div class="input-logo">
+            <i class="fa fa-unlock-alt fa-lg" aria-hidden="true"></i>
+            </div>    
+            <input type="text" name="user" id="" placeholder="Contraseña">
+          </div>
+          
+          <div class="div-button">
+            <button type="submit" class="button-login">Login</button>
+          </div>
+
+          <div class="register">
+            <a href="">¿Aún no estás registrado?</a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
     <!-- HEADER -->
     <header>
       <!-- TOP HEADER -->
@@ -91,7 +123,7 @@ $families = $fam->getFamilies();
               <a href="#"><i class="fa fa-eur"></i>EUR</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-user-o"></i>Mi Cuenta</a>
+              <a href="#" id="account"><i class="fa fa-user-o"></i>Mi Cuenta</a>
             </li>
           </ul>
         </div>
@@ -908,5 +940,7 @@ $families = $fam->getFamilies();
     <!-- script que gestiona el carrito -->
     <script type="text/javascript" src="./js/shopCart.js"></script>
     <script type="text/javascript" src="./js/removeFromCart.js"></script>
+    <!-- script para el login -->
+    <script type="text/javascript" src="./js/credentials.js"></script>
   </body>
 </html>
