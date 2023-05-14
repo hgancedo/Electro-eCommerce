@@ -310,15 +310,7 @@ $families = $fam->getFamilies();
                   placeholder="Apellidos"
                 />
               </div>
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Email"
-                />
-              </div>
+
               <div class="form-group">
                 <input
                   class="input"
@@ -328,6 +320,7 @@ $families = $fam->getFamilies();
                   placeholder="Dirección"
                 />
               </div>
+
               <div class="form-group">
                 <input
                   class="input"
@@ -337,8 +330,24 @@ $families = $fam->getFamilies();
                   placeholder="Teléfono"
                 />
               </div>
+
+              <div class="form-group">
+                <input
+                  class="input"
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                />
+              </div>
+
               <div>
-                <p class="danger" id="danger"></p>
+                <div 
+                  class="danger"
+                  name="danger"
+                  id="danger">
+                  <span id="message"> </span>
+                </div>
               </div>
               
             </div>
@@ -392,43 +401,26 @@ $families = $fam->getFamilies();
                   <span></span>
                   Transferencia Bancaria
                 </label>
-                <div class="caption">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
-                </div>
               </div>
+
               <div class="input-radio">
                 <input type="radio" name="payment" id="payment-2" />
                 <label for="payment-2">
                   <span></span>
                   Tarjéta de débito/crédito
                 </label>
-                <div class="caption">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
-                </div>
               </div>
+
               <div class="input-radio">
                 <input type="radio" name="payment" id="payment-3" />
                 <label for="payment-3">
                   <span></span>
                   Paypal
                 </label>
-                <div class="caption">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
-                  </p>
-                </div>
               </div>
+
             </div>
+
             <div class="input-checkbox">
               <input type="checkbox" id="terms" />
               <label for="terms">

@@ -3,9 +3,15 @@ session_start();
 
 //para pruebas
 //session_destroy();
-
 include_once "./src/Producto.php";
 include_once "./src/Familia.php";
+
+//Si la compra se ha realizado, reseteamos el SESSION arrayProd
+if(isset($_GET['resetProd'])){
+  unset($_SESSION['arrayProd']);
+  unset($_SESSION['resetProd']);
+  header("Location: ./index.php");
+} 
 
 $prod = new Producto();
 $fam = new Familia();
