@@ -297,6 +297,7 @@ $families = $fam->getFamilies();
                   class="input"
                   type="text"
                   name="first-name"
+                  id="name"
                   placeholder="Nombre"
                 />
               </div>
@@ -305,6 +306,7 @@ $families = $fam->getFamilies();
                   class="input"
                   type="text"
                   name="last-name"
+                  id="last-name"
                   placeholder="Apellidos"
                 />
               </div>
@@ -313,6 +315,7 @@ $families = $fam->getFamilies();
                   class="input"
                   type="email"
                   name="email"
+                  id="email"
                   placeholder="Email"
                 />
               </div>
@@ -321,31 +324,8 @@ $families = $fam->getFamilies();
                   class="input"
                   type="text"
                   name="address"
+                  id="address"
                   placeholder="Dirección"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="text"
-                  name="city"
-                  placeholder="Población"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="text"
-                  name="country"
-                  placeholder="Provincia"
-                />
-              </div>
-              <div class="form-group">
-                <input
-                  class="input"
-                  type="text"
-                  name="zip-code"
-                  placeholder="C.P."
                 />
               </div>
               <div class="form-group">
@@ -353,8 +333,12 @@ $families = $fam->getFamilies();
                   class="input"
                   type="tel"
                   name="tel"
+                  id="tel"
                   placeholder="Teléfono"
                 />
+              </div>
+              <div>
+                <p class="danger" id="danger"></p>
               </div>
               
             </div>
@@ -452,7 +436,7 @@ $families = $fam->getFamilies();
                 He leído y acepto los <a href="#">términos y condiciones</a>
               </label>
             </div>
-            <a href="#" class="primary-btn order-submit">Pagar</a>
+            <a class="primary-btn order-submit" id="pagar">Pagar</a>
           </div>
           <!-- /Order Details -->
           <?php
@@ -647,5 +631,7 @@ $families = $fam->getFamilies();
     <!-- script que gestiona el carrito -->
     <script type="text/javascript" src="./js/shopCart.js"></script>
     <script type="text/javascript" src="./js/removeFromCart.js"></script>
+    <!-- validamos el pago en checkout.php -->
+    <script type="text/javascript" src="./js/formValidation.js"></script>
   </body>
 </html>

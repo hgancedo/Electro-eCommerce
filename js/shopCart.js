@@ -1,4 +1,5 @@
 "use strict";
+
 const arrayButtAddCart = document.querySelectorAll(".addToCart");
 console.log(arrayButtAddCart);
 
