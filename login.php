@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once "./src/Conexion.php";
 
 if(isset($_POST['user'])) $user = $_POST['user'];

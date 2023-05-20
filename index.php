@@ -123,7 +123,11 @@ $families = $fam->getFamilies();
               <a href="#"><i class="fa fa-eur"></i>EUR</a>
             </li>
             <li>
-              <a href="#" id="account"><i class="fa fa-user-o"></i>Iniciar sesión</a>
+              <!-- El valor true/false ha de ir en string, sino js no lo captura -->
+              <?php $hasSession = isset($_SESSION['login']) ? "true" : "false"; ?>
+              <input type="hidden" id="hasSession" value="<?php echo $hasSession; ?>">
+              <?php $strLogin = isset($_SESSION['login']) ? "Desconectarse" : "Iniciar sesión"; ?>
+              <a href="#" id="account"><i class="fa fa-user-o"></i><?php echo $strLogin ;?></a>
             </li>
           </ul>
         </div>
@@ -168,7 +172,8 @@ $families = $fam->getFamilies();
                 <!-- Wishlist -->
                 <div>
                   <a href="#">
-                    <span id="isLogged">Desconectado</span>
+                    <?php $isConnected = isset($_SESSION['login']) ? $_SESSION['login'] : "Desconectado"; ?>
+                    <span id="isLogged"><?php echo $isConnected; ?></span>
                   </a>
                 </div>
                 <!-- /Wishlist -->

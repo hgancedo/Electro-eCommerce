@@ -27,14 +27,12 @@ buttlog.addEventListener("click", () => {
       resp.textContent = data[0];
       //Si se logea, el 2º elmto del array es true
       if (data[1]) {
-        document.querySelector("#isLogged").textContent = user;
-        document.querySelector("#account").textContent = "Desconectarse";
         respStyle.style.backgroundColor = "rgb(212, 246, 160)";
       } else {
         respStyle.style.backgroundColor = "rgb(249, 199, 188)";
       }
 
-      setTimeout(() => (respStyle.style.visibility = "hidden"), 5000);
+      setTimeout(() => (location.href = "./index.php"), 1500);
     });
 
   //form reset
