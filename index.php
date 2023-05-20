@@ -69,27 +69,27 @@ $families = $fam->getFamilies();
     <![endif]-->
   </head>
   <body>
-    <!-- div que se mostrará al hacer click en MiCuenta -->
+    <!-- ventana de login que se mostrará al hacer click en MiCuenta -->
     <div class="show_acc" id="show-acc">
-      <div class="title">Iniciar sesión</div>
+      <div class="title" >Iniciar sesión</div>
       <div class="form-login">
-        <form action="">
+        <form action="" id="form-login">
           <div class="input-flex">
             <div class="input-logo">
               <i class="fa fa-user fa-lg" aria-hidden="true"></i>
             </div>    
-            <input type="text" name="user" id="" placeholder="Usuario">
+            <input type="text" name="user" id="user" placeholder="Usuario">
           </div>
           
           <div class="input-flex">
             <div class="input-logo">
             <i class="fa fa-unlock-alt fa-lg" aria-hidden="true"></i>
             </div>    
-            <input type="text" name="user" id="" placeholder="Contraseña">
+            <input type="password" name="pass" id="pass" placeholder="Contraseña">
           </div>
           
           <div class="div-button">
-            <button type="submit" class="button-login">Login</button>
+            <button type="button" class="button-login" id="login">Login</button>
           </div>
 
           <div class="register">
@@ -123,7 +123,7 @@ $families = $fam->getFamilies();
               <a href="#"><i class="fa fa-eur"></i>EUR</a>
             </li>
             <li>
-              <a href="#" id="account"><i class="fa fa-user-o"></i>Mi Cuenta</a>
+              <a href="#" id="account"><i class="fa fa-user-o"></i>Iniciar sesión</a>
             </li>
           </ul>
         </div>
@@ -168,9 +168,7 @@ $families = $fam->getFamilies();
                 <!-- Wishlist -->
                 <div>
                   <a href="#">
-                    <i class="fa fa-heart-o"></i>
-                    <span>Lista Deseos</span>
-                    <div class="qty">2</div>
+                    <span id="isLogged">Desconectado</span>
                   </a>
                 </div>
                 <!-- /Wishlist -->
@@ -314,6 +312,12 @@ $families = $fam->getFamilies();
       <!-- /container -->
     </nav>
     <!-- /NAVIGATION -->
+
+    <!-- Mensaje de usuario logeado o login incorrecto -->
+    <div class="resp-login">
+      <span id="resp-login"></span>
+    </div>
+    <!-- /Mensaje de usuario logeado o login incorrecto -->
 
     <!-- SECTION -->
     <div class="section">
@@ -940,7 +944,9 @@ $families = $fam->getFamilies();
     <!-- script que gestiona el carrito -->
     <script type="text/javascript" src="./js/shopCart.js"></script>
     <script type="text/javascript" src="./js/removeFromCart.js"></script>
-    <!-- script para el login -->
+    <!-- script para la ventana de login -->
     <script type="text/javascript" src="./js/credentials.js"></script>
+    <!-- Script para hacer login -->
+    <script type="text/javascript" src="./js/login.js"></script>
   </body>
 </html>

@@ -128,7 +128,7 @@ $category = $fam->getFamilies($famKey);
                 <div>
                   <a href="#">
                     <i class="fa fa-heart-o"></i>
-                    <span>Lista Deseos</span>
+                    <span id="isLogged">Desconectado</span>
                     <div class="qty">2</div>
                   </a>
                 </div>

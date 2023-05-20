@@ -21,6 +21,7 @@ Table OF Contents
 ------ Breadcrumb
 2 > HEADER
 ++++++ Mi Cuenta (pop up window)
+++++++ Respuesta del login
 ------ Top header
 ------ Logo
 ------ Search
@@ -494,6 +495,10 @@ textarea.input {
   padding: 15px;
 }
 
+.form-login input:valid {
+  text-decoration: none;
+}
+
 .input-flex {
   display: flex;
   margin-top: 10px;
@@ -538,6 +543,19 @@ textarea.input {
   font-size: 1.3rem;
 }
 
+/*----------------------------*\
+	respuesta del login
+\*----------------------------*/
+
+.resp-login {
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  font-weight: 600 !important;
+}
 /*----------------------------*\
 	Logo
 \*----------------------------*/
