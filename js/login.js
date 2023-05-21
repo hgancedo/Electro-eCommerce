@@ -32,7 +32,7 @@ buttlog.addEventListener("click", () => {
         respStyle.style.backgroundColor = "rgb(249, 199, 188)";
       }
 
-      setTimeout(() => (location.href = "./index.php"), 1500);
+      setTimeout(() => (location.href = "./index.php"), 2000);
     });
 
   //form reset
