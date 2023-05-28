@@ -23,5 +23,18 @@ if (hasSession === "false") {
   acc.addEventListener("click", () => {
     console.log("Desconectarse");
     //ajax para finalizar session
+    const data = new FormData();
+    const logout = true;
+    data.append("logout", logout);
+
+    fetch("./credentials.php", {
+      method: "POST",
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("respuesta:" + data);
+        setTimeout(() => (location.href = "./index.php"), 2000);
+      });
   });
 }
