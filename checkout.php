@@ -1,11 +1,17 @@
 <?php
 session_start();
 include_once "./src/Familia.php";
+include_once "./src/Usuario.php";
 
 $fam = new Familia();
 $families = $fam->getFamilies();
-?>
 
+//Si el user está logeado, mostramos sus datos en el form
+if(isset($_SESSION['login'])) {
+  $user = new Usuario();
+  $userLogged = $user->getUserData($_SESSION['login']);
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -340,6 +346,7 @@ $families = $fam->getFamilies();
                   name="first-name"
                   id="name"
                   placeholder="Nombre"
+                  value="<?php if(isset($userLogged)) echo $userLogged[0]['nombre']; ?>" 
                 />
               </div>
               <div class="form-group">
@@ -349,6 +356,7 @@ $families = $fam->getFamilies();
                   name="last-name"
                   id="last-name"
                   placeholder="Apellidos"
+                  value="<?php if(isset($userLogged)) echo $userLogged[0]['apellidos']; ?>" 
                 />
               </div>
 
@@ -359,6 +367,7 @@ $families = $fam->getFamilies();
                   name="address"
                   id="address"
                   placeholder="Dirección"
+                  value="<?php if(isset($userLogged)) echo $userLogged[0]['direccion']; ?>" 
                 />
               </div>
 
@@ -369,6 +378,7 @@ $families = $fam->getFamilies();
                   name="tel"
                   id="tel"
                   placeholder="Teléfono"
+                  value="<?php if(isset($userLogged)) echo $userLogged[0]['telefono']; ?>" 
                 />
               </div>
 
@@ -379,6 +389,7 @@ $families = $fam->getFamilies();
                   name="email"
                   id="email"
                   placeholder="Email"
+                  value="<?php if(isset($userLogged)) echo $userLogged[0]['email']; ?>" 
                 />
               </div>
 
