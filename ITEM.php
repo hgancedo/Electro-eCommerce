@@ -66,6 +66,37 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
     <![endif]-->
   </head>
   <body>
+    <!-- ventana de login que se mostrará al hacer click en MiCuenta -->
+    <div class="show_acc" id="show-acc">
+      <div class="title" >Iniciar sesión</div>
+      <div class="form-login">
+        <form action="" id="form-login">
+          <div class="input-flex">
+            <div class="input-logo">
+              <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+            </div>    
+            <input type="text" name="user" id="user" placeholder="Usuario">
+          </div>
+          
+          <div class="input-flex">
+            <div class="input-logo">
+            <i class="fa fa-unlock-alt fa-lg" aria-hidden="true"></i>
+            </div>    
+            <input type="password" name="pass" id="pass" placeholder="Contraseña">
+          </div>
+          
+          <div class="div-button">
+            <button type="button" class="button-login" id="login">Login</button>
+          </div>
+
+          <div class="register">
+            <a href="">¿Aún no estás registrado?</a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
     <!-- HEADER -->
     <header>
       <!-- TOP HEADER -->
@@ -89,7 +120,11 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
               <a href="#"><i class="fa fa-eur"></i>EUR</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-user-o"></i>Mi Cuenta</a>
+              <!-- El valor true/false ha de ir en string, sino js no lo captura -->
+              <?php $hasSession = isset($_SESSION['login']) ? "true" : "false"; ?>
+              <input type="hidden" id="hasSession" value="<?php echo $hasSession; ?>">
+              <?php $strLogin = isset($_SESSION['login']) ? "Desconectarse" : "Iniciar sesión"; ?>
+              <a href="#" id="account"><i class="fa fa-user-o"></i><?php echo $strLogin ;?></a>
             </li>
           </ul>
         </div>
@@ -134,9 +169,8 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
                 <!-- Wishlist -->
                 <div>
                   <a href="#">
-                    <i class="fa fa-heart-o"></i>
-                    <span>Lista Deseos</span>
-                    <div class="qty">2</div>
+                    <?php $isConnected = isset($_SESSION['login']) ? $_SESSION['login'] : "Desconectado"; ?>
+                    <span id="isLogged"><?php echo $isConnected; ?></span>
                   </a>
                 </div>
                 <!-- /Wishlist -->
@@ -278,6 +312,12 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
       <!-- /container -->
     </nav>
     <!-- /NAVIGATION -->
+
+    <!-- Mensaje de usuario logeado o login incorrecto -->
+    <div class="resp-login">
+      <span id="resp-login"></span>
+    </div>
+    <!-- /Mensaje de usuario logeado o login incorrecto -->
 
     <!-- BREADCRUMB -->
     <div id="breadcrumb" class="section">
@@ -894,5 +934,9 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
     <!-- script que gestiona el carrito -->
     <script type="text/javascript" src="./js/shopCartFromItem.js"></script>
     <script type="text/javascript" src="./js/removeFromCart.js"></script>
+    <!-- script para la ventana de login -->
+    <script type="text/javascript" src="./js/credentials.js"></script>
+    <!-- Script para hacer login -->
+    <script type="text/javascript" src="./js/login.js"></script>
   </body>
 </html>

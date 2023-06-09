@@ -34,7 +34,7 @@ if (hasSession === "false") {
       .then((response) => response.json())
       .then((data) => {
         console.log("respuesta:" + data);
-        setTimeout(() => (location.href = "./index.php"), 2000);
+        setTimeout(() => location.reload(), 2000);
       });
   });
 }
