@@ -215,7 +215,7 @@
             <!-- Billing Details -->
             <div class="billing-details">
               <div class="section-title">
-                <h3 class="title">Datos Personales</h3>
+                <h3 class="title">Introduzca sus datos Personales</h3>
               </div>
 			  <div class="form-group">
                 <input
@@ -224,6 +224,15 @@
                   name="alias"
                   id="alias"
                   placeholder="Nombre de usuario o alias"
+                />
+              </div>
+			  <div class="form-group">
+                <input
+                  class="input"
+                  type="text"
+                  name="pass"
+                  id="pass"
+                  placeholder="Contraseña"
                 />
               </div>
               <div class="form-group">
