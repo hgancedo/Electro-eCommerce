@@ -19,8 +19,8 @@ class Familia extends Conexion {
             $sql ="SELECT * FROM familias WHERE cod = :c ORDER BY nombre DESC";
         }
         
-        $stm=$this->conexion->prepare($sql);
         try {
+            $stm=$this->conexion->prepare($sql);
             if(!$fam) {
                 $stm->execute();
             } else {
@@ -37,9 +37,8 @@ class Familia extends Conexion {
     //Función que devuelve el cod a partir del nombre
     public function getCodFamily($nomFam) {
         $sql = "SELECT cod FROM familias WHERE nombre = :n";
-        $stm=$this->conexion->prepare($sql);
-
         try {
+            $stm=$this->conexion->prepare($sql);
             $stm->execute([":n"=>$nomFam]);
         } catch (Exception $ex) {
             echo "Error al comprobar el cod de familia: " .$ex->getMessage(). "<br>";

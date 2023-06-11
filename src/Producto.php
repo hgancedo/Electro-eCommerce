@@ -19,8 +19,8 @@ class Producto extends Conexion {
             $sql="SELECT * FROM productos WHERE familia = :f AND id = :id";
         }
 
-        $stm=$this->conexion->prepare($sql);
         try {
+            $stm=$this->conexion->prepare($sql);
             if(!$id) {
                 $stm->execute([":f"=>$familia]);
             } else {
@@ -38,8 +38,8 @@ class Producto extends Conexion {
     public function getRandomProducts($num) {
         $sql = "SELECT id, nombre_corto, pvp, f.nombre, f.cod FROM productos p inner join familias f 
         ON p.familia = f.cod ORDER BY RAND() LIMIT $num";
-        $stm=$this->conexion->prepare($sql);
         try {
+            $stm=$this->conexion->prepare($sql);
             $stm->execute();
         } catch (Exception $ex) {
             echo "Error al seleccionar productos aleatorios <br>" .$ex->getMessage();

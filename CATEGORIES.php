@@ -58,8 +58,8 @@ $category = $fam->getFamilies($famKey);
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <>
-        <!-- ventana de login que se mostrará al hacer click en MiCuenta -->
+  <body>
+    <!-- ventana de login que se mostrará al hacer click en MiCuenta -->
     <div class="show_acc" id="show-acc">
       <div class="title" >Iniciar sesión</div>
       <div class="form-login">
@@ -83,7 +83,7 @@ $category = $fam->getFamilies($famKey);
           </div>
 
           <div class="register">
-            <a href="">¿Aún no estás registrado?</a>
+            <a href="./register.php">¿Aún no estás registrado?</a>
           </div>
 
         </form>

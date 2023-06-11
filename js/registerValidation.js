@@ -5,11 +5,12 @@ registro.addEventListener("click", () => {
   console.log("registrarse pulsado");
 
   const alias = document.querySelector("#alias").value;
+  const password = document.querySelector("#password").value;
   const nom = document.querySelector("#name").value;
   const lastName = document.querySelector("#last-name").value;
   const address = document.querySelector("#address").value;
-  const tel = document.querySelector("#tel").value;
   const email = document.querySelector("#email").value;
+  const tel = document.querySelector("#tel").value;
   const terms = document.querySelector("#terms").checked;
   const message = document.querySelector("#message");
   const danger = document.querySelector("#danger");
@@ -17,16 +18,18 @@ registro.addEventListener("click", () => {
   const handleClick = async () => {
     if (
       !someInputVal(nom, lastName, address) ||
-      !telVal(tel) ||
+      !passwordVal(password) ||
       !emailVal(email) ||
+      !telVal(tel) ||
       !termsCond(terms) ||
       !(await validateAliasEmail(alias, email))
     ) {
       return false;
     }
-    danger.style.visibility = "visible";
-    danger.style.backgroundColor = "rgb(64, 223, 55)";
-    message.textContent = "Registro realizado correctamente";
+
+    //async fetch para realizar el registro en la BD
+    bdRegister();
+
     setTimeout(() => {
       location.reload();
     }, 5000);
@@ -43,6 +46,31 @@ registro.addEventListener("click", () => {
           "Error: alias, nombre, apellidos o dirección sin asignar";
         return false;
       }
+      return true;
+    }
+
+    function passwordVal(password) {
+      // Regular expressions for password validation
+      const hasNumber = /[0-9]/;
+      const hasUppercase = /[A-Z]/;
+
+      if (password.length < 5) {
+        danger.style.visibility = "visible";
+        message.textContent =
+          "Error: la contraseña debe tener al menos 5 caracteres";
+        return false;
+      } else if (!hasNumber.test(password)) {
+        danger.style.visibility = "visible";
+        message.textContent =
+          "Error: la contraseña debe contener al menos un número";
+        return false;
+      } else if (!hasUppercase.test(password)) {
+        danger.style.visibility = "visible";
+        message.textContent =
+          "Error: la contraseña debe contener al menos una letra mayúscula";
+        return false;
+      }
+
       return true;
     }
 
@@ -119,6 +147,38 @@ registro.addEventListener("click", () => {
         // Manejar el error de la solicitud
         console.error(error);
         return false;
+      }
+    }
+
+    async function bdRegister() {
+      const formObj = new FormData();
+      const arrayInputs = [
+        ["alias", alias],
+        ["password", password],
+        ["nom", nom],
+        ["lastName", lastName],
+        ["address", address],
+        ["email", email],
+        ["tel", tel],
+      ];
+
+      arrayInputs.forEach((val) => {
+        formObj.append(val[0], val[1]);
+      });
+
+      try {
+        const resp = await fetch("./bdRegister.php", {
+          method: "POST",
+          body: formObj,
+        });
+
+        const respBd = await resp.json();
+        console.log(respBd);
+        danger.style.visibility = "visible";
+        danger.style.backgroundColor = "rgb(64, 223, 55)";
+        message.textContent = respBd;
+      } catch (error) {
+        console.log(error);
       }
     }
   };

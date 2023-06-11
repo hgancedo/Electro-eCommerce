@@ -1,3 +1,13 @@
+<?php
+session_start();
+include_once "./src/Familia.php";
+include_once "./src/Producto.php";
+
+$fam = new Familia();
+//El conjunto de todas las familias o categorías
+$families = $fam->getFamilies();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -6,7 +16,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML Ecommerce Template</title>
+		<title>NETWARE TIENDA ONLINE DE INFORMÁTICA</title>
 
  		<!-- Google font -->
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -36,22 +46,70 @@
 
     </head>
 	<body>
+	<!-- ventana de login que se mostrará al hacer click en MiCuenta -->
+	<div class="show_acc" id="show-acc">
+      <div class="title" >Iniciar sesión</div>
+      <div class="form-login">
+        <form action="" id="form-login">
+          <div class="input-flex">
+            <div class="input-logo">
+              <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+            </div>    
+            <input type="text" name="user" id="user" placeholder="Usuario">
+          </div>
+          
+          <div class="input-flex">
+            <div class="input-logo">
+            <i class="fa fa-unlock-alt fa-lg" aria-hidden="true"></i>
+            </div>    
+            <input type="password" name="pass" id="pass" placeholder="Contraseña">
+          </div>
+          
+          <div class="div-button">
+            <button type="button" class="button-login" id="login">Login</button>
+          </div>
+
+          <div class="register">
+            <a href="">¿Aún no estás registrado?</a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
 		<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
-			<div id="top-header">
-				<div class="container">
-					<ul class="header-links pull-left">
-						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
-					</ul>
-					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-					</ul>
-				</div>
-			</div>
+		   <div id="top-header">
+			  <div class="container">
+				<ul class="header-links pull-left">
+				  <li>
+					<a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a>
+				  </li>
+				  <li>
+					<a href="#"><i class="fa fa-envelope-o"></i>hgancedo@email.com</a>
+				  </li>
+				  <li>
+					<a href="#"
+						><i class="fa fa-map-marker"></i>17 Pol. Industrial Trápaga,
+						Vizcaya</a>
+				  </li>
+				</ul>
+				<ul class="header-links pull-right">
+				  <li>
+					<a href="#"><i class="fa fa-eur"></i>EUR</a>
+				  </li>
+				  <li>
+					<!-- El valor true/false ha de ir en string, sino js no lo captura -->
+					<?php $hasSession = isset($_SESSION['login']) ? "true" : "false"; ?>
+					<input type="hidden" id="hasSession" value="<?php echo $hasSession; ?>">
+					<?php $strLogin = isset($_SESSION['login']) ? "Desconectarse" : "Iniciar sesión"; ?>
+					<a href="#" id="account"><i class="fa fa-user-o"></i><?php echo $strLogin ;?></a>
+				  </li>
+				</ul>
+			  </div>
+
+		    </div>
 			<!-- /TOP HEADER -->
 
 			<!-- MAIN HEADER -->
@@ -92,52 +150,102 @@
 								<!-- Wishlist -->
 								<div>
 									<a href="#">
-										<i class="fa fa-heart-o"></i>
-										<span>Your Wishlist</span>
-										<div class="qty">2</div>
+										<?php $isConnected = isset($_SESSION['login']) ? $_SESSION['login'] : "Desconectado"; ?>
+										<span id="isLogged"><?php echo $isConnected; ?></span>
 									</a>
 								</div>
 								<!-- /Wishlist -->
 
 								<!-- Cart -->
 								<div class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+									<a href="#"
+										class="dropdown-toggle"
+										data-toggle="dropdown"
+										aria-expanded="true"
+									>
 										<i class="fa fa-shopping-cart"></i>
-										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<span>Carrito</span>
+
+										<?php
+										//num de productos totales que se muestran en la burbuja del carrito
+										$prodTot = 0;
+										if(isset($_SESSION['arrayProd'])) {
+											foreach($_SESSION['arrayProd'] as $prod) {
+												$prodTot += $prod[3];
+											}
+										}
+										?>
+
+										<div class="qty"><?php echo $prodTot ;?></div>
 									</a>
+
 									<div class="cart-dropdown">
 										<div class="cart-list">
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product01.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
 
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
+										<!-- Si hay productos en Session arrayProd, lo recorremos, si no mostramos vacío -->
+										<?php if(isset($_SESSION['arrayProd'])) {
+										// controlar con variable boolean si isset arrayProd false no mostramos cart-summary tampoco
+										$show = true; 
+										$sumTot = 0;
+										$prodTot = 0;
+										foreach($_SESSION['arrayProd'] as $prod) {
+										//precio * cantidad
+										$sumTot += floatval($prod[2]) * intval($prod[3]);
+										//uds de productos totales en carrito
+										$prodTot += floatval($prod[3]);
+										?>
+
+										<div class="product-widget">
+											<div class="product-img">
+											<img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="" />
 											</div>
+											<div class="product-body">
+												<h3 class="product-name">
+
+													<!-- ruta para ir a ITEM.php desde el carrito -->
+													<?php $link= './ITEM.php?famKey=' .$prod[4]. '&id=' .$prod[0] ;?>
+													<a href="<?php echo $link ;?>"><?php echo $prod[1] ;?></a>
+												</h3>
+												<h4 class="product-price">
+													<span class="qty"><?php echo $prod[3] .'x' ;?></span><?php echo $prod[2] .'€' ; ?>
+												</h4>
+											</div>
+											<button class="delete" value="<?php echo $prod[0] ;?>">
+												<i class="fa fa-close"></i>
+											</button>
 										</div>
+										<?php
+										}
+										//cierre de if count > 0
+										
+										} else {
+											$show = false;
+										?>
+										<div>
+											Carrito Vacío
+										</div>
+										<!-- cierre del else -->
+										<?php
+										}
+										?>
+										</div>
+										<!-- /cierre de class="cart-list" -->
+
+										<?php if($show) {?>
 										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
+											<small> <?php echo $prodTot ;?> producto(s)   seleccionados</small>
+											<h5>SUBTOTAL: <?php echo $sumTot .'€' ;?> </h5>
 										</div>
 										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+											<a href="./checkout.php"
+												>Comprar <i class="fa fa-arrow-circle-right"></i
+											></a>
 										</div>
+										<?php
+										}
+										?>
+										<!-- Cierre de if(show) -->
+
 									</div>
 								</div>
 								<!-- /Cart -->
@@ -170,13 +278,16 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Hot Deals</a></li>
-						<li><a href="#">Categories</a></li>
-						<li><a href="#">Laptops</a></li>
-						<li><a href="#">Smartphones</a></li>
-						<li><a href="#">Cameras</a></li>
-						<li><a href="#">Accessories</a></li>
+						<!-- <li class="active"><a href="#">Pc Sobremesa</a></li> -->
+						<li><a href="./index.php">Inicio</a></li>
+						<?php foreach($families as $family) {
+						//ruta para los enlaces
+						$link = './CATEGORIES.php?famKey=' .$family['cod'];
+						?>
+						<li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
+						<?php
+						}
+						?>
 					</ul>
 					<!-- /NAV -->
 				</div>
@@ -186,6 +297,12 @@
 		</nav>
 		<!-- /NAVIGATION -->
 
+		<!-- Mensaje de usuario logeado o login incorrecto -->
+		<div class="resp-login">
+      		<span id="resp-login"></span>
+    	</div>
+    	<!-- /Mensaje de usuario logeado o login incorrecto -->
+
 		<!-- BREADCRUMB -->
 		<div id="breadcrumb" class="section">
 			<!-- container -->
@@ -194,7 +311,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
-							<li><a href="#">Inicio</a></li>
+							<li><a href="./index.php">Inicio</a></li>
 							<li class="active">Registro</li>
 						</ul>
 					</div>
@@ -230,8 +347,8 @@
                 <input
                   class="input"
                   type="text"
-                  name="pass"
-                  id="pass"
+                  name="password"
+                  id="password"
                   placeholder="Contraseña"
                 />
               </div>
@@ -267,20 +384,20 @@
               <div class="form-group">
                 <input
                   class="input"
-                  type="tel"
-                  name="tel"
-                  id="tel"
-                  placeholder="Teléfono" 
-                />
-              </div>
-
-              <div class="form-group">
-                <input
-                  class="input"
                   type="email"
                   name="email"
                   id="email"
                   placeholder="Email" 
+                />
+              </div>
+
+			  <div class="form-group">
+                <input
+                  class="input"
+                  type="tel"
+                  name="tel"
+                  id="tel"
+                  placeholder="Teléfono" 
                 />
               </div>
 
@@ -364,25 +481,27 @@
 					<div class="row">
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">About Us</h3>
+								<h3 class="footer-title">Sobre Nosotros</h3>
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
 								<ul class="footer-links">
-									<li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+									<li><a href="#"><i class="fa fa-map-marker"></i>17 Pol. Industrial Trápaga, Vizcaya</a></li>
 									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+									<li><a href="#"><i class="fa fa-envelope-o"></i>hgancedo@email.com</a></li>
 								</ul>
 							</div>
 						</div>
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Categories</h3>
+								<h3 class="footer-title">Categoías</h3>
 								<ul class="footer-links">
-									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Smartphones</a></li>
-									<li><a href="#">Cameras</a></li>
-									<li><a href="#">Accessories</a></li>
+									<li><a >Ofertas</a></li>
+									<?php foreach($families as $family) {
+										$link = './CATEGORIES.php?famKey=' .$family['cod']; ?>
+									<li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
+									<?php
+									}
+									?>
 								</ul>
 							</div>
 						</div>
@@ -393,24 +512,24 @@
 							<div class="footer">
 								<h3 class="footer-title">Information</h3>
 								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
+									<li><a href="#">Sobre Nosotros</a></li>
+									<li><a href="#">Contacto</a></li>
+									<li><a href="#">Política de Privacidad</a></li>
+									<li><a href="#">Pedidos y Devoluciones</a></li>
+									<li><a href="#">Términos y Condiciones</a></li>
 								</ul>
 							</div>
 						</div>
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
-								<h3 class="footer-title">Service</h3>
+								<h3 class="footer-title">Servicio</h3>
 								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
+									<li><a href="#">Mi Cuenta</a></li>
+									<li><a href="#">Ver Carrito</a></li>
+									<li><a href="#">Lista de Deseos</a></li>
+									<li><a href="#">Seguimiento del Pedido</a></li>
+									<li><a href="#">Ayuda</a></li>
 								</ul>
 							</div>
 						</div>
@@ -436,7 +555,7 @@
 								<li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
 							</ul>
 							<span class="copyright">
-								 <a target="_blank" href="https://www.templateshub.net">Templates Hub</a>
+								 <a target="_blank" href="https://www.templateshub.net">Powered By Hector Gancedo Grade</a>
 							</span>
 
 
@@ -460,6 +579,13 @@
 
 		<!-- Validación del form de registro -->
 		<script src="js/registerValidation.js"></script>
+		<!-- script que gestiona el carrito -->
+		<script type="text/javascript" src="./js/shopCart.js"></script>
+    	<script type="text/javascript" src="./js/removeFromCart.js"></script>
+    	<!-- script para la ventana de login -->
+    	<script type="text/javascript" src="./js/credentials.js"></script>
+    	<!-- Script para hacer login -->
+    	<script type="text/javascript" src="./js/login.js"></script>
 
 	</body>
 </html>
