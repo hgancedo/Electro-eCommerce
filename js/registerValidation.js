@@ -94,10 +94,10 @@ registro.addEventListener("click", () => {
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
       // Verificar la longitud del email
-      if (email.length < 6 || email.length > 320) {
+      if (email.length < 6 || email.length > 254) {
         danger.style.visibility = "visible";
         message.textContent =
-          "Error: la longitud de email ha de ser entre 6 y 320 caracteres";
+          "Error: la longitud de email ha de ser entre 6 y 254 caracteres";
         return false;
         // Validar el formato del email
       } else if (!expresionRegular.test(email)) {

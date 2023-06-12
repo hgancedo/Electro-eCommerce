@@ -418,7 +418,7 @@ if(isset($_SESSION['login'])) {
                 <div><strong>PRODUCT</strong></div>
                 <div><strong>TOTAL</strong></div>
               </div>
-              <div class="order-products">
+              <div class="order-products" id="order-products" data-products="<?php echo htmlspecialchars(json_encode($_SESSION['arrayProd'])); ?>">
 
                 <?php
                 $sumTot = 0;
@@ -676,7 +676,7 @@ if(isset($_SESSION['login'])) {
     <script type="text/javascript" src="./js/shopCart.js"></script>
     <script type="text/javascript" src="./js/removeFromCart.js"></script>
     <!-- validamos el pago en checkout.php -->
-    <script type="text/javascript" src="./js/formValidation.js"></script>
+    <script type="text/javascript" src="./js/payOrder.js"></script>
     <!-- script para la ventana de login -->
     <script type="text/javascript" src="./js/credentials.js"></script>
     <!-- Script para hacer login -->

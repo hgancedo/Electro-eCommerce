@@ -90,7 +90,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
           </div>
 
           <div class="register">
-            <a href="">¿Aún no estás registrado?</a>
+            <a href="./register.php">¿Aún no estás registrado?</a>
           </div>
 
         </form>

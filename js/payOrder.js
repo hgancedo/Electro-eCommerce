@@ -16,6 +16,15 @@ pagar.addEventListener("click", () => {
   const message = document.querySelector("#message");
   const danger = document.querySelector("#danger");
 
+  //Capturamos si hay un usuario logeado para poder insertar el pedido en la bd
+  //Si no hay usuario logeado, únicamente mostramos mensaje pedido completado
+  const isLogged = document.querySelector("#isLogged").textContent;
+  console.log("El usuario logeado es: " + isLogged);
+  const orderProductsElement = document.querySelector("#order-products");
+  const productsData = orderProductsElement.getAttribute("data-products");
+  const arrayOrder = JSON.parse(productsData);
+  console.log(arrayOrder);
+
   if (
     !someInputVal(nom, lastName, address) ||
     !telVal(tel) ||
@@ -25,12 +34,19 @@ pagar.addEventListener("click", () => {
   ) {
     return false;
   }
-  danger.style.visibility = "visible";
-  danger.style.backgroundColor = "rgb(64, 223, 55)";
-  message.textContent = "Pedido realizado correctamente";
-  setTimeout(() => {
-    document.location.href = "index.php?resetProd=true";
-  }, 5000);
+
+  if (isLogged === "Desconectado") {
+    //Si hacemos el pedido sin logearnos, únicamente mostramos el mensaje de pedido realizado
+    danger.style.visibility = "visible";
+    danger.style.backgroundColor = "rgb(64, 223, 55)";
+    message.textContent = "Pedido realizado correctamente";
+    setTimeout(() => {
+      document.location.href = "index.php?resetProd=true";
+    }, 5000);
+  } else {
+    //Si hay usuario logeado insertamos pedido en la BD
+    checkOrder(isLogged, arrayOrder);
+  }
 
   function someInputVal(nom, lastName, address) {
     if (
@@ -65,10 +81,10 @@ pagar.addEventListener("click", () => {
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     // Verificar la longitud del email
-    if (email.length < 6 || email.length > 320) {
+    if (email.length < 6 || email.length > 254) {
       danger.style.visibility = "visible";
       message.textContent =
-        "Error: la longitud de email ha de ser entre 6 y 320 caracteres";
+        "Error: la longitud de email ha de ser entre 6 y 254 caracteres";
       return false;
       // Validar el formato del email
     } else if (!expresionRegular.test(email)) {
@@ -92,5 +108,35 @@ pagar.addEventListener("click", () => {
     danger.style.visibility = "visible";
     message.textContent = "Error: debe aceptar los términos";
     return false;
+  }
+
+  async function checkOrder(user, arrayOrder) {
+    arrayOrder.unshift(user);
+
+    const data = {
+      myData: arrayOrder,
+    };
+
+    const jsonData = JSON.stringify(data);
+
+    try {
+      const resp = await fetch("./payOrder.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonData,
+      });
+      const serverResponse = await resp.json();
+      console.log(serverResponse);
+      danger.style.visibility = "visible";
+      danger.style.backgroundColor = "rgb(64, 223, 55)";
+      message.textContent = serverResponse;
+      setTimeout(() => {
+        document.location.href = "index.php?resetProd=true";
+      }, 5000);
+    } catch (error) {
+      console.log(error);
+    }
   }
 });
