@@ -31,7 +31,8 @@ if(isset($_POST['prod'])) {
         $control = false;
         //cuando utilizamos "as" para recorrer $_SESSION ha de hacerse por referencia con "&"
         foreach($_SESSION['arrayProd'] as &$innerArray) {
-                if(in_array($prod[0], $innerArray)) {
+                //si el id de prod existe en el array de $_SESSION['arryProd']
+                if($prod[0] === $innerArray[0]) {
                     $innerArray[3] += $prod[3];
                     $control = true;
                 }
