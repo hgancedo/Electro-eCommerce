@@ -50,4 +50,29 @@ class Order extends Conexion {
             echo "Error al insertar en la tabla productos_pedido: " .$ex->getMessage();
         }
     }
+
+    public function getUserOrders($user) {
+        $sql = "SELECT * FROM pedido WHERE usuario = :u";
+        try {
+            $stm=$this->conexion->prepare($sql);
+            $stm->execute([":u"=>$user]);
+        } catch (Exception $ex) {
+            echo "Error al comprobar los pedidos del usuario " .$ex->getMessage(). "<br>";
+        }
+
+        return $stm->fetchAll();
+    }
+
+    public function getProductsOrder($pedidoId) {
+        $sql = "SELECT * FROM productos_pedido WHERE pedido_id = :p";
+        try {
+            $stm=$this->conexion->prepare($sql);
+            $stm->execute([":p"=>$pedidoId]);
+        } catch (Exception $ex) {
+            echo "Error al comprobar los productos del pedido " .$ex->getMessage(). "<br>";
+        }
+
+        return $stm->fetchAll();
+    }
+
 }

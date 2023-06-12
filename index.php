@@ -171,7 +171,7 @@ $families = $fam->getFamilies();
               <div class="header-ctn">
                 <!-- Wishlist -->
                 <div>
-                  <a href="#">
+                  <a href="./myOrders.php">
                     <?php $isConnected = isset($_SESSION['login']) ? $_SESSION['login'] : "Desconectado"; ?>
                     <span id="isLogged"><?php echo $isConnected; ?></span>
                   </a>

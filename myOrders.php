@@ -1,22 +1,26 @@
 <?php
-session_start();
-include_once "./src/Familia.php";
-include_once "./src/Producto.php";
+  session_start();
+  include_once "./src/Familia.php";
+  include_once "./src/Order.php";
+  include_once "./src/Producto.php";
 
+  if(!isset($_SESSION['login'])) header("Location: ./index.php");
 
-//AHORA RECIBIMOS $famKey por url para hacer una única página de categorías y crearla dinámicamente según la categoría recibida
-$famKey = $_GET['famKey'];
+  $fam = new Familia();
+  //El conjunto de todas las familias o categorías
+  $families = $fam->getFamilies();
 
-//Seleccionamos los productos según la familia (o categoría, es sinónimo), al igual que lo es cod o famKey
-$prod = new Producto();
-$items = $prod->getProducts($famKey);
+  //Comprobamos si el usuario ha realizado pedidos
+  $order = new Order();
+  $result = $order->getUserOrders($_SESSION['login']);
+  $areOrders = false;
+  if(count($result) > 0) {
+    $areOrders = true; 
+    echo "<pre>";
+    print_r($result);
+    echo "</pre>";
+  }
 
-$fam = new Familia();
-//El conjunto de todas las familias o categorías
-$families = $fam->getFamilies();
-
-//El nombre de la familia según el cod
-$category = $fam->getFamilies($famKey);
 ?>
 
 <!DOCTYPE html>
@@ -100,12 +104,13 @@ $category = $fam->getFamilies($famKey);
               <a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a>
+              <a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a>
             </li>
             <li>
               <a href="#"
-                ><i class="fa fa-map-marker"></i>17 Pol. Industrial Trápaga,
-                Vizcaya</a>
+                ><i class="fa fa-map-marker"></i> 17 Pol. Industrial Trápaga,
+                Vizcaya</a
+              >
             </li>
           </ul>
           <ul class="header-links pull-right">
@@ -145,12 +150,12 @@ $category = $fam->getFamilies($famKey);
               <div class="header-search">
                 <form>
                   <select class="input-select">
-                    <option value="0">Categorías</option>
+                    <option value="0">All Categories</option>
                     <option value="1">Category 01</option>
                     <option value="1">Category 02</option>
                   </select>
-                  <input class="input" placeholder="Buscar aquí" />
-                  <button class="search-btn">Buscar</button>
+                  <input class="input" placeholder="Search here" />
+                  <button class="search-btn">Search</button>
                 </form>
               </div>
             </div>
@@ -260,8 +265,6 @@ $category = $fam->getFamilies($famKey);
 
                   </div>
                 </div>
-
-
                 <!-- /Cart -->
 
                 <!-- Menu Toogle -->
@@ -324,10 +327,10 @@ $category = $fam->getFamilies($famKey);
         <!-- row -->
         <div class="row">
           <div class="col-md-12">
-          <h3 class="breadcrumb-header">><?php echo $category[0]['nombre'] ;?></h3>
+            <h3 class="breadcrumb-header">Mis Pedidos</h3>
             <ul class="breadcrumb-tree">
-              <li><a href="./index.php">Inicio</a></li>
-              <li class="active"><?php echo $category[0]['nombre'] ;?></li>
+              <li><a href="#">Home</a></li>
+              <li class="active">Mis Pedidos</li>
             </ul>
           </div>
         </div>
@@ -337,83 +340,85 @@ $category = $fam->getFamilies($famKey);
     </div>
     <!-- /BREADCRUMB -->
 
-    <!-- SECTION -->
+    <?php if($areOrders) { ?>
+    <!-- SECTION IF IS LOGGED AND THERE´RE ORDERS-->
     <div class="section">
       <!-- container -->
       <div class="container">
         <!-- row -->
         <div class="row">
-          
-          <!-- STORE -->
-          <div id="store" class="col-md-12">
 
-            <!-- store products -->
-            <div class="row">
+          <?php 
+          foreach($result as $pedido) {?>
+          <div class="pedido col-md-8">
 
-              <?php foreach($items as $item){
-              $srcItem = "./img/PRODUCTS/ALL_SMALL/" .$item['id']. ".webp"; ?>
-              <!-- product -->
-              <div class="col-md-3 col-xs-6">
-                <div class="product">
-                  <div class="product-img">
-                    <img src="<?php echo $srcItem ;?>" alt="" />
-                  </div>
-                  <div class="product-body">
-                    <p class="product-category"><?php echo $category[0]['nombre'] ;?></p>
-
-                    <h3 class="product-name">
-                      <!-- ruta para enlace al producto, le pasamos la familia y el id -->
-                      <?php $ItemView = './ITEM.php?famKey=' .$famKey. '&id=' .$item['id'] ;?>
-                      <a href="<?php echo $ItemView ;?>"><?php echo $item['nombre_corto'] ;?></a>
-                    </h3>
-                    <h4 class="product-price">
-                      <?php echo $item['pvp'] ."€" ;?>
-                    </h4>
-                    <div class="product-rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                    <div class="product-btns">
-                      <button class="add-to-wishlist">
-                        <i class="fa fa-heart-o"></i
-                        ><span class="tooltipp">add to wishlist</span>
-                      </button>
-                      <button class="add-to-compare">
-                        <i class="fa fa-exchange"></i
-                        ><span class="tooltipp">add to compare</span>
-                      </button>
-                      <button class="eyeView" value="<?php echo $item['id']. '+' .$famKey ;?>">
-                        <i class="fa fa-eye"></i
-                        ><span class="tooltipp">quick view</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="add-to-cart">
-                    <button class="add-to-cart-btn addToCart" value="<?php echo $item['id']. '/' .$item['nombre_corto'] .'/'. $item['pvp'] .'/'. 1 .'/'. $famKey;?>">
-                      <i class="fa fa-shopping-cart"></i> añadir al carrito
-                    </button>
-                  </div>
-                </div>
+            <div class="conte-opp">
+              <div class="left">
+                <h3><?php echo "Pedido #" .$pedido['id'] .str_repeat('&nbsp', 20) ; ?></h3>
               </div>
-              <!-- /product -->
-              <?php
-              }
+              <div class="right">
+                <h5><?php echo "Fecha: " .date("d/m/Y", strtotime($pedido['fecha'])) ;?></h5>
+              </div>
+            </div>
+
+            <?php
+            $list = $order->getProductsOrder($pedido['id']);
+            foreach($list as $product) {?>
+            <div class="product vertical-center">
+
+              <div class="col-md-2 img-order">
+                <img
+                  <?php $img = "./img/PRODUCTS/ALL_SMALL/" .$product['producto_id'] .".webp"; ?>
+                  src="<?php echo $img;?>"
+                  alt=""
+                  class="img-responsive"
+                />
+              </div>
+              <!-- CONSULTAMOS LAS CARACTERÍSTICAS DEL PRODUCTO -->
+              <?php 
+              $resolve = new Producto();
+              $item = $resolve->getProductDetails($product['producto_id']);
               ?>
+              <div class="col-md-6">
+                <span><?php echo $item[0]['nombre_corto'] .str_repeat('&nbsp', 20) ." x" .$product['unidades'] ;?></span>
+              </div>
 
             </div>
-            <!-- /store products -->
-
+            <!-- /class="product" -->
+            <?php
+            }
+            ?>
           </div>
-          <!-- /STORE -->
+          <!-- /class="pedido" -->
+          <?php
+          }
+          ?>
+
         </div>
         <!-- /row -->
       </div>
       <!-- /container -->
     </div>
-    <!-- /SECTION -->
+    <!-- /SECTION IF IS LOGGED-->
+
+    <?php
+    } else {?>
+    <!-- SECTION IF IS LOGGED AND THERE AREN´T ORDERS-->
+    <div class="section">
+      <!-- container -->
+      <div class="container">
+        <!-- row -->
+        <div class="row">
+          <span>No ha realizado ningún pedido</span>
+        </div>
+        <!-- /row -->
+      </div>
+      <!-- /container -->
+    </div>
+    <?php
+    }
+    ?>
+    <!-- /SECTION IF IS LOGGED AND THERE AREN´T ORDERS-->
 
     <!-- NEWSLETTER -->
     <div id="newsletter" class="section">
@@ -423,15 +428,15 @@ $category = $fam->getFamilies($famKey);
         <div class="row">
           <div class="col-md-12">
             <div class="newsletter">
-              <p>Suscríbete a nuestra <strong>NEWSLETTER</strong></p>
+              <p>Sign Up for the <strong>NEWSLETTER</strong></p>
               <form>
                 <input
                   class="input"
                   type="email"
-                  placeholder="Introduce tu Email"
+                  placeholder="Enter Your Email"
                 />
                 <button class="newsletter-btn">
-                  <i class="fa fa-envelope"></i> Subscribirse
+                  <i class="fa fa-envelope"></i> Subscribe
                 </button>
               </form>
               <ul class="newsletter-follow">
@@ -492,7 +497,7 @@ $category = $fam->getFamilies($famKey);
 
             <div class="col-md-3 col-xs-6">
               <div class="footer">
-                <h3 class="footer-title">Categorías</h3>
+                <h3 class="footer-title">Categorias</h3>
                 <ul class="footer-links">
                   <li><a >Ofertas</a></li>
                   <?php foreach($families as $family) {
@@ -509,7 +514,7 @@ $category = $fam->getFamilies($famKey);
 
             <div class="col-md-3 col-xs-6">
               <div class="footer">
-                <h3 class="footer-title">Información</h3>
+                <h3 class="footer-title">Information</h3>
                 <ul class="footer-links">
                   <li><a href="#">Sobre Nosotros</a></li>
                   <li><a href="#">Contacto</a></li>
@@ -522,7 +527,7 @@ $category = $fam->getFamilies($famKey);
 
             <div class="col-md-3 col-xs-6">
               <div class="footer">
-                <h3 class="footer-title">Servicio</h3>
+                <h3 class="footer-title">Service</h3>
                 <ul class="footer-links">
                   <li><a href="#">Mis Pedidos</a></li>
                   <li><a href="#">Ver Carrito</a></li>
@@ -587,8 +592,6 @@ $category = $fam->getFamilies($famKey);
     <script src="js/nouislider.min.js"></script>
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
-    <!-- script que envía valores por medio del botón eyeView a ITEM.php para localizar producto -->
-    <script type="text/javascript" src="./js/toItemFromEye.js"></script>
     <!-- script que gestiona el carrito -->
     <script type="text/javascript" src="./js/shopCart.js"></script>
     <script type="text/javascript" src="./js/removeFromCart.js"></script>

@@ -43,10 +43,11 @@ Table OF Contents
 ------ Product details
 ------ Product tab
 9 > CHECKOUT PAGE
-10 > NEWSLETTER
-11 > FOOTER
-11 > SLICK STYLE
-12 > RESPONSIVE
+10 > LOGGED ORDER-LIST
+11 > NEWSLETTER
+12 > FOOTER
+13 > SLICK STYLE
+14 > RESPONSIVE
 ------------------------------------*/
 
 /*=========================================================
@@ -2065,9 +2066,43 @@ textarea.input {
   font-weight: bold;
   font-size: 1.7rem;
 }
-
 /*=========================================================
-	10 -> NEWSLETTER
+	10 -> lOGGED ORDER-LIST
+===========================================================*/
+
+.img-order {
+  width: 75px;
+}
+
+.vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+.pedido {
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+.product {
+  padding: 8px;
+}
+
+.conte-opp {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left {
+  align-self: flex-start;
+}
+
+.right {
+  align-self: flex-end;
+}
+/*=========================================================
+	11 -> NEWSLETTER
 ===========================================================*/
 
 #newsletter.section {
@@ -2153,7 +2188,7 @@ textarea.input {
 }
 
 /*=========================================================
-	11 -> FOOTER
+	12 -> FOOTER
 ===========================================================*/
 
 #footer {
@@ -2213,7 +2248,7 @@ textarea.input {
 }
 
 /*=========================================================
-	12 -> SLICK STYLE
+	13 -> SLICK STYLE
 ===========================================================*/
 
 /*----------------------------*\
@@ -2297,7 +2332,7 @@ textarea.input {
 }
 
 /*=========================================================
-	13 -> RESPONSIVE
+	14 -> RESPONSIVE
 ===========================================================*/
 
 @media only screen and (max-width: 1201px) {

@@ -48,6 +48,19 @@ class Producto extends Conexion {
         return $stm->fetchAll();
 
     }
+
+    //Detalles de cada producto
+    public function getProductDetails($id) {
+        $sql = "SELECT nombre_corto, pvp FROM productos WHERE id = :i";
+        try {
+            $stm=$this->conexion->prepare($sql);
+            $stm->execute([":i"=> $id]);
+        } catch (Exception $ex) {
+            echo "Error al seleccionar productos aleatorios <br>" .$ex->getMessage();
+        }
+
+        return $stm->fetchAll();
+    }
 }
 
     
