@@ -16,9 +16,6 @@
   $areOrders = false;
   if(count($result) > 0) {
     $areOrders = true; 
-    echo "<pre>";
-    print_r($result);
-    echo "</pre>";
   }
 
 ?>
@@ -357,12 +354,13 @@
                 <h3><?php echo "Pedido #" .$pedido['id'] .str_repeat('&nbsp', 20) ; ?></h3>
               </div>
               <div class="right">
-                <h5><?php echo "Fecha: " .date("d/m/Y", strtotime($pedido['fecha'])) ;?></h5>
+                <h4><?php echo "Fecha: " .date("d/m/Y", strtotime($pedido['fecha'])) ;?></h4>
               </div>
             </div>
 
             <?php
             $list = $order->getProductsOrder($pedido['id']);
+            $total = 0;
             foreach($list as $product) {?>
             <div class="product vertical-center">
 
@@ -379,8 +377,17 @@
               $resolve = new Producto();
               $item = $resolve->getProductDetails($product['producto_id']);
               ?>
-              <div class="col-md-6">
-                <span><?php echo $item[0]['nombre_corto'] .str_repeat('&nbsp', 20) ." x" .$product['unidades'] ;?></span>
+              <div class="col-xs-12 conte-opp">
+                <div class="col-xs-6 col-sm-4 col-md-5 col-lg-4">
+                  <span><?php echo $item[0]['nombre_corto']; ?></span>
+                </div>
+                <div class="col-xs-2 col-sm-5 col-md-5 col-lg-4 ali-right">
+                  <span class="right"><?php echo $item[0]['pvp'] ."€  x" .$product['unidades'] ;?></span>
+                </div>
+                <div class="col-xs-4 col-sm-3 col-md-2 col-lg-4 ali-right">
+                  <span><?php echo  $item[0]['pvp'] * $product['unidades'] .'€';?></span>
+                  <?php $total += $item[0]['pvp'] * $product['unidades']; ?>
+                </div>
               </div>
 
             </div>
@@ -388,6 +395,9 @@
             <?php
             }
             ?>
+            <div class="ali-right padd-right">
+              <h4><?php echo "TOTAL: " .str_repeat('&nbsp', 5) .$total .'€'; ?></h4>
+            </div>
           </div>
           <!-- /class="pedido" -->
           <?php

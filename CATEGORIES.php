@@ -324,7 +324,7 @@ $category = $fam->getFamilies($famKey);
         <!-- row -->
         <div class="row">
           <div class="col-md-12">
-          <h3 class="breadcrumb-header">><?php echo $category[0]['nombre'] ;?></h3>
+          <h3 class="breadcrumb-header"><?php echo $category[0]['nombre'] ;?></h3>
             <ul class="breadcrumb-tree">
               <li><a href="./index.php">Inicio</a></li>
               <li class="active"><?php echo $category[0]['nombre'] ;?></li>
