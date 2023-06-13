@@ -43,11 +43,12 @@ Table OF Contents
 ------ Product details
 ------ Product tab
 9 > CHECKOUT PAGE
-10 > LOGGED ORDER-LIST
-11 > NEWSLETTER
-12 > FOOTER
-13 > SLICK STYLE
-14 > RESPONSIVE
+10 > LOCATION WHERE WE ARE
+11 > LOGGED ORDER-LIST
+12 > NEWSLETTER
+13 > FOOTER
+14 > SLICK STYLE
+15 > RESPONSIVE
 ------------------------------------*/
 
 /*=========================================================
@@ -2066,8 +2067,29 @@ textarea.input {
   font-weight: bold;
   font-size: 1.7rem;
 }
+
 /*=========================================================
-	10 -> lOGGED ORDER-LIST
+	10 -> LOCATION - WHERE WE ARE
+===========================================================*/
+.location-desc {
+  font-size: medium;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-location {
+  border: 1px solid rgba(29, 28, 28, 0.4);
+  width: 700px;
+}
+/*=========================================================
+	11 -> lOGGED ORDER-LIST
 ===========================================================*/
 
 .img-order {

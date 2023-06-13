@@ -600,7 +600,7 @@ if(isset($_SESSION['login'])) {
               <div class="footer">
                 <h3 class="footer-title">Información</h3>
                 <ul class="footer-links">
-                  <li><a href="#">Sobre Nosotros</a></li>
+                  <li><a href="./whereWeAre.php">Dónde Estamos</a></li>
                   <li><a href="#">Contacto</a></li>
                   <li><a href="#">Política de Privacidad</a></li>
                   <li><a href="#">Pedidos y Devoluciones</a></li>
