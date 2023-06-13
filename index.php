@@ -110,7 +110,7 @@ $families = $fam->getFamilies();
               <a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-envelope-o"></i>hgancedo@email.com</a>
+              <a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a>
             </li>
             <li>
               <a href="#"
@@ -144,7 +144,7 @@ $families = $fam->getFamilies();
             <div class="col-md-3">
               <div class="header-logo">
                 <a href="#" class="logo">
-                  <img src="./img/logo.png" alt="" />
+                  <img src="./img/NetWareWhite.png" alt="logo" />
                 </a>
               </div>
             </div>
@@ -171,10 +171,13 @@ $families = $fam->getFamilies();
               <div class="header-ctn">
                 <!-- Wishlist -->
                 <div>
+                  <?php if(isset($_SESSION['login'])){?>
                   <a href="./myOrders.php">
-                    <?php $isConnected = isset($_SESSION['login']) ? $_SESSION['login'] : "Desconectado"; ?>
-                    <span id="isLogged"><?php echo $isConnected; ?></span>
+                    <span id="isLogged"><?php echo $_SESSION['login']; ?></span>
                   </a>
+                  <?php
+                  }
+                  ?>
                 </div>
                 <!-- /Wishlist -->
 
@@ -215,7 +218,7 @@ $families = $fam->getFamilies();
                       ?>
                       <div class="product-widget">
                         <div class="product-img">
-                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="" />
+                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="product" />
                         </div>
                         <div class="product-body">
                           <h3 class="product-name">
@@ -339,7 +342,7 @@ $families = $fam->getFamilies();
           <div class="col-md-3 col-xs-6">
             <div class="shop">
               <div class="shop-img">
-                <img src="<?php echo $srcCateg ;?>" alt="" />
+                <img src="<?php echo $srcCateg ;?>" alt="category" />
               </div>
               <div class="shop-body">
                 <h3><?php echo $family['nombre']; ?><br /></h3>
@@ -409,7 +412,7 @@ $families = $fam->getFamilies();
                     $srcAllProd = "./img/PRODUCTS/ALL_SMALL/" .$novedad['id']. ".webp"; ?>
                     <div class="product">
                       <div class="product-img">
-                        <img src="<?php echo $srcAllProd; ?>" alt="" />
+                        <img src="<?php echo $srcAllProd; ?>" alt="product" />
                         <div class="product-label">
                           <span class="new">NEW</span>
                         </div>
@@ -542,7 +545,7 @@ $families = $fam->getFamilies();
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="<?php echo $srcNovedades ;?>" alt="" />
+                    <img src="<?php echo $srcNovedades ;?>" alt="product" />
                   </div>
                   <div class="product-body">
                     <p class="product-category"><?php echo $novedades[$i]['nombre']; ?></p>
@@ -574,7 +577,7 @@ $families = $fam->getFamilies();
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="<?php echo $srcNovedades2 ;?>" alt="" />
+                    <img src="<?php echo $srcNovedades2 ;?>" alt="product" />
                   </div>
                   <div class="product-body">
                     <p class="product-category"><?php echo $novedades[$i]['nombre']; ?></p>
@@ -620,7 +623,7 @@ $families = $fam->getFamilies();
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="<?php echo $srcTopVentas ;?>" alt="" />
+                    <img src="<?php echo $srcTopVentas ;?>" alt="product" />
                   </div>
                   <div class="product-body">
                     <p class="product-category"><?php echo $topVentas[$i]['nombre']; ?></p>
@@ -654,7 +657,7 @@ $families = $fam->getFamilies();
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="<?php echo $srcTopVentas2 ;?>" alt="" />
+                    <img src="<?php echo $srcTopVentas2 ;?>" alt="product" />
                   </div>
                   <div class="product-body">
                     <p class="product-category"><?php echo $topVentas[$i]['nombre']; ?></p>
@@ -702,7 +705,7 @@ $families = $fam->getFamilies();
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="<?php echo $srcMostValued ;?>" alt="" />
+                    <img src="<?php echo $srcMostValued ;?>" alt="product" />
                   </div>
                   <div class="product-body">
                     <p class="product-category"><?php echo $mostValued[$i]['nombre']; ?></p>
@@ -737,7 +740,7 @@ $families = $fam->getFamilies();
                 <!-- product widget -->
                 <div class="product-widget">
                   <div class="product-img">
-                    <img src="<?php echo $srcMostValued2 ;?>" alt="" />
+                    <img src="<?php echo $srcMostValued2 ;?>" alt="product" />
                   </div>
                   <div class="product-body">
                     <p class="product-category"><?php echo $mostValued[$i]['nombre']; ?></p>
@@ -840,7 +843,7 @@ $families = $fam->getFamilies();
                   </li>
                   <li>
                     <a href="#"
-                      ><i class="fa fa-envelope-o"></i>hgancedo@email.com</a
+                      ><i class="fa fa-envelope-o"></i>email@email.com</a
                     >
                   </li>
                 </ul>
@@ -881,8 +884,12 @@ $families = $fam->getFamilies();
               <div class="footer">
                 <h3 class="footer-title">Servicio</h3>
                 <ul class="footer-links">
-                  <li><a href="#">Mi Cuenta</a></li>
-                  <li><a href="#">Ver Carrito</a></li>
+                  <?php if(isset($_SESSION['login'])){?>
+                  <li><a href="./myOrders.php">Mis Pedidos</a></li>
+                  <?php
+                  }
+                  ?>
+                  <li><a href="./checkout.php">Ver Carrito</a></li>
                   <li><a href="#">Lista de Deseos</a></li>
                   <li><a href="#">Seguimiento del Pedido</a></li>
                   <li><a href="#">Ayuda</a></li>

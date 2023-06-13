@@ -134,7 +134,7 @@ $category = $fam->getFamilies($famKey);
             <div class="col-md-3">
               <div class="header-logo">
                 <a href="#" class="logo">
-                  <img src="./img/logo.png" alt="" />
+                  <img src="./img/NetWareWhite.png" alt="logo" />
                 </a>
               </div>
             </div>
@@ -161,10 +161,13 @@ $category = $fam->getFamilies($famKey);
               <div class="header-ctn">
                 <!-- Wishlist -->
                 <div>
-                  <a href="#">
-                    <?php $isConnected = isset($_SESSION['login']) ? $_SESSION['login'] : "Desconectado"; ?>
-                    <span id="isLogged"><?php echo $isConnected; ?></span>
+                  <?php if(isset($_SESSION['login'])){?>
+                  <a href="./myOrders.php">
+                    <span id="isLogged"><?php echo $_SESSION['login']; ?></span>
                   </a>
+                  <?php
+                  }
+                  ?>
                 </div>
                 <!-- /Wishlist -->
 
@@ -209,7 +212,7 @@ $category = $fam->getFamilies($famKey);
 
                       <div class="product-widget">
                         <div class="product-img">
-                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="" />
+                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="product" />
                         </div>
                         <div class="product-body">
                           <h3 class="product-name">
@@ -356,7 +359,7 @@ $category = $fam->getFamilies($famKey);
               <div class="col-md-3 col-xs-6">
                 <div class="product">
                   <div class="product-img">
-                    <img src="<?php echo $srcItem ;?>" alt="" />
+                    <img src="<?php echo $srcItem ;?>" alt="product" />
                   </div>
                   <div class="product-body">
                     <p class="product-category"><?php echo $category[0]['nombre'] ;?></p>
@@ -524,8 +527,12 @@ $category = $fam->getFamilies($famKey);
               <div class="footer">
                 <h3 class="footer-title">Servicio</h3>
                 <ul class="footer-links">
-                  <li><a href="#">Mis Pedidos</a></li>
-                  <li><a href="#">Ver Carrito</a></li>
+                  <?php if(isset($_SESSION['login'])){?>
+                  <li><a href="./myOrders.php">Mis Pedidos</a></li>
+                  <?php
+                  }
+                  ?>
+                  <li><a href="./checkout.php">Ver Carrito</a></li>
                   <li><a href="#">Lista de Deseos</a></li>
                   <li><a href="#">Seguimiento del Pedido</a></li>
                   <li><a href="#">Ayuda</a></li>

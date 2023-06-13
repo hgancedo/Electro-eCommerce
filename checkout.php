@@ -94,7 +94,7 @@ if(isset($_SESSION['login'])) {
               <a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-envelope-o"></i> hgancedo@email.com</a>
+              <a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a>
             </li>
             <li>
               <a href="#"
@@ -128,7 +128,7 @@ if(isset($_SESSION['login'])) {
             <div class="col-md-3">
               <div class="header-logo">
                 <a href="#" class="logo">
-                  <img src="./img/logo.png" alt="" />
+                  <img src="./img/NetWareWhite.png" alt="logo" />
                 </a>
               </div>
             </div>
@@ -155,10 +155,13 @@ if(isset($_SESSION['login'])) {
               <div class="header-ctn">
                 <!-- Wishlist -->
                 <div>
-                  <a href="#">
-                    <?php $isConnected = isset($_SESSION['login']) ? $_SESSION['login'] : "Desconectado"; ?>
-                    <span id="isLogged"><?php echo $isConnected; ?></span>
+                  <?php if(isset($_SESSION['login'])){?>
+                  <a href="./myOrders.php">
+                    <span id="isLogged"><?php echo $_SESSION['login']; ?></span>
                   </a>
+                  <?php
+                  }
+                  ?>
                 </div>
                 <!-- /Wishlist -->
 
@@ -199,7 +202,7 @@ if(isset($_SESSION['login'])) {
                       ?>
                       <div class="product-widget">
                         <div class="product-img">
-                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="" />
+                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="product" />
                         </div>
                         <div class="product-body">
                           <h3 class="product-name">
@@ -315,6 +318,7 @@ if(isset($_SESSION['login'])) {
         <!-- row -->
         <div class="row">
           <div class="col-md-12">
+            <h3 class="breadcrumb-header">Carrito</h3>
             <ul class="breadcrumb-tree">
               <li><a href="index.php">Inicio</a></li>
               <li class="active">Carrito</li>
@@ -412,8 +416,8 @@ if(isset($_SESSION['login'])) {
               <h3 class="title">PEDIDO</h3>
             </div>
 
+            <?php if(isset($_SESSION['arrayProd'])) { ?>
             <div class="order-summary">
-              <?php if(isset($_SESSION['arrayProd'])) { ?>
               <div class="order-col">
                 <div><strong>PRODUCT</strong></div>
                 <div><strong>TOTAL</strong></div>
@@ -500,14 +504,14 @@ if(isset($_SESSION['login'])) {
     </div>
     <!-- /SECTION -->
 
-    <!-- NEWSLETTER -->
-    <div id="newsletter" class="section">
+     <!-- NEWSLETTER -->
+     <div id="newsletter" class="section">
       <!-- container -->
       <div class="container">
         <!-- row -->
         <div class="row">
           <div class="col-md-12">
-          <div class="newsletter">
+            <div class="newsletter">
               <p>Suscríbete a nuestra <strong>NEWSLETTER</strong></p>
               <form>
                 <input
@@ -552,7 +556,7 @@ if(isset($_SESSION['login'])) {
           <div class="row">
             <div class="col-md-3 col-xs-6">
               <div class="footer">
-                <h3 class="footer-title">About Us</h3>
+                <h3 class="footer-title">Sobre Nosotros</h3>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                   do eiusmod tempor incididunt ut.
@@ -560,7 +564,7 @@ if(isset($_SESSION['login'])) {
                 <ul class="footer-links">
                   <li>
                     <a href="#"
-                      ><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a
+                      ><i class="fa fa-map-marker"></i>17 Pol. Industrial Trápaga, Vizcaya</a
                     >
                   </li>
                   <li>
@@ -581,7 +585,7 @@ if(isset($_SESSION['login'])) {
                 <ul class="footer-links">
                   <li><a href="#">Ofertas</a></li>
                   <?php foreach($families as $family) {
-                    $link = './CATEGORIES.php?famKey=' .$family['cod']; ?>
+                  $link = './CATEGORIES.php?famKey=' .$family['cod']; ?>
                   <li><a href="<?php echo $link ;?>"><?php echo $family['nombre']; ?></a></li>
                   <?php
                   }
@@ -609,7 +613,11 @@ if(isset($_SESSION['login'])) {
               <div class="footer">
                 <h3 class="footer-title">Servicio</h3>
                 <ul class="footer-links">
-                  <li><a href="#">Mi Cuenta</a></li>
+                  <?php if(isset($_SESSION['login'])){?>
+                  <li><a href="./myOrders.php">Mis Pedidos</a></li>
+                  <?php
+                  }
+                  ?>
                   <li><a href="#">Ver Carrito</a></li>
                   <li><a href="#">Lista de Deseos</a></li>
                   <li><a href="#">Seguimiento del Pedido</a></li>
@@ -652,7 +660,7 @@ if(isset($_SESSION['login'])) {
               </ul>
               <span class="copyright">
                 <a target="_blank" href="https://www.templateshub.net"
-                  >Templates Hub</a
+                  >Powered By Hector Gancedo Grade</a
                 >
               </span>
             </div>
@@ -672,14 +680,16 @@ if(isset($_SESSION['login'])) {
     <script src="js/nouislider.min.js"></script>
     <script src="js/jquery.zoom.min.js"></script>
     <script src="js/main.js"></script>
+    <!-- script que envía valores por medio del botón eyeView a ITEM.php para localizar producto -->
+    <script type="text/javascript" src="./js/toItemFromEye.js"></script>
     <!-- script que gestiona el carrito -->
     <script type="text/javascript" src="./js/shopCart.js"></script>
     <script type="text/javascript" src="./js/removeFromCart.js"></script>
-    <!-- validamos el pago en checkout.php -->
-    <script type="text/javascript" src="./js/payOrder.js"></script>
     <!-- script para la ventana de login -->
     <script type="text/javascript" src="./js/credentials.js"></script>
     <!-- Script para hacer login -->
     <script type="text/javascript" src="./js/login.js"></script>
+    <!-- script para registrar pedido -->
+    <script type="text/javascript" src="./js/payOrder.js"></script>
   </body>
 </html>

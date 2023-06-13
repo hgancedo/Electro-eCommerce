@@ -23,5 +23,5 @@ foreach($arrayOrder as $product) {
 
 
 // Devolver una respuesta (opcional)
-$response = 'Pedido realizado y registrado en su cuenta->pedidos';
+$response = 'Pedido realizado. Puede consultarlo en "Mis Pedidos"';
 echo json_encode($response);

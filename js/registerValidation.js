@@ -31,7 +31,7 @@ registro.addEventListener("click", () => {
     bdRegister();
 
     setTimeout(() => {
-      location.reload();
+      location.href = "./index.php";
     }, 5000);
 
     function someInputVal(nom, lastName, address) {

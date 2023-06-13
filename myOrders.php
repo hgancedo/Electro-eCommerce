@@ -136,7 +136,7 @@
             <div class="col-md-3">
               <div class="header-logo">
                 <a href="#" class="logo">
-                  <img src="./img/logo.png" alt="" />
+                <img src="./img/NetWareWhite.png" alt="logo" />
                 </a>
               </div>
             </div>
@@ -211,7 +211,7 @@
 
                       <div class="product-widget">
                         <div class="product-img">
-                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="" />
+                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="product" />
                         </div>
                         <div class="product-body">
                           <h3 class="product-name">
@@ -368,7 +368,7 @@
                 <img
                   <?php $img = "./img/PRODUCTS/ALL_SMALL/" .$product['producto_id'] .".webp"; ?>
                   src="<?php echo $img;?>"
-                  alt=""
+                  alt="product"
                   class="img-responsive"
                 />
               </div>
@@ -385,8 +385,8 @@
                   <span class="right"><?php echo $item[0]['pvp'] ."€  x" .$product['unidades'] ;?></span>
                 </div>
                 <div class="col-xs-4 col-sm-3 col-md-2 col-lg-4 ali-right">
-                  <span><?php echo  $item[0]['pvp'] * $product['unidades'] .'€';?></span>
-                  <?php $total += $item[0]['pvp'] * $product['unidades']; ?>
+                  <span><?php echo  floatval($item[0]['pvp']) * $product['unidades'] .'€';?></span>
+                  <?php $total += floatval($item[0]['pvp']) * $product['unidades']; ?>
                 </div>
               </div>
 
@@ -539,8 +539,7 @@
               <div class="footer">
                 <h3 class="footer-title">Service</h3>
                 <ul class="footer-links">
-                  <li><a href="#">Mis Pedidos</a></li>
-                  <li><a href="#">Ver Carrito</a></li>
+                  <li><a href="./checkout.php">Ver Carrito</a></li>
                   <li><a href="#">Lista de Deseos</a></li>
                   <li><a href="#">Seguimiento del Pedido</a></li>
                   <li><a href="#">Ayuda</a></li>

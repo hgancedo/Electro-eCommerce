@@ -107,7 +107,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
               <a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-envelope-o"></i>hgancedo@email.com</a>
+              <a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a>
             </li>
             <li>
               <a href="#"
@@ -141,7 +141,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
             <div class="col-md-3">
               <div class="header-logo">
                 <a href="#" class="logo">
-                  <img src="./img/logo.png" alt="" />
+                  <img src="./img/NetWareWhite.png" alt="logo" />
                 </a>
               </div>
             </div>
@@ -168,10 +168,13 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
               <div class="header-ctn">
                 <!-- Wishlist -->
                 <div>
-                  <a href="#">
-                    <?php $isConnected = isset($_SESSION['login']) ? $_SESSION['login'] : "Desconectado"; ?>
-                    <span id="isLogged"><?php echo $isConnected; ?></span>
+                  <?php if(isset($_SESSION['login'])){?>
+                  <a href="./myOrders.php">
+                    <span id="isLogged"><?php echo $_SESSION['login']; ?></span>
                   </a>
+                  <?php
+                  }
+                  ?>
                 </div>
                 <!-- /Wishlist -->
 
@@ -212,7 +215,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
                       ?>
                       <div class="product-widget">
                         <div class="product-img">
-                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="" />
+                          <img src="<?php echo './img/PRODUCTS/ALL_SMALL/' .$prod[0]. '.webp' ;?>" alt="product" />
                         </div>
                         <div class="product-body">
                           <h3 class="product-name">
@@ -353,19 +356,19 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
               <div class="product-preview">
                 <!-- ruta a las imágenes de diferentes vistas del producto AMPLIADO Y ZOOM -->
                 <?php $srcItempreview = './img/PRODUCTS/ALL_BIG/' .$_GET['id']. '.webp' ;?>
-                <img src="<?php echo $srcItempreview ;?>" alt="" />
+                <img src="<?php echo $srcItempreview ;?>" alt="product" />
               </div>
 
               <div class="product-preview">
-                <img src="<?php echo $srcItempreview ;?>" alt="" />
+                <img src="<?php echo $srcItempreview ;?>" alt="product" />
               </div>
 
               <div class="product-preview">
-                <img src="<?php echo $srcItempreview ;?>" alt="" />
+                <img src="<?php echo $srcItempreview ;?>" alt="product" />
               </div>
 
               <div class="product-preview">
-                <img src="<?php echo $srcItempreview ;?>" alt="" />
+                <img src="<?php echo $srcItempreview ;?>" alt="product" />
               </div>
             </div>
           </div>
@@ -376,20 +379,20 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
             <div id="product-imgs">
               <div class="product-preview">
               <!-- ruta a las imágenes de diferentes vistas del producto, preview pequeños -->
-              <?php $srcItemSmall = './img/PRODUCTS/ALL_SMALL/' .$_GET['id']. '.webp' ;?>
-              <img src="<?php echo $srcItemSmall ;?>" alt="" />
+              <?php $srcItemSmall = './product/PRODUCTS/ALL_SMALL/' .$_GET['id']. '.webp' ;?>
+              <img src="<?php echo $srcItemSmall ;?>" alt="product" />
               </div>
 
               <div class="product-preview">
-                <img src="<?php echo $srcItemSmall ;?>" alt="" />
+                <img src="<?php echo $srcItemSmall ;?>" alt="product" />
               </div>
 
               <div class="product-preview">
-                <img src="<?php echo $srcItemSmall ;?>" alt="" />
+                <img src="<?php echo $srcItemSmall ;?>" alt="product" />
               </div>
 
               <div class="product-preview">
-                <img src="<?php echo $srcItemSmall ;?>" alt="" />
+                <img src="<?php echo $srcItemSmall ;?>" alt="product" />
               </div>
             </div>
           </div>
@@ -827,7 +830,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
                   </li>
                   <li>
                     <a href="#"
-                      ><i class="fa fa-envelope-o"></i>hgancedo@email.com</a
+                      ><i class="fa fa-envelope-o"></i>email@email.com</a
                     >
                   </li>
                 </ul>
@@ -868,8 +871,12 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
               <div class="footer">
                 <h3 class="footer-title">Servicio</h3>
                 <ul class="footer-links">
-                  <li><a href="#">Mi Cuenta</a></li>
-                  <li><a href="#">Ver Carrito</a></li>
+                <?php if(isset($_SESSION['login'])){?>
+                  <li><a href="./myOrders.php">Mis Pedidos</a></li>
+                  <?php
+                  }
+                  ?>
+                  <li><a href="./checkout.php">Ver Carrito</a></li>
                   <li><a href="#">Lista de Deseos</a></li>
                   <li><a href="#">Seguimiento del Pedido</a></li>
                   <li><a href="#">Ayuda</a></li>
