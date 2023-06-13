@@ -379,7 +379,7 @@ $familyItem = $fam->getFamilies($_GET['famKey']);
             <div id="product-imgs">
               <div class="product-preview">
               <!-- ruta a las imágenes de diferentes vistas del producto, preview pequeños -->
-              <?php $srcItemSmall = './product/PRODUCTS/ALL_SMALL/' .$_GET['id']. '.webp' ;?>
+              <?php $srcItemSmall = './img/PRODUCTS/ALL_SMALL/' .$_GET['id']. '.webp' ;?>
               <img src="<?php echo $srcItemSmall ;?>" alt="product" />
               </div>
 
