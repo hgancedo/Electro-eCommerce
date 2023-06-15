@@ -64,7 +64,7 @@ pagar.addEventListener("click", () => {
   function telVal(tel) {
     if (isNaN(tel)) {
       danger.style.visibility = "visible";
-      message.textContent = "Error: inserte únicamente números";
+      message.textContent = "Error: el teléfono sólo admite números";
       return false;
     } else if (tel.trim().length != 9) {
       danger.style.visibility = "visible";
