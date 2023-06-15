@@ -310,6 +310,7 @@ $families = $fam->getFamilies();
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
+						<h3 class="breadcrumb-header">Registro</h3>
 						<ul class="breadcrumb-tree">
 							<li><a href="./index.php">Inicio</a></li>
 							<li class="active">Registro</li>
@@ -443,7 +444,7 @@ $families = $fam->getFamilies();
 				<div class="row">
 					<div class="col-md-12">
 						<div class="newsletter">
-							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
+							<p>Suscríbete a nuestra  <strong>NEWSLETTER</strong></p>
 							<form>
 								<input class="input" type="email" placeholder="Enter Your Email">
 								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>

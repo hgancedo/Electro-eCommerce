@@ -438,7 +438,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="newsletter">
-              <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+              <p>Suscríbete a nuestra <strong>NEWSLETTER</strong></p>
               <form>
                 <input
                   class="input"
