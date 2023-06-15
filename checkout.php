@@ -155,13 +155,11 @@ if(isset($_SESSION['login'])) {
               <div class="header-ctn">
                 <!-- Wishlist -->
                 <div>
-                  <?php if(isset($_SESSION['login'])){?>
-                  <a href="./myOrders.php">
-                    <span id="isLogged"><?php echo $_SESSION['login']; ?></span>
+                  <?php $connected = isset($_SESSION['login']) ? './myOrders.php' : '' ;?>
+                  <a href="<?php echo $connected ;?>">
+                    <?php $isConnected = isset($_SESSION['login']) ? $_SESSION['login'] : "Desconectado"; ?>
+                    <span id="isLogged"><?php echo $isConnected; ?></span>
                   </a>
-                  <?php
-                  }
-                  ?>
                 </div>
                 <!-- /Wishlist -->
 

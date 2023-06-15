@@ -19,7 +19,7 @@ pagar.addEventListener("click", () => {
   //Capturamos si hay un usuario logeado para poder insertar el pedido en la bd
   //Si no hay usuario logeado, únicamente mostramos mensaje pedido completado
   const isLogged = document.querySelector("#isLogged").textContent;
-  console.log("El usuario logeado es: " + isLogged);
+  //console.log("El usuario logeado es: " + isLogged);
   const orderProductsElement = document.querySelector("#order-products");
   const productsData = orderProductsElement.getAttribute("data-products");
   const arrayOrder = JSON.parse(productsData);
@@ -111,6 +111,7 @@ pagar.addEventListener("click", () => {
   }
 
   async function checkOrder(user, arrayOrder) {
+    console.log("El tipo de arrayOrder es: " + typeof arrayOrder);
     arrayOrder.unshift(user);
 
     const data = {
