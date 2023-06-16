@@ -326,7 +326,7 @@
           <div class="col-md-12">
             <h3 class="breadcrumb-header">Mis Pedidos</h3>
             <ul class="breadcrumb-tree">
-              <li><a href="#">Home</a></li>
+              <li><a href="./index.php">Inicio</a></li>
               <li class="active">Mis Pedidos</li>
             </ul>
           </div>
