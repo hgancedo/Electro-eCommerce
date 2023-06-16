@@ -1,3 +1,4 @@
+/* eslint-disable esversion: 8 */
 "use strict";
 const pagar = document.querySelector("#pagar");
 
